@@ -7,11 +7,18 @@ class AnswerBar extends Component {
   }
 
   render () {
-    return <input value={this.state.answer} onChange={this.onInputChange} />;
+    return (
+      <div className="search-bar">
+        <input 
+          value={this.state.answer}
+          onChange={event => this.onInputChange(event.target.value)} />;
+      </div>
+    )
   }
 
-  onInputChange(event) {
-    this.setState({answer: event.target.value});
+  onInputChange(answer) {
+    this.setState({answer});
+    this.props.onAnswerChange(answer);
   }
 }
 
