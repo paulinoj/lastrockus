@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React from 'react';
 import styles from './App.css';
 import AnswerBar from './components/answer_bar';
@@ -17,6 +18,9 @@ export default class App extends React.Component {
   }
 
   render() {
+    // Not sure want to throttle answer checking -- will effect scoring
+    const answerCheck = _.debounce((answer) => { this.check(answer) }, 300);
+
     const musicList = 
       [`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
        `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
@@ -25,7 +29,7 @@ export default class App extends React.Component {
 
     return (
       <div className={styles.app}>
-        <AnswerBar onAnswerChange={answer => this.check(answer)}/>
+        <AnswerBar onAnswerChange={answerCheck}/>
         <MusicPlayerGroup musicList={musicList} />
       </div>
     );
