@@ -1,9 +1,9 @@
 import React from 'react';
 
-const MusicPlayer = () => {
+const MusicPlayer = (props) => {
   return (
     <div>
-      <audio controls autoplay>
+      <audio src={props.song} controls>
       </audio>
     </div>
   );

@@ -5,12 +5,18 @@ import styles from '../App.css';
 export default class MusicPlayerGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = {test: 'foo'};
+    // this.state = {test: 'foo'};
   }
   render() {
+    const musicPlayers = this.props.musicList.map((song) => {
+      return (
+        <MusicPlayer song={song} key={song} />
+      )
+    });
+
     return (
       <div className={styles.app}>
-        <MusicPlayer />
+        {musicPlayers}
       </div>
     );
   }
