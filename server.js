@@ -7,12 +7,31 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
+
+
+
+// SETUP FOR TEST PURPOSES ONLY
+const soundcloud = require('./soundcloud2.config.js');
+// DATA FOR TEST PURPOSES ONLY
+const musicList = 
+  [`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
+   `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
+   `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
+   `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`];
+
+app.get('/music/classical', function response(req, res) {
+  res.json(musicList);
+  res.end();
+});
+
+
+
+
 if (isDeveloping) {
   const webpack = require('webpack');
   const webpackMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
   const config = require('./webpack.config.js');
-
 
   const compiler = webpack(config);
   const middleware = webpackMiddleware(compiler, {
@@ -27,29 +46,6 @@ if (isDeveloping) {
       modules: false
     }
   });
-
-
-
-
-  // SETUP FOR TEST PURPOSES ONLY
-  const soundcloud = require('./soundcloud2.config.js');
-  // DATA FOR TEST PURPOSES ONLY
-  const musicList = 
-    [`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
-     `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
-     `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
-     `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`];
-
-  app.get('/music/classical', function response(req, res) {
-    res.json(musicList);
-    res.end();
-  });
-
-
-
-
-
-
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
