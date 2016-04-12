@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { submitAnswer } from "../actions/index";
 
 class AnswerBar extends Component {
   constructor(props) {
@@ -11,15 +14,21 @@ class AnswerBar extends Component {
       <div className="search-bar">
         <input 
           value={this.state.answer}
-          onChange={event => this.onInputChange(event.target.value)} />;
+          onChange={event => this.onInputChange(event.target.value)} />
       </div>
     )
   }
 
   onInputChange(answer) {
     this.setState({answer});
-    this.props.onAnswerChange(answer);
+    this.props.submitAnswer(answer);
   }
 }
 
-export default AnswerBar;
+function mapDispatchToProps(dispatch) {
+  // Whenever submitAnswer is called, result should be passed to all 
+  // of our reducers
+  return bindActionCreators({ submitAnswer: submitAnswer }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(AnswerBar);
