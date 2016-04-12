@@ -9,9 +9,9 @@ class MusicPlayerGroup extends Component {
     // this.state = {test: 'foo'};
   }
   renderList() {
-    // if (!this.props.musicList) {
-    //   return <div>Songs loading ...</div>;
-    // }
+    if (!this.props.musicList) {
+      return <div>Songs loading ...</div>;
+    }
 
     return this.props.musicList.map((song) => {
       return (

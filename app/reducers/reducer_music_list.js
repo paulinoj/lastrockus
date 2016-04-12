@@ -1,12 +1,10 @@
-import soundcloud from '../../soundcloud.config.js';
+import { GET_NEW_MUSIC_LIST } from '../actions/index.js';
 
-export default function() {
-
-  const musicList = 
-    [`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
-     `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
-     `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
-     `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`];
-
-  return musicList;
+export default function(state = [], action) {
+  switch(action.type) {
+    case GET_NEW_MUSIC_LIST:
+      console.log("INSIDE GET NEW MUSIC LIST REDUCER:", action.payload);
+      return action.payload;
+  }
+  return state;
 }
