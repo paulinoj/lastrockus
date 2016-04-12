@@ -12,14 +12,14 @@ class AnswerBar extends Component {
   }
 
   onInputChange(event) {
-    this.setState({answer: event.target.value});
+    this.setState({ answer: event.target.value });
     this.props.submitAnswer(event.target.value);
   }
 
   onFormSubmit(event) {
     event.preventDefault();
     this.props.submitAnswer(this.state.answer);
-    this.setState({answer: ""});
+    this.setState({ answer: "" });
   }
 
   render () {

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const ANSWER_SUBMITTED = 'ANSWER_SUBMITTED';
 export const GET_NEW_MUSIC_LIST = 'GET_NEW_MUSIC_LIST';
 
@@ -13,8 +15,10 @@ export function submitAnswer(answer) {
 
 export function getNewMusicList(genre) {
   console.log('New Selection is: ', genre);
+  const request = axios.get(url);
+
   return {
     type: GET_NEW_MUSIC_LIST,
-    payload: genre
+    payload: request
   };
 }
