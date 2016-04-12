@@ -11,10 +11,15 @@ class AnswerBar extends Component {
 
   render () {
     return (
-      <div className="search-bar">
-        <input 
-          value={this.state.answer}
-          onChange={event => this.onInputChange(event.target.value)} />
+      <div className="answer-bar">
+        <form className="input-group">
+          <input 
+            value={this.state.answer}
+            onChange={event => this.onInputChange(event.target.value)} />
+          <span className="input-group-btn">
+            <button type="submit" className="btn btn-secondary">Submit</button>
+          </span>
+        </form>
       </div>
     )
   }
