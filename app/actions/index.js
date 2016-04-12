@@ -14,7 +14,9 @@ export function submitAnswer(answer) {
 }
 
 export function getNewMusicList(genre) {
+  genre = genre.toLowerCase();
   console.log('New Selection is: ', genre);
+  const url = `music/${genre}`
   const request = axios.get(url);
 
   return {
