@@ -8,6 +8,7 @@ class AnswerBar extends Component {
     super(props);
     this.state = { answer: '' };
     this.onInputChange = this.onInputChange.bind(this);
+    this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
   onInputChange(event) {
@@ -15,10 +16,16 @@ class AnswerBar extends Component {
     this.props.submitAnswer(event.target.value);
   }
 
+  onFormSubmit(event) {
+    event.preventDefault();
+    this.props.submitAnswer(this.state.answer);
+    this.setState({answer: ""});
+  }
+
   render () {
     return (
       <div className="answer-bar">
-        <form className="input-group">
+        <form onSubmit={this.onFormSubmit} className="input-group">
           <input
             placeholder="Guess a song"
             className="form-control" 
