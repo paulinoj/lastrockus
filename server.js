@@ -28,6 +28,29 @@ if (isDeveloping) {
     }
   });
 
+
+
+
+  // SETUP FOR TEST PURPOSES ONLY
+  const soundcloud = require('./soundcloud2.config.js');
+  // DATA FOR TEST PURPOSES ONLY
+  const musicList = 
+    [`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
+     `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
+     `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
+     `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`];
+
+  app.get('/music/classical', function response(req, res) {
+    res.json(musicList);
+    res.end();
+  });
+
+
+
+
+
+
+
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
   app.get('*', function response(req, res) {
