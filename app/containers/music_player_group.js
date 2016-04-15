@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import styles from '../App.css';
 import StartButton from '../components/start_button';
 import { incNumberOfMusicPlayersReady } from "../actions/index";
-
+import { resetNumberOfMusicPlayersReady } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
@@ -45,7 +45,8 @@ class MusicPlayerGroup extends Component {
     this.props.musicList.forEach((song, index) => {
       playerRef = `musicPlayer${index}`;
       this.refs[playerRef].play();
-    });    
+    });
+    this.props.resetNumberOfMusicPlayersReady();    
   }
 
   render() {
@@ -70,7 +71,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   // Whenever submitAnswer is called, result should be passed to all 
   // of our reducers
-  return bindActionCreators({ incNumberOfMusicPlayersReady: incNumberOfMusicPlayersReady }, dispatch);
+  return bindActionCreators(
+    { incNumberOfMusicPlayersReady: incNumberOfMusicPlayersReady,
+      resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerGroup);
