@@ -2,6 +2,9 @@ import axios from 'axios';
 
 export const ANSWER_SUBMITTED = 'ANSWER_SUBMITTED';
 export const GET_NEW_MUSIC_LIST = 'GET_NEW_MUSIC_LIST';
+export const ACTIVATE_START_BUTTON = 'ACTIVATE_START_BUTTON';
+export const INC_NUMBER_OF_MUSIC_PLAYERS_READY = 'INC_NUMBER_OF_MUSIC_PLAYERS_READY';
+export const SWITCH_MUSIC_PLAYER = 'SWITCH_MUSIC_PLAYER';
 
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
@@ -23,3 +26,20 @@ export function getNewMusicList(genre) {
     payload: request
   };
 }
+
+export function activateStartButton() {
+  return {
+    type: ACTIVATE_START_BUTTON,
+    payload: null
+  }
+}
+
+export function incNumberOfMusicPlayersReady() {
+  console.log("HELLO");
+  return {
+    type: INC_NUMBER_OF_MUSIC_PLAYERS_READY,
+    payload: true
+  }
+}
+
+
