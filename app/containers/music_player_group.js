@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from '../App.css';
-import StartButton from './start_button';
+import StartButton from '../components/start_button';
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 
 
