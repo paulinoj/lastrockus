@@ -2,7 +2,6 @@ import _ from 'lodash';
 import React from 'react';
 import styles from './App.css';
 import GenreSelector from './containers/genre_selector'
-import AnswerBar from './containers/answer_bar';
 import MusicPlayerGroup from './containers/music_player_group';
 import soundcloud from '../soundcloud.config.js';
 
@@ -25,7 +24,6 @@ export default class App extends React.Component {
     return (
       <div className={styles.app}>
         <GenreSelector />
-        <AnswerBar />
         <MusicPlayerGroup />
       </div>
     );

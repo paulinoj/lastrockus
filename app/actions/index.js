@@ -1,18 +1,17 @@
 import axios from 'axios';
 
-export const ANSWER_SUBMITTED = 'ANSWER_SUBMITTED';
 export const GET_NEW_MUSIC_LIST = 'GET_NEW_MUSIC_LIST';
 export const ACTIVATE_START_BUTTON = 'ACTIVATE_START_BUTTON';
 export const INC_NUMBER_OF_MUSIC_PLAYERS_READY = 'INC_NUMBER_OF_MUSIC_PLAYERS_READY';
 export const RESET_NUMBER_OF_MUSIC_PLAYERS_READY = 'RESET_NUMBER_OF_MUSIC_PLAYERS_READY';
-export const SWITCH_MUSIC_PLAYER = 'SWITCH_MUSIC_PLAYER';
+export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
   // and calculate points
   console.log('An answer has been submitted:', answer);
   return {
-    type: ANSWER_SUBMITTED,
+    type: SUBMIT_ANSWER,
     payload: answer
   };
 }

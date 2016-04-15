@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from '../App.css';
 import StartButton from '../components/start_button';
+import AnswerBar from './answer_bar';
+
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
 
@@ -29,7 +31,9 @@ class MusicPlayerGroup extends Component {
   }
 
   componentDidUpdate() {
-    console.log("DID UPDATE");
+    if (this.props.musicPlayersStatus) {
+      this.refs[this.props.musicPlayersStatus].pause();
+    }
     let playerRef = "";
     console.log(this.props.numberOfMusicPlayersReady);
     if (this.props.numberOfMusicPlayersReady === 0) {
@@ -56,6 +60,7 @@ class MusicPlayerGroup extends Component {
         <StartButton activatePlayers={this.activatePlayers}
         numberOfMusicPlayers={this.props.musicList.length} 
         numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady}/>
+        <AnswerBar musicList={this.props.musicList} />
       </div>
     );
   }
@@ -64,7 +69,8 @@ class MusicPlayerGroup extends Component {
 function mapStateToProps(state) {
   return {
     musicList: state.musicList,
-    numberOfMusicPlayersReady: state.numberOfMusicPlayersReady
+    numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
+    musicPlayersStatus: state.musicPlayersStatus
   };
 }
 

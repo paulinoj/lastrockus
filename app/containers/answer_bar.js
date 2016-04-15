@@ -13,12 +13,12 @@ class AnswerBar extends Component {
 
   onInputChange(event) {
     this.setState({ answer: event.target.value });
-    this.props.submitAnswer(event.target.value);
+    this.props.submitAnswer({answer: event.target.value, musicList: this.props.musicList});
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-    this.props.submitAnswer(this.state.answer);
+    this.props.submitAnswer({answer: event.target.value, musicList: this.props.musicList});
     this.setState({ answer: "" });
   }
 
