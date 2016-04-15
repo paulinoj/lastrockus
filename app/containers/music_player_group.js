@@ -23,7 +23,7 @@ class MusicPlayerGroup extends Component {
       playerRef = `musicPlayer${index}`;
       // let newFunc=this.props.signalAllMusicPlayersReady;
       return (
-        <audio src={song} key={song} ref={playerRef} controls />
+        <audio src={song.url} key={song.url} ref={playerRef} controls />
       );
     });
   }

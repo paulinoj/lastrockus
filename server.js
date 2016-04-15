@@ -14,10 +14,14 @@ const app = express();
 const soundcloud = require('./soundcloud2.config.js');
 // DATA FOR TEST PURPOSES ONLY
 const musicList = 
-  [`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
-   `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
-   `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
-   `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`];
+  [{url: `https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
+    answer: 'whatever1'},
+   {url: `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
+    answer: 'whatever2'},
+   {url: `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
+    answer: 'whatever3'},
+   {url: `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`,
+    answer: 'whatever4'}];
 
 app.get('/music/classical', function response(req, res) {
   res.json(musicList);
