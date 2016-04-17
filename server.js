@@ -20,40 +20,29 @@ function soundcloudURL(trackID) {
 }
 
 const musicList = 
-  [{url: '/song1',
+  [{url: '/song/0',
     title: 'whatever1',
     soundcloudURL: soundcloudURL(25278226)},
-   {url: '/song2',
+   {url: '/song/1',
     title: 'whatever2',
     soundcloudURL: soundcloudURL(251024523)},
-   {url: '/song3',
-    title: 'whatever3',
-    soundcloudURL: soundcloudURL(77862534)},
-   {url: '/song4',
+   {url: '/song/2',
     title: 'whatever4',
-    soundcloudURL: soundcloudURL(30396474)}];
+    soundcloudURL: soundcloudURL(30396474)},
+   {url: '/song/3',
+    title: 'whatever3',
+    soundcloudURL: soundcloudURL(77862534)}
+];
 
 app.get('/music/classical', function response(req, res) {
   res.json(musicList);
   res.end();
 });
 
-app.get('/song1', function response(req, res) {
-  request.get(musicList[0].soundcloudURL).pipe(res)
+app.get('/song/:number', function response(req, res) {
+  console.log(req.params.number);
+  request.get(musicList[req.params.number].soundcloudURL).pipe(res)
 });
-
-app.get('/song2', function response(req, res) {
-  request.get(musicList[1].soundcloudURL).pipe(res)
-});
-
-app.get('/song3', function response(req, res) {
-  request.get(musicList[2].soundcloudURL).pipe(res)
-});
-
-app.get('/song4', function response(req, res) {
-  request.get(musicList[3].soundcloudURL).pipe(res)
-});
-
 
 
 if (isDeveloping) {
