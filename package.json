@@ -47,6 +47,7 @@
     "react-redux": "^4.4.2",
     "redux": "^3.4.0",
     "redux-promise": "^0.5.3",
+    "request": "^2.71.0",
     "stats-webpack-plugin": "^0.2.1",
     "style-loader": "^0.12.4",
     "webpack": "^1.12.2"

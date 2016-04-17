@@ -2,6 +2,7 @@
 
 const path = require('path');
 const express = require('express');
+const request = require('request');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -14,18 +15,34 @@ const app = express();
 const soundcloud = require('./soundcloud2.config.js');
 // DATA FOR TEST PURPOSES ONLY
 const musicList = 
-  [{url: `https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`,
+  [{url: '/song1',
     title: 'whatever1'},
-   {url: `https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`,
+   {url: '/song2',
     title: 'whatever2'},
-   {url: `https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`,
+   {url: '/song3',
     title: 'whatever3'},
-   {url: `https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`,
+   {url: '/song4',
     title: 'whatever4'}];
 
 app.get('/music/classical', function response(req, res) {
   res.json(musicList);
   res.end();
+});
+
+app.get('/song1', function response(req, res) {
+  request.get(`https://api.soundcloud.com/tracks/25278226/stream?client_id=${soundcloud.key}`).pipe(res)
+});
+
+app.get('/song2', function response(req, res) {
+  request.get(`https://api.soundcloud.com/tracks/251024523/stream?client_id=${soundcloud.key}`).pipe(res)
+});
+
+app.get('/song3', function response(req, res) {
+  request.get(`https://api.soundcloud.com/tracks/77862534/stream?client_id=${soundcloud.key}`).pipe(res)
+});
+
+app.get('/song4', function response(req, res) {
+  request.get(`https://api.soundcloud.com/tracks/30396474/stream?client_id=${soundcloud.key}`).pipe(res)
 });
 
 
