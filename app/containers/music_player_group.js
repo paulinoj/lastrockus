@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import styles from '../App.css';
 import StartButton from '../components/start_button';
 import AnswerBar from './answer_bar';
+import Visualizer from './visualizer';
 
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
@@ -25,7 +26,10 @@ class MusicPlayerGroup extends Component {
       playerRef = `musicPlayer${index}`;
       // let newFunc=this.props.signalAllMusicPlayersReady;
       return (
-        <audio src={song.url} key={song.url} ref={playerRef} controls />
+        <div>
+          <audio id={playerRef} src={song.url} key={song.url} ref={playerRef} controls />
+          <Visualizer audioID={playerRef} />
+        </div>
       );
     });
   }
