@@ -1,10 +1,13 @@
 import axios from 'axios';
+import { browserHistory } from 'react-router';
 
 export const GET_NEW_MUSIC_LIST = 'GET_NEW_MUSIC_LIST';
 export const ACTIVATE_START_BUTTON = 'ACTIVATE_START_BUTTON';
 export const INC_NUMBER_OF_MUSIC_PLAYERS_READY = 'INC_NUMBER_OF_MUSIC_PLAYERS_READY';
 export const RESET_NUMBER_OF_MUSIC_PLAYERS_READY = 'RESET_NUMBER_OF_MUSIC_PLAYERS_READY';
 export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
+export const AUTH_USER = 'AUTH_USER';
+export const UNAUTH_USER = 'UNAUTH_USER';
 
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
@@ -51,12 +54,17 @@ export function resetNumberOfMusicPlayersReady() {
 export function signinUser({ email, password }) {
   return function(dispatch) {
     // Submit email/password to the server
-    axios.post('signin', { email, password });
+    axios.post('signin', { email, password })
+      .then(response => {
+        // If request is good ...
+        // - Update state to indicate user is authenticated
+        dispatch({ type: AUTH_USER });
 
-    // If request is good ...
-    // - Update state to indicate user is authenticated
-    // - Save the JWT token
-    // - redirect to the route '/feature'
+        // - Save the JWT token
+        // - redirect to the route '/feature'
+        browserHistory.push('/feature');
+      })
+      .catch();
 
     // If request is bad ...
     // - Show an error to the user

@@ -3,6 +3,7 @@
 const path = require('path');
 const express = require('express');
 const request = require('request');
+const bodyParser = require('body-parser');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -37,6 +38,9 @@ const musicList =
     soundcloudURL: soundcloudURL(204414950)}    
 ];
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get('/music/classical', function response(req, res) {
   res.json(musicList);
   res.end();
@@ -47,6 +51,19 @@ app.get('/song/:number', function response(req, res) {
   request.get(musicList[req.params.number].soundcloudURL).pipe(res)
 });
 
+
+// Fake signin authentication
+app.post('/signin', function response(req, res) {
+  if (req.body.password === "hello") {
+    res.json({"message": "Here's your token afdsafdsafdsafdsaf", "token": "xdfdsa43fdasffdsafd"});
+    res.end();    
+  }
+  else
+  {
+    res.status(404).send('Not found');
+  }
+
+});
 
 if (isDeveloping) {
   const webpack = require('webpack');
