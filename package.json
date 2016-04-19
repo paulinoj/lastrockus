@@ -48,6 +48,7 @@
     "react-redux": "^4.4.2",
     "react-router": "^2.3.0",
     "redux": "^3.4.0",
+    "redux-form": "^5.0.1",
     "redux-promise": "^0.5.3",
     "request": "^2.71.0",
     "stats-webpack-plugin": "^0.2.1",

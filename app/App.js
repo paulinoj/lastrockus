@@ -24,6 +24,7 @@ export default class App extends React.Component {
     return (
       <div className={styles.app}>
         <Header />
+        {this.props.children}
         <GenreSelector />
         <MusicPlayerGroup />
       </div>
