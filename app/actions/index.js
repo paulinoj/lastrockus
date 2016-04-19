@@ -8,6 +8,7 @@ export const RESET_NUMBER_OF_MUSIC_PLAYERS_READY = 'RESET_NUMBER_OF_MUSIC_PLAYER
 export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
+export const AUTH_ERROR = 'AUTH_ERROR';
 
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
@@ -62,15 +63,23 @@ export function signinUser({ email, password }) {
 
         // - Save the JWT token in LocalStorage
         localStorage.setItem('token', response.data.token);
-        
+
         // - redirect to the route '/feature'
         browserHistory.push('/feature');
       })
-      .catch();
-
-    // If request is bad ...
-    // - Show an error to the user
+      .catch(() => {
+        // If request is bad ...
+        // - Show an error to the user
+        dispatch(authError('Bad Login Info'));
+      });
   }
+}
+
+export function authError(error) {
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  };
 }
 
 
