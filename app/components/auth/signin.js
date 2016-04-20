@@ -32,7 +32,7 @@ class Signin extends Component {
           <label>Password:</label>
           <input {...password} type="password" className="form-control" />
         </fieldset>
-        {this.renderAlert()};
+        {this.renderAlert()}
         <button acton="submit" className="btn btn-primary">Sign In</button>
       </form>
     );
