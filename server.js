@@ -51,6 +51,10 @@ app.get('/song/:number', function response(req, res) {
   request.get(musicList[req.params.number].soundcloudURL).pipe(res)
 });
 
+app.get('/data', function response(req, res) {
+  console.log("HELLO");
+  res.json({"message": "Data successfully requested"});
+});
 
 // Fake signin authentication
 app.post('/signin', function response(req, res) {
@@ -76,6 +80,8 @@ app.post('/signup', function response(req, res) {
   }
 
 });
+
+
 
 if (isDeveloping) {
   const webpack = require('webpack');

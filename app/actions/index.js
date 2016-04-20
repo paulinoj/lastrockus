@@ -9,6 +9,8 @@ export const SUBMIT_ANSWER = 'SUBMIT_ANSWER';
 export const AUTH_USER = 'AUTH_USER';
 export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
+export const FETCH_MESSAGE = 'FETCH_MESSAGE';
+
 
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
@@ -102,4 +104,17 @@ export function signoutUser() {
   return { type: UNAUTH_USER };
 }
 
+export function fetchData() {
+  return function(dispatch) {
+    axios.get('data', {
+      headers: { authorization: localStorage.getItem('token') }
+    })
+      .then(response => {
+        dispatch({
+          type: FETCH_MESSAGE,
+          payload: response.data.message
+        })
+      });
+  }
+}
 
