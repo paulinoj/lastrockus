@@ -1,8 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import styles from './App.css';
-import GenreSelector from './containers/genre_selector'
-import MusicPlayerGroup from './containers/music_player_group';
 import Header from './containers/header';
 
 export default class App extends React.Component {
@@ -25,8 +23,6 @@ export default class App extends React.Component {
       <div className={styles.app}>
         <Header />
         {this.props.children}
-        <GenreSelector />
-        <MusicPlayerGroup />
       </div>
     );
   }

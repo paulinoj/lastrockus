@@ -10,6 +10,8 @@ import App from './App.js';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
+import Game from './containers/game';
+
 
 import reducers from './reducers'
 
@@ -22,6 +24,7 @@ ReactDOM.render(
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
         <Route path="signup" component={Signup} />
+        <Route path="game" component={Game} />
       </Route>
     </Router>
   </Provider>
