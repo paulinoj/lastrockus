@@ -4,12 +4,18 @@ const path = require('path');
 const express = require('express');
 const request = require('request');
 const bodyParser = require('body-parser');
+const http = require('http');
+const morgan = require('morgan');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
+const router = require('./router');
+const mongoose = require('mongoose');
 
+// DB Setup
 
+mongoose.connect('mongodb://localhost:auth/auth')
 
 
 // SETUP FOR TEST PURPOSES ONLY
@@ -38,8 +44,12 @@ const musicList =
     soundcloudURL: soundcloudURL(204414950)}    
 ];
 
-app.use(bodyParser.json());
+app.use(morgan('combined'));
+app.use(bodyParser.json({ type: '*/*' }));
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Call router with our app
+router(app);
 
 app.get('/music/classical', function response(req, res) {
   res.json(musicList);
@@ -52,7 +62,6 @@ app.get('/song/:number', function response(req, res) {
 });
 
 app.get('/data', function response(req, res) {
-  console.log("HELLO");
   res.json({"message": "Data successfully requested"});
 });
 
