@@ -66,29 +66,29 @@ app.get('/data', function response(req, res) {
 });
 
 // Fake signin authentication
-app.post('/signin', function response(req, res) {
-  if (req.body.password === "hello") {
-    res.json({"message": "Here's your token", "token": "SIGNINTOKEN"});
-    res.end();    
-  }
-  else
-  {
-    res.status(404).send('Not found');
-  }
+// app.post('/signin', function response(req, res) {
+//   if (req.body.password === "hello") {
+//     res.json({"message": "Here's your token", "token": "SIGNINTOKEN"});
+//     res.end();    
+//   }
+//   else
+//   {
+//     res.status(404).send('Not found');
+//   }
 
-});
+// });
 
-app.post('/signup', function response(req, res) {
-  if (req.body.password === "hello") {
-    res.json({"message": "Here's your token", "token": "SIGNUPTOKEN"});
-    res.end();    
-  }
-  else
-  {
-    res.status(404).send({"error": "Could not sign you up"});
-  }
+// app.post('/signup', function response(req, res) {
+//   if (req.body.password === "hello") {
+//     res.json({"message": "Here's your token", "token": "SIGNUPTOKEN"});
+//     res.end();    
+//   }
+//   else
+//   {
+//     res.status(404).send({"error": "Could not sign you up"});
+//   }
 
-});
+// });
 
 
 
