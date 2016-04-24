@@ -1,4 +1,5 @@
 const Authentication = require('./server/controllers/authentication');
+const Music = require('./server/controllers/music');
 const passportService = require('./server/services/passport');
 const passport = require('passport');
 
@@ -11,6 +12,8 @@ module.exports = function(app) {
   app.get('/test2', requireAuth, function(req, res) {
     res.send({ hi: 'there'});
   });
+  app.get('/music/classical', Music.classical);
+  app.get('/song/:number', Music.song);    
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup);
 }

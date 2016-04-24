@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     genre: DataTypes.STRING,
     title: DataTypes.STRING,
     soundcloudTrack: DataTypes.STRING,
-    SongListID: DataTypes.INTEGER
+    SongListId: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
