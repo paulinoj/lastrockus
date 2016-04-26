@@ -1,7 +1,7 @@
 const request = require('request');
 const models = require('../sequelize/models');
 
-const soundcloudKey;
+var soundcloudKey;
 if (process.env.SOUNDCLOUDKEY) {
   soundcloudKey = process.env.SOUNDCLOUDKEY;
 }
