@@ -15,7 +15,8 @@ const mongoose = require('mongoose');
 
 // DB Setup
 
-mongoose.connect('mongodb://localhost:auth/auth')
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:auth/auth';
+mongoose.connect(mongoURI);
 
 // DATA FOR TEST PURPOSES ONLY
 // const musicList = 
