@@ -17,7 +17,7 @@ module.exports = {
       soundcloudTrack: {
         type: Sequelize.STRING
       },
-      SongListID: {
+      SongListId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

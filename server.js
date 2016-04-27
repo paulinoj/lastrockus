@@ -19,23 +19,23 @@ const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:auth/auth';
 mongoose.connect(mongoURI);
 
 // DATA FOR TEST PURPOSES ONLY
-// const musicList = 
-//   [{url: '/song/0',
-//     title: 'whatever1',
-//     soundcloudURL: soundcloudURL(25278226)},
-//    {url: '/song/1',
-//     title: 'whatever2',
-//     soundcloudURL: soundcloudURL(251024523)},
-//    {url: '/song/2',
-//     title: 'whatever4',
-//     soundcloudURL: soundcloudURL(30396474)},
-//    {url: '/song/3',
-//     title: 'whatever3',
-//     soundcloudURL: soundcloudURL(77862534)},
-//    {url: '/song/4',
-//     title: 'whatever4',
-//     soundcloudURL: soundcloudURL(204414950)}    
-// ];
+const musicList = 
+  [{genre: 'pop',
+    title: 'whatever1',
+    soundcloudTrack: "25278226"},
+   {genre: 'pop',
+    title: 'whatever2',
+    soundcloudTrack: "251024523"},
+   {genre: 'pop',
+    title: 'whatever3',
+    soundcloudTrack: "30396474"},
+   {genre: 'pop',
+    title: 'whatever4',
+    soundcloudTrack: "77862534"},
+   {genre: 'pop',
+    title: 'whatever5',
+    soundcloudTrack: "204414950"}    
+  ];
 
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
@@ -46,23 +46,54 @@ router(app);
 
 // CREATE TEMPORARY ROUTES FOR ADDING TO DATABASE
 const models = require('./server/sequelize/models');
-app.post('/makeSong', function(req, res) {
-  models.Song.create({
-    genre: req.body.genre,
-    title: req.body.title,
-    soundcloudTrack: req.body.soundcloudTrack,
-    SongListID: req.body.SongListID
-  }).then(function(song) {
-    res.json(song);
-  });
-});
+// app.post('/makeSong', function(req, res) {
+//   models.Song.create({
+//     genre: req.body.genre,
+//     title: req.body.title,
+//     soundcloudTrack: req.body.soundcloudTrack,
+//     SongListID: req.body.SongListID
+//   }).then(function(song) {
+//     res.json(song);
+//   });
+// });
+// app.post('/makeSongList', function(req, res) {
+//   models.SongList.create({
+//     genre: req.body.genre
+//   }).then(function(songList) {
+//     res.json(songList);
+//   });
+// });
 app.post('/makeSongList', function(req, res) {
   models.SongList.create({
-    genre: req.body.genre
+    genre: "pop"
   }).then(function(songList) {
-    res.json(songList);
+
+    function songLoop(counter) {
+      var title;
+      if (counter > 0) {
+        title = "whatever" + counter;
+        counter--;
+        models.Song.create({
+          genre: musicList[counter].genre,
+          title: musicList[counter].title,
+          soundcloudTrack: musicList[counter].soundcloudTrack
+        }).then(function(song) {
+          songList.addSong(song);
+          if (counter === 0) {
+            res.json(songList);
+          }
+          else
+          {
+            songLoop(counter);
+          }
+        });
+      }      
+    }
+    songLoop(musicList.length);
   });
 });
+
+
 // **** END OF TEMPORARY ROUTES FOR ADDING TO DATABASE
 
 app.get('/data', function response(req, res) {
