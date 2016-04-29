@@ -15,7 +15,7 @@ export function logoDrop(el) {
       .text(msg);
       ty.style("font-size", "100px")
       .style("text-anchor", "end")
-      .attr("transform", "translate(400,0) rotate(180)");
+      .attr("transform", "translate(400,-100) rotate(180)");
 
   ty.transition()
   .attr("transform", "translate(400, 400) rotate(180)")
