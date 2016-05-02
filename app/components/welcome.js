@@ -38,21 +38,23 @@ export default class Visualizer extends Component {
 
 
   render () {
-    let button1Classes = `btn btn-info btn-lg ${styles.signin_button}`;
-    let button2Classes = `btn btn-info btn-lg ${styles.login_button}`;
+    let signin_button_classes = `btn btn-info btn-lg ${styles.signin_button}`;
+    let login_button_classes = `btn btn-info btn-lg ${styles.login_button}`;
 
     return (
       <div className="welcome">
+        <div className={styles.button_group}>
           <div className="text-center">
-            <button type="button" className={button1Classes}>
+            <button type="button" className={signin_button_classes}>
               Sign Up
             </button>
           </div>
           <div className="text-center">
-            <button type="button" className={button2Classes}>
+            <button type="button" className={login_button_classes}>
               Login
             </button>
           </div>
+        </div>
       </div>
     )
   }

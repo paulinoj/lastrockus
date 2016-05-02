@@ -1,9 +1,21 @@
 .signin_button {
   width: 320px;
   margin-bottom: 20px;
+  background-color: #30393C;
 }
 
 .login_button {
   width: 320px;
   margin-bottom: 20px;
+  background-color: #435358;
+}
+
+.welcome {
+	position: relative;
+}
+
+.button_group {
+    position:absolute;
+    top:700px;
+    width:100%;
 }

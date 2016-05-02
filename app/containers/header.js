@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+// import styles from '../header.css';
 
 class Header extends Component {
 
@@ -27,7 +28,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-default">
+      <nav className="navbar navbar-custom">
         <Link to="/" className="navbar-brand">Rockus</Link>
         <ul className="nav navbar-nav">
           {this.renderLinks()}
