@@ -67,7 +67,7 @@ export function logoDrop(el) {
     var nodes = [];
      
     for (var i in d3.range(n)) {
-      nodes.push({radius: 30,
+      nodes.push({radius: 40,
         // color: color(Math.floor(Math.random() * m)),
         color: "white",
         x: rect[0] + (Math.random() * (rect[2] - rect[0])),
@@ -95,7 +95,9 @@ export function logoDrop(el) {
      
     var notes = ["\u2669", "\u266A", "\u266B", "\u266C", "\u266D", "\u266E"];
 
-    var fontSizes = [30, 40, 50];
+    // var fontSizes = [30, 40, 50];
+
+    var fontSizes = [50, 60, 70];
 
     var circle = notesGroup.selectAll("text")
       .data(nodes)
@@ -257,7 +259,7 @@ export function logoDrop(el) {
   // logoElement.attr("transform", translation(xCenterPosition(text_width, "start"), -125, 180))
   //   .transition()
   //   .attr("transform", translation(xCenterPosition(text_width, "start"), logoBottom - text_height/2, 180))
-  //   .delay(5000)
+  //   .delay(11000)
   //   .duration(500)
   //   .ease("cubic")
   //   .transition()
@@ -267,7 +269,8 @@ export function logoDrop(el) {
   //   .transition()
   //   .duration(2000)
   //   .ease("cubic")
-  //   .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0));
+  //   .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0))
+  //   .each("end", addButtons);
 
   logoElement.attr("transform", translation(xCenterPosition(text_width, "end"), -125, 0))
     .transition()
