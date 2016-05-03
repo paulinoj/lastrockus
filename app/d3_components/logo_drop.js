@@ -1,4 +1,6 @@
 import d3 from 'd3';
+import styles from '../welcome.css';
+
 
 export function logoDrop(el) {
 
@@ -15,6 +17,33 @@ export function logoDrop(el) {
     .attr("height", svg_height)
     .attr("fill", "#222");
 
+  function addButtons() {
+
+    let login_button_classes = `btn btn-info btn-lg ${styles.login_button}`;
+    let signup_button_classes = `btn btn-info btn-lg ${styles.signup_button}`;
+    let button_div = d3.select(el)
+      .append("div")
+      .attr("class", styles.button_group);
+    let login_button = button_div
+      .append("div")
+      .attr("class", "text-center")
+      .append("a")
+      .attr("class", login_button_classes)
+      .text("Sign In")
+      .style("opacity", 0)
+      .attr("href", "/signin");
+    let signup_button = button_div
+      .append("div")
+      .attr("class", "text-center")
+      .append("a")
+      .attr("class", signup_button_classes)
+      .text("Sign Up")
+      .style("opacity", 0)
+      .attr("href", "/signup");
+
+      login_button.transition().delay(3000).duration(3000).style("opacity", 1);
+      signup_button.transition().delay(3000).duration(3000).style("opacity", 1);
+  }
 
   // MUSICAL NOTES START ****
 
@@ -58,7 +87,7 @@ export function logoDrop(el) {
     var notesGroup = svg
     // .attr("width", svg_width + margin.left + margin.right)
     // .attr("height", svg_height + margin.top + margin.bottom)
-      .append("g");
+      .insert("g",":nth-child(2)");
     // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
      
     var notes = ["\u2669", "\u266A", "\u266B", "\u266C", "\u266D", "\u266E"];
@@ -158,7 +187,7 @@ export function logoDrop(el) {
   let textGroupBottom = svg_height - 340;
 
   let blurbElement = textGroup.append("text")
-    .text("5 Songs.  Played at one time.  Name 'em.")
+    .text("Name these 5 songs.  Played at the same time.")
     .style("font-size", "30px")
     .style('fill', '#FF83E2')
     .style("text-anchor", "start")
@@ -176,7 +205,7 @@ export function logoDrop(el) {
 
   const text_width3 = textWidth(text_element2);
 
-  blurbElement.text("5 Songs.  Played at one time.")
+  blurbElement.text("Name these 5 songs.")
 
   const text_width2 = textWidth(text_element2);
   const text_height2 = textHeight(text_element2);
@@ -209,7 +238,7 @@ export function logoDrop(el) {
     .attr("transform", translation(xCenterPosition(text_width3, "start"), textGroupBottom, 0));
 
   let blurbElementEnding = textGroup.append("text")
-    .text("Name 'em.")
+    .text("Played at the same time.")
     .style("font-size", "30px")
     .style('fill', '#FF83E2')      
     .style("text-anchor", "end")
@@ -242,7 +271,8 @@ export function logoDrop(el) {
     .delay(11000)
     .duration(1000)
     .ease("bounce")
-    .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0));
+    .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0))
+    .each("end", addButtons);
 
   function resize() {
     /* Find the new window dimensions */
