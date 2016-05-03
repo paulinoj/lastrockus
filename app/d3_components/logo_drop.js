@@ -5,7 +5,7 @@ import styles from '../welcome.css';
 export function logoDrop(el) {
 
   var svg_width = parseInt(d3.select("body").style("width"));
-  let svg_height = 900;
+  let svg_height = 1200;
 
   // initialize the svg canvas
   var svg = d3.select(el).insert("svg",":first-child")
@@ -19,11 +19,14 @@ export function logoDrop(el) {
 
   function addButtons() {
 
+    let buttonGroupTop = (svg_height/2 + 170) + "px";
+
     let login_button_classes = `btn btn-info btn-lg ${styles.login_button}`;
     let signup_button_classes = `btn btn-info btn-lg ${styles.signup_button}`;
     let button_div = d3.select(el)
       .append("div")
-      .attr("class", styles.button_group);
+      .attr("class", styles.button_group)
+      .style("top", buttonGroupTop);
     let login_button = button_div
       .append("div")
       .attr("class", "text-center")
@@ -103,7 +106,7 @@ export function logoDrop(el) {
       .attr("x", function(d) { return d.x; })
       .attr("y", function(d) { return d.y; })
       .style("fill", function(d) { return d.color; })
-      .style("opacity", 0.5)
+      .style("opacity", 0.3)
       .call(force.drag);
      
     var flag = false;
@@ -183,11 +186,11 @@ export function logoDrop(el) {
   const text_width = textWidth(text_element);
   const text_height = textHeight(text_element);
 
-  let logoBottom = svg_height - 400;
-  let textGroupBottom = svg_height - 340;
+  let logoBottom = svg_height/2 - 50;
+  let textGroupBottom = svg_height/2 + 10;
 
   let blurbElement = textGroup.append("text")
-    .text("Name these 5 songs.  Played at the same time.")
+    .text("Identify 5 songs. Played at the same time.")
     .style("font-size", "30px")
     .style('fill', '#FF83E2')
     .style("text-anchor", "start")
@@ -203,9 +206,9 @@ export function logoDrop(el) {
     return textElement.node().getBBox().height;
   }
 
-  const text_width3 = textWidth(text_element2);
+  const text_width3 = textWidth(text_element2) + 10;
 
-  blurbElement.text("Name these 5 songs.")
+  blurbElement.text("Identify 5 songs.")
 
   const text_width2 = textWidth(text_element2);
   const text_height2 = textHeight(text_element2);
@@ -276,13 +279,13 @@ export function logoDrop(el) {
 
   function resize() {
     /* Find the new window dimensions */
-    let svg = d3.select("svg");
-    var svg_width = parseInt(d3.select("body").style("width"));
+    // let svg = d3.select("svg");
+    svg_width = parseInt(d3.select("body").style("width"));
     svg.attr("width", svg_width);
-    console.log(svg.attr("width"));
-    let translationX = (svg_width/2 + text_width/2);
-    let translation = "translate(" + translationX + ", " + logoBottom + ") rotate(0)";
-    logoElement.attr("transform", translation);
+    logoElement.attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0));
+    blurbElement.attr("transform", translation(xCenterPosition(text_width3, "start"), textGroupBottom, 0));
+    blurbElementEnding.attr("transform", translation(xCenterPosition(text_width3, "end"), textGroupBottom, 0));
+
   }
      
   d3.select(window).on('resize', resize);
