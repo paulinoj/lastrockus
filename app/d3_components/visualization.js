@@ -1,7 +1,7 @@
 import d3 from 'd3';
 
 export function createVisualization(el, audioID) {
-
+  console.log("AUDIOID: ", audioID);
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   var audioElement = document.getElementById(audioID);
   var audioSrc = audioCtx.createMediaElementSource(audioElement);
