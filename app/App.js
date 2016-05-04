@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import styles from './App.css';
-import Header from './containers/header';
+import Header from './components/header';
 
 export default class App extends React.Component {
   constructor(props) {

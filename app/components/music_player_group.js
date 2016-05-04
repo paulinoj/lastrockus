@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from '../App.css';
-import SongPanel from "../components/song_panel";
-import StartButton from '../components/start_button';
+import SongPanel from "./song_panel";
+import StartButton from './start_button';
 import AnswerBar from './answer_bar';
 
 import { resetNumberOfMusicPlayersReady } from "../actions/index";

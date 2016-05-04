@@ -10,7 +10,7 @@ import App from './App.js';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
-import Game from './containers/game';
+import Game from './components/game';
 import RequireAuth from './components/auth/require_auth';
 import Welcome from './components/welcome';
 import reducers from './reducers';
