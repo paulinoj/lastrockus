@@ -27,22 +27,31 @@ class SongPanel extends Component {
   }
 
   render() {
-     console.log("THIS.PROPS.PLAY2", this.props.play);
-
-    return (
-      <div className={styles.app}>
-        <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
-        <Visualizer audioID={this.props.audioID} />
-      </div>
-    );
+    if (!this.props.playersActivated || this.props.play) {
+      return (
+        <div className={styles.app}>
+          <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
+          <Visualizer audioID={this.props.audioID} />
+        </div>
+      );
+    }
+    else
+    {
+      return (
+        <div className={styles.app}>
+          <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
+          <div>{this.props.title}</div>
+        </div>
+      );      
+    }
   }
 }
 
-// function mapStateToProps(state) {
-//   return {
-//     playersActivated: state.playersActivated
-//   };
-// }
+function mapStateToProps(state) {
+  return {
+    playersActivated: state.playersActivated
+  };
+}
 
 function mapDispatchToProps(dispatch) {
   // Whenever submitAnswer is called, result should be passed to all 
@@ -51,4 +60,4 @@ function mapDispatchToProps(dispatch) {
     { incNumberOfMusicPlayersReady: incNumberOfMusicPlayersReady }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(SongPanel);
+export default connect(mapStateToProps, mapDispatchToProps)(SongPanel);

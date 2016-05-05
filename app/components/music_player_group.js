@@ -28,7 +28,7 @@ class MusicPlayerGroup extends Component {
       playerRef = `musicPlayer${index}`;
       playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef];
       return (
-        <SongPanel audioID={playerRef} src={song.url} key={playerRef} play={playProp} />
+        <SongPanel audioID={playerRef} src={song.url} key={playerRef} title={song.title} play={playProp} />
       );
     });
   }
