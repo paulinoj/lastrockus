@@ -9,12 +9,14 @@ import AnswerBar from './answer_bar';
 import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
 import { startTimer } from "../actions/index";
+import { signalGameOver } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
     super(props);
     // this.state = {test: 'foo'};
     this.activatePlayers = this.activatePlayers.bind(this);
+    this.signalGameOver = this.signalGameOver.bind(this);
   }
 
   renderList() {
@@ -27,7 +29,7 @@ class MusicPlayerGroup extends Component {
 
     return this.props.musicList.map((song, index) => {
       playerRef = `musicPlayer${index}`;
-      playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef];
+      playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef] && !this.props.gameOver;
       return (
         <SongPanel audioID={playerRef} src={song.url} key={playerRef} title={song.title} play={playProp} timerStarted={this.props.timerStarted} />
       );
@@ -37,7 +39,12 @@ class MusicPlayerGroup extends Component {
   activatePlayers() {
     this.props.activateMusicPlayers();
     this.props.startTimer();
-    this.props.resetNumberOfMusicPlayersReady();    
+    this.props.resetNumberOfMusicPlayersReady();
+    setTimeout(this.signalGameOver, 120000);    
+  }
+
+  signalGameOver() {
+    this.props.signalGameOver();
   }
 
   render() {
@@ -61,7 +68,8 @@ function mapStateToProps(state) {
     numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
     playersActivated: state.playersActivated,
     timerStarted: state.timerStarted,
-    score: state.score
+    score: state.score,
+    gameOver: state.gameOver
   };
 }
 
@@ -71,7 +79,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady,
       activateMusicPlayers: activateMusicPlayers,
-      startTimer: startTimer }, dispatch);
+      startTimer: startTimer,
+      signalGameOver: signalGameOver }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerGroup);
