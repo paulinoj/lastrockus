@@ -6,6 +6,7 @@ import SongPanel from "./song_panel";
 import StartButton from './start_button';
 import AnswerBar from './answer_bar';
 
+import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
@@ -21,22 +22,43 @@ class MusicPlayerGroup extends Component {
     }
 
     let playerRef = "";
-    return this.props.musicList.map((song, index) => {
-      playerRef = `musicPlayer${index}`;
-      // let newFunc=this.props.signalAllMusicPlayersReady;
-      return (
-        <SongPanel audioID={playerRef} src={song.url} key={playerRef} />
-      );
-    });
+
+    if (this.props.musicPlayersActivated) {
+
+      return this.props.musicList.map((song, index) => {
+        playerRef = `musicPlayer${index}`;
+        // let newFunc=this.props.signalAllMusicPlayersReady;
+        return (
+          <SongPanel audioID={playerRef} src={song.url} key={playerRef} play={true} />
+        );
+      });
+
+
+    }
+    else {
+
+
+      return this.props.musicList.map((song, index) => {
+        playerRef = `musicPlayer${index}`;
+        // let newFunc=this.props.signalAllMusicPlayersReady;
+        return (
+          <SongPanel audioID={playerRef} src={song.url} key={playerRef} />
+        );
+      });
+
+
+    }
+
   }
 
   activatePlayers() {
-    let playerRef = "";
-    this.props.musicList.forEach((song, index) => {
-      playerRef = `musicPlayer${index}`;
-      // ReactDOM.findDOMNode
-      this.refs[playerRef].play();
-    });
+    // let playerRef = "";
+    // this.props.musicList.forEach((song, index) => {
+    //   playerRef = `musicPlayer${index}`;
+    //   // ReactDOM.findDOMNode
+    //   this.refs[playerRef].play();
+    // });
+    this.props.activateMusicPlayers();
     this.props.resetNumberOfMusicPlayersReady();    
   }
 
@@ -64,7 +86,8 @@ function mapDispatchToProps(dispatch) {
   // Whenever submitAnswer is called, result should be passed to all 
   // of our reducers
   return bindActionCreators(
-    { resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady }, dispatch);
+    { resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady,
+      activateMusicPlayers: activateMusicPlayers }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerGroup);

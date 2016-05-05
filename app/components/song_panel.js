@@ -19,6 +19,12 @@ class SongPanel extends Component {
     if (this.props.musicPlayersStatus === this.props.audioID) {
       this.refs[this.props.audioID].pause();
     }
+    else
+    {
+      if (this.props.playersActivated) {
+        this.refs[this.props.audioID].play();
+      }
+    }
   }
 
   render() {
@@ -33,7 +39,8 @@ class SongPanel extends Component {
 
 function mapStateToProps(state) {
   return {
-    musicPlayersStatus: state.musicPlayersStatus
+    musicPlayersStatus: state.musicPlayersStatus,
+    playersActivated: state.playersActivated
   };
 }
 

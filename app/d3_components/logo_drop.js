@@ -57,8 +57,8 @@ export function logoDrop(el) {
      
     var rect = [50,50, svg_width - 50, svg_height - 50];
      
-    var n =500,
-      m = 30,
+    var n =1000,
+      m = 40,
       padding = 6,
       maxSpeed = 3,
       radius = d3.scale.sqrt().range([0, 10]),
@@ -67,7 +67,7 @@ export function logoDrop(el) {
     var nodes = [];
      
     for (var i in d3.range(n)) {
-      nodes.push({radius: 40,
+      nodes.push({radius: 20,
         // color: color(Math.floor(Math.random() * m)),
         color: "white",
         x: rect[0] + (Math.random() * (rect[2] - rect[0])),
@@ -97,7 +97,7 @@ export function logoDrop(el) {
 
     // var fontSizes = [30, 40, 50];
 
-    var fontSizes = [50, 60, 70];
+    var fontSizes = [30, 40, 50];
 
     var circle = notesGroup.selectAll("text")
       .data(nodes)
