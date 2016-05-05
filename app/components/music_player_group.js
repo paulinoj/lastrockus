@@ -22,42 +22,18 @@ class MusicPlayerGroup extends Component {
     }
 
     let playerRef = "";
+    let playProp = false;
 
-    if (this.props.musicPlayersActivated) {
-
-      return this.props.musicList.map((song, index) => {
-        playerRef = `musicPlayer${index}`;
-        // let newFunc=this.props.signalAllMusicPlayersReady;
-        return (
-          <SongPanel audioID={playerRef} src={song.url} key={playerRef} play={true} />
-        );
-      });
-
-
-    }
-    else {
-
-
-      return this.props.musicList.map((song, index) => {
-        playerRef = `musicPlayer${index}`;
-        // let newFunc=this.props.signalAllMusicPlayersReady;
-        return (
-          <SongPanel audioID={playerRef} src={song.url} key={playerRef} />
-        );
-      });
-
-
-    }
-
+    return this.props.musicList.map((song, index) => {
+      playerRef = `musicPlayer${index}`;
+      playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef];
+      return (
+        <SongPanel audioID={playerRef} src={song.url} key={playerRef} play={playProp} />
+      );
+    });
   }
 
   activatePlayers() {
-    // let playerRef = "";
-    // this.props.musicList.forEach((song, index) => {
-    //   playerRef = `musicPlayer${index}`;
-    //   // ReactDOM.findDOMNode
-    //   this.refs[playerRef].play();
-    // });
     this.props.activateMusicPlayers();
     this.props.resetNumberOfMusicPlayersReady();    
   }
@@ -78,7 +54,9 @@ class MusicPlayerGroup extends Component {
 function mapStateToProps(state) {
   return {
     musicList: state.musicList,
-    numberOfMusicPlayersReady: state.numberOfMusicPlayersReady
+    musicPlayerOffList: state.musicPlayerOffList,
+    numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
+    playersActivated: state.playersActivated
   };
 }
 

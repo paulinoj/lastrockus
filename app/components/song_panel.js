@@ -16,18 +16,19 @@ class SongPanel extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.musicPlayersStatus === this.props.audioID) {
+     console.log("THIS.PROPS.PLAY", this.props.play);
+    if (!this.props.play) {
       this.refs[this.props.audioID].pause();
     }
     else
     {
-      if (this.props.playersActivated) {
-        this.refs[this.props.audioID].play();
-      }
+      this.refs[this.props.audioID].play();
     }
   }
 
   render() {
+     console.log("THIS.PROPS.PLAY2", this.props.play);
+
     return (
       <div className={styles.app}>
         <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
@@ -37,20 +38,17 @@ class SongPanel extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    musicPlayersStatus: state.musicPlayersStatus,
-    playersActivated: state.playersActivated
-  };
-}
+// function mapStateToProps(state) {
+//   return {
+//     playersActivated: state.playersActivated
+//   };
+// }
 
 function mapDispatchToProps(dispatch) {
   // Whenever submitAnswer is called, result should be passed to all 
   // of our reducers
   return bindActionCreators(
-    // { incNumberOfMusicPlayersReady: incNumberOfMusicPlayersReady,
-    //   resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady }, dispatch);
     { incNumberOfMusicPlayersReady: incNumberOfMusicPlayersReady }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SongPanel);
+export default connect(null, mapDispatchToProps)(SongPanel);
