@@ -8,6 +8,7 @@ import AnswerBar from './answer_bar';
 
 import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
+import { startTimer } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
@@ -28,13 +29,14 @@ class MusicPlayerGroup extends Component {
       playerRef = `musicPlayer${index}`;
       playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef];
       return (
-        <SongPanel audioID={playerRef} src={song.url} key={playerRef} title={song.title} play={playProp} />
+        <SongPanel audioID={playerRef} src={song.url} key={playerRef} title={song.title} play={playProp} timeStarted={this.props.timerStarted} />
       );
     });
   }
 
   activatePlayers() {
     this.props.activateMusicPlayers();
+    this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();    
   }
 
@@ -56,7 +58,8 @@ function mapStateToProps(state) {
     musicList: state.musicList,
     musicPlayerOffList: state.musicPlayerOffList,
     numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
-    playersActivated: state.playersActivated
+    playersActivated: state.playersActivated,
+    timerStarted: state.timerStarted
   };
 }
 
@@ -65,7 +68,8 @@ function mapDispatchToProps(dispatch) {
   // of our reducers
   return bindActionCreators(
     { resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady,
-      activateMusicPlayers: activateMusicPlayers }, dispatch);
+      activateMusicPlayers: activateMusicPlayers,
+      startTimer: startTimer }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerGroup);

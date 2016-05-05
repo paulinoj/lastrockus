@@ -41,6 +41,7 @@ class SongPanel extends Component {
         <div className={styles.app}>
           <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
           <div>{this.props.title}</div>
+          <div>{new Date() - this.props.timeStarted}</div>
         </div>
       );      
     }

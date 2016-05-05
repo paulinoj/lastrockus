@@ -6,6 +6,7 @@ import Answer from "./reducer_answer";
 import NumberOfMusicPlayersReadyReducer from './reducer_number_of_music_players_ready';
 import musicPlayerOffListReducer from './reducer_music_player_off_list';
 import PlayersActivatedReducer from './reducer_players_activated';
+import TimerStartedReducer from './reducer_timer_started';
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   answer: Answer,
   numberOfMusicPlayersReady: NumberOfMusicPlayersReadyReducer,
   musicPlayerOffList: musicPlayerOffListReducer,
-  playersActivated: PlayersActivatedReducer
+  playersActivated: PlayersActivatedReducer,
+  timerStarted: TimerStartedReducer
 });
 
 export default rootReducer;
