@@ -29,7 +29,7 @@ class MusicPlayerGroup extends Component {
       playerRef = `musicPlayer${index}`;
       playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef];
       return (
-        <SongPanel audioID={playerRef} src={song.url} key={playerRef} title={song.title} play={playProp} timeStarted={this.props.timerStarted} />
+        <SongPanel audioID={playerRef} src={song.url} key={playerRef} title={song.title} play={playProp} timerStarted={this.props.timerStarted} />
       );
     });
   }
@@ -48,6 +48,7 @@ class MusicPlayerGroup extends Component {
           numberOfMusicPlayers={this.props.musicList.length} 
           numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
         <AnswerBar musicList={this.props.musicList} />
+        <div>{this.props.score}</div>
       </div>
     );
   }
@@ -59,7 +60,8 @@ function mapStateToProps(state) {
     musicPlayerOffList: state.musicPlayerOffList,
     numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
     playersActivated: state.playersActivated,
-    timerStarted: state.timerStarted
+    timerStarted: state.timerStarted,
+    score: state.score
   };
 }
 

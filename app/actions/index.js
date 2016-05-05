@@ -12,6 +12,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_MESSAGE = 'FETCH_MESSAGE';
 export const ACTIVATE_MUSIC_PLAYERS = 'ACTIVATE_MUSIC_PLAYERS';
 export const START_TIMER = 'START_TIMER';
+export const INC_SCORE = 'INC_SCORE';
 
 
 export function submitAnswer(answer) {
@@ -67,6 +68,13 @@ export function startTimer() {
   return {
     type: START_TIMER,
     payload: null
+  }  
+}
+
+export function incScore(points) {
+  return {
+    type: INC_SCORE,
+    payload: points
   }  
 }
 
