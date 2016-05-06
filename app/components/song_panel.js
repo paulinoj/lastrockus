@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from '../App.css';
 import Visualizer from './visualizer';
+import SongInfo from './song_info';
+
 
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 import { incScore } from "../actions/index";
@@ -55,7 +57,7 @@ class SongPanel extends Component {
     if (!this.props.playersActivated || this.props.play) {
       return (
         <div className={styles.app}>
-          <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
+          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
           <Visualizer audioID={this.props.audioID} />
         </div>
       );
@@ -64,9 +66,8 @@ class SongPanel extends Component {
     {
       return (
         <div className={styles.app}>
-          <audio id={this.props.audioID} src={this.props.src} ref={this.props.audioID} controls />
-          <div>{this.props.title}</div>
-          <div>{new Date() - this.props.timerStarted}</div>
+          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
+          <SongInfo song={this.props.song} points={this.calcPoints()} />
         </div>
       );      
     }
