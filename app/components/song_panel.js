@@ -57,7 +57,7 @@ class SongPanel extends Component {
     if (!this.props.playersActivated || this.props.play) {
       return (
         <div className={styles.songPanel}>
-          <Visualizer audioID={this.props.audioID} />
+          <Visualizer audioID={this.props.audioID} color={this.props.color} />
           <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         </div>
       );

@@ -11,7 +11,7 @@ export default class Visualizer extends Component {
 
   componentDidMount() {
     let el = ReactDOM.findDOMNode(this);
-    let d3Dispatcher = createVisualization(el, this.props.audioID)
+    let d3Dispatcher = createVisualization(el, this.props.audioID, this.props.color)
   }
 
   render () {

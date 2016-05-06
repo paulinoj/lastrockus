@@ -1,6 +1,6 @@
 import d3 from 'd3';
 
-export function createVisualization(el, audioID) {
+export function createVisualization(el, audioID, color) {
   console.log("AUDIOID: ", audioID);
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   var audioElement = document.getElementById(audioID);
@@ -13,8 +13,8 @@ export function createVisualization(el, audioID) {
 
   var frequencyData = new Uint8Array(200);
 
-  var svgHeight = '150';
-  var svgWidth = '1200';
+  var svgHeight = '75';
+  var svgWidth = '940';
   var barPadding = '1';
 
   function createSvg(parent, height, width) {
@@ -34,6 +34,7 @@ export function createVisualization(el, audioID) {
      .attr('width', svgWidth / frequencyData.length - barPadding);
 
   function renderChart() {
+     console.log(color);
      requestAnimationFrame(renderChart);
 
      // Copy frequency data to frequencyData array.
@@ -49,8 +50,9 @@ export function createVisualization(el, audioID) {
            return d/2;
         })
         .attr('fill', function(d) {
-           return 'rgb(0, 0, ' + d + ')';
-        });
+           return color;
+        })
+        .attr('opacity', 0.3);
   }
 
   // Run the loop

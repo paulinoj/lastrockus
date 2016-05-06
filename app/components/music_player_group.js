@@ -26,12 +26,20 @@ class MusicPlayerGroup extends Component {
 
     let playerRef = "";
     let playProp = false;
+    // let colorList = ['white', 'white', 'white', 'white', 'white'];
+    let colorList = ['#FF83E2', '#FF83E2', '#FF83E2', '#FF83E2', '#FF83E2'];
+    // let colorList = ['red', 'blue', 'green', 'yellow', 'orange'];
 
     return this.props.musicList.map((song, index) => {
       playerRef = `musicPlayer${index}`;
       playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef] && !this.props.gameOver;
       return (
-        <SongPanel audioID={playerRef} song={song} key={playerRef} play={playProp} timerStarted={this.props.timerStarted} />
+        <SongPanel audioID={playerRef} 
+          song={song} 
+          key={playerRef} 
+          play={playProp} 
+          timerStarted={this.props.timerStarted}
+          color={colorList[index]} />
       );
     });
   }
