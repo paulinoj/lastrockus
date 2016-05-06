@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createVisualization } from '../d3_components/visualization';
+import styles from '../visualizer.css';
+
 
 export default class Visualizer extends Component {
   constructor(props) {
@@ -14,7 +16,7 @@ export default class Visualizer extends Component {
 
   render () {
     return (
-      <div className="visualizer">
+      <div className={styles.visualizer}>
       </div>
     )
   }

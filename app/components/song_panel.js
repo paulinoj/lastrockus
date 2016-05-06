@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import styles from '../App.css';
+import styles from '../song_panel.css';
 import Visualizer from './visualizer';
 import SongInfo from './song_info';
 
@@ -56,18 +56,18 @@ class SongPanel extends Component {
   render() {
     if (!this.props.playersActivated || this.props.play) {
       return (
-        <div className={styles.app}>
-          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
+        <div className={styles.songPanel}>
           <Visualizer audioID={this.props.audioID} />
+          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         </div>
       );
     }
     else
     {
       return (
-        <div className={styles.app}>
-          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
+        <div className={styles.songPanel}>
           <SongInfo song={this.props.song} points={this.calcPoints()} />
+          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
         </div>
       );      
     }

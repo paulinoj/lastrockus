@@ -49,7 +49,7 @@ class MusicPlayerGroup extends Component {
 
   render() {
     return (
-      <div className={styles.app}>
+      <div className="container">
         {this.renderList()}
         <StartButton activatePlayers={this.activatePlayers}
           numberOfMusicPlayers={this.props.musicList.length} 
