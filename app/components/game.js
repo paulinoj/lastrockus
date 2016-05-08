@@ -12,7 +12,6 @@ class Game extends Component {
   render() {
     return (
       <div>{this.props.message}
-        <GenreSelector />
         <MusicPlayerGroup />
       </div>
     )

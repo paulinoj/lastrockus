@@ -10,6 +10,7 @@ import App from './App.js';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
+import GenreSelector from './components/genre_selector';
 import Game from './components/game';
 import RequireAuth from './components/auth/require_auth';
 import Welcome from './components/welcome';
@@ -34,6 +35,7 @@ ReactDOM.render(
         <Route path="signin" component={Signin} />
         <Route path="signout" component={Signout} />
         <Route path="signup" component={Signup} />
+        <Route path="genre_selector" component={RequireAuth(GenreSelector)} />
         <Route path="game" component={RequireAuth(Game)} />
       </Route>
     </Router>

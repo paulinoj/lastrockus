@@ -1,11 +1,12 @@
 import d3 from 'd3';
 
 export function createVisualization(el, audioID, color) {
-  console.log("AUDIOID: ", audioID);
+
   var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   var audioElement = document.getElementById(audioID);
   var audioSrc = audioCtx.createMediaElementSource(audioElement);
   var analyser = audioCtx.createAnalyser();
+  let timer_ret_val = false;
 
   // Bind our analyser to the media element source.
   audioSrc.connect(analyser);
@@ -35,10 +36,11 @@ export function createVisualization(el, audioID, color) {
 
   function renderChart() {
      console.log(color);
-     requestAnimationFrame(renderChart);
 
      // Copy frequency data to frequencyData array.
-     analyser.getByteFrequencyData(frequencyData);
+     if (analyser) {
+       analyser.getByteFrequencyData(frequencyData);
+     }
 
      // Update d3 chart with new data.
      svg.selectAll('rect')
@@ -53,8 +55,20 @@ export function createVisualization(el, audioID, color) {
            return color;
         })
         .attr('opacity', 0.3);
+ 
+    return timer_ret_val;
   }
 
   // Run the loop
-  renderChart();
+  // renderChart();
+  d3.timer(renderChart);
+
+  return function() {
+    timer_ret_val = true;
+    audioElement = null;
+    audioSrc = null;
+    audioCtx = null;
+    analyser = null;
+  }
+
 };
