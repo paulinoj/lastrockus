@@ -2,8 +2,13 @@
   height: 200px;
 }
 
-.bap {
-  background-color: red;
-  height: 25px;
+.background {
+  /*background-color: #222;*/
 }
 
+.hide {
+  display: none;
+}
+
+.show {
+}

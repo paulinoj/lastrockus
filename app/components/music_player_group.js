@@ -19,16 +19,16 @@ class MusicPlayerGroup extends Component {
     this.signalGameOver = this.signalGameOver.bind(this);
   }
 
-  renderList() {
+  renderSongPanels() {
     if (!this.props.musicList) {
       return <div>Songs loading ...</div>;
     }
 
     let playerRef = "";
     let playProp = false;
-    // let colorList = ['white', 'white', 'white', 'white', 'white'];
+    let colorList = ['white', 'white', 'white', 'white', 'white'];
     // let colorList = ['#FF83E2', '#FF83E2', '#FF83E2', '#FF83E2', '#FF83E2'];
-    let colorList = ['red', 'blue', 'green', 'yellow', 'orange'];
+    // let colorList = ['red', 'blue', 'green', 'yellow', 'orange'];
 
     return this.props.musicList.map((song, index) => {
       playerRef = `musicPlayer${index}`;
@@ -56,13 +56,28 @@ class MusicPlayerGroup extends Component {
   }
 
   render() {
+    let songPanelVisibility = styles.show;
+    let startButtonVisibility = styles.show;      
+
+    if (this.props.playersActivated) {
+      startButtonVisibility = styles.hide;      
+    }
+    else
+    {
+      songPanelVisibility = styles.hide;      
+    }
+
     return (
       <div className="container">
-        {this.renderList()}
-        <StartButton activatePlayers={this.activatePlayers}
-          numberOfMusicPlayers={this.props.musicList.length} 
-          numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
         <AnswerBar musicList={this.props.musicList} />
+        <div className={songPanelVisibility}>
+          {this.renderSongPanels()}
+        </div>
+        <div className={startButtonVisibility}>
+          <StartButton activatePlayers={this.activatePlayers}
+            numberOfMusicPlayers={this.props.musicList.length} 
+            numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
+        </div>
         <div>{this.props.score}</div>
       </div>
     );

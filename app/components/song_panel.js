@@ -5,10 +5,8 @@ import styles from '../song_panel.css';
 import Visualizer from './visualizer';
 import SongInfo from './song_info';
 
-
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 import { incScore } from "../actions/index";
-
 
 class SongPanel extends Component {
   constructor(props) {

@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import GenreSelectorButton from './genre_selector_button';
 import { getNewMusicList } from "../actions/index";
 
 class GenreSelector extends Component {
   constructor(props) {
     super(props);
     this.state = { answer: '' };
+    this.onSelection = this.onSelection.bind(this);
   }
 
   render() {
     return (
       <div className="genre-selector">
-        <select onChange={event => this.onSelectionChange(event.target.value)}>
-          <option value="80s">80s</option>
-          <option value="Classical">Classical</option>
-          <option value="Pop">Pop</option>
-        </select>
+        <GenreSelectorButton value="80s" onClick={this.onSelection} />
+        <GenreSelectorButton value="Classical" onClick={this.onSelection} />
+        <GenreSelectorButton value="Pop" onClick={this.onSelection} />        
       </div>
     );
   }
 
-  onSelectionChange(genre) {
+  onSelection(genre) {
     this.props.getNewMusicList(genre);
   }  
 }
