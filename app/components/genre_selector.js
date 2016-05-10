@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import GenreSelectorButton from './genre_selector_button';
 import { getNewMusicList } from "../actions/index";
+import styles from '../genre_selector.css';
 
 class GenreSelector extends Component {
   constructor(props) {
@@ -13,10 +14,12 @@ class GenreSelector extends Component {
 
   render() {
     return (
-      <div className="genre-selector">
+      <div className={styles.genre_selector}>
+        <div className="text-center">
         <GenreSelectorButton value="80s" onClick={this.onSelection} />
         <GenreSelectorButton value="Classical" onClick={this.onSelection} />
         <GenreSelectorButton value="Pop" onClick={this.onSelection} />        
+        </div>
       </div>
     );
   }
