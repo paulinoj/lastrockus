@@ -37,6 +37,24 @@ const musicList =
     soundcloudTrack: "39147564"}    
   ];
 
+const musicList2 = 
+  [{genre: 'eighties',
+    title: 'Saturday Night',
+    soundcloudTrack: "73102421"},
+   {genre: 'eighties',
+    title: 'Saturday Night',
+    soundcloudTrack: "73102421"},
+   {genre: 'eighties',
+    title: 'Saturday Night',
+    soundcloudTrack: "73102421"},
+   {genre: 'eighties',
+    title: 'Saturday Night',
+    soundcloudTrack: "73102421"},
+   {genre: 'eighties',
+    title: 'I Just Wanna Stop',
+    soundcloudTrack: "114113508"}    
+  ];
+
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -46,23 +64,7 @@ router(app);
 
 // CREATE TEMPORARY ROUTES FOR ADDING TO DATABASE
 const models = require('./server/sequelize/models');
-// app.post('/makeSong', function(req, res) {
-//   models.Song.create({
-//     genre: req.body.genre,
-//     title: req.body.title,
-//     soundcloudTrack: req.body.soundcloudTrack,
-//     SongListID: req.body.SongListID
-//   }).then(function(song) {
-//     res.json(song);
-//   });
-// });
-// app.post('/makeSongList', function(req, res) {
-//   models.SongList.create({
-//     genre: req.body.genre
-//   }).then(function(songList) {
-//     res.json(songList);
-//   });
-// });
+
 app.post('/makeSongList', function(req, res) {
   models.SongList.create({
     genre: "pop"
@@ -93,6 +95,35 @@ app.post('/makeSongList', function(req, res) {
   });
 });
 
+app.post('/makeSongList2', function(req, res) {
+  models.SongList.create({
+    genre: "eighties"
+  }).then(function(songList) {
+
+    function songLoop(counter) {
+      var title;
+      if (counter > 0) {
+        title = "whatever" + counter;
+        counter--;
+        models.Song.create({
+          genre: musicList2[counter].genre,
+          title: musicList2[counter].title,
+          soundcloudTrack: musicList2[counter].soundcloudTrack
+        }).then(function(song) {
+          songList.addSong(song);
+          if (counter === 0) {
+            res.json(songList);
+          }
+          else
+          {
+            songLoop(counter);
+          }
+        });
+      }      
+    }
+    songLoop(musicList2.length);
+  });
+});
 
 // **** END OF TEMPORARY ROUTES FOR ADDING TO DATABASE
 

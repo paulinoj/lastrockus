@@ -13,6 +13,7 @@ module.exports = function(app) {
     res.send({ hi: 'there'});
   });
   app.get('/music/classical', Music.classical);
+  app.get('/music/eighties', Music.eighties);
   app.get('/song/:number', Music.song);    
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup);

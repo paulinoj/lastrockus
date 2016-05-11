@@ -10,13 +10,28 @@ else
   soundcloudKey = require('../../soundcloud.config.js')["key"];
 }
 
+
+
+exports.eighties = function(req, res, next) {
+  // JOHN you need to handle errors, i.e.
+  // if (err) { return next(err); }
+  models.SongList.findById(3).then(function(songList) {
+    songList.getSongs().then(function(songs) {
+      let responseList = songs.map(function(song) {
+        return { title: song.dataValues.title, url: `/song/${song.id}`}
+      });
+      res.json(responseList);
+    });
+  });
+};
+
 exports.classical = function(req, res, next) {
   // JOHN you need to handle errors, i.e.
   // if (err) { return next(err); }
   models.SongList.findById(1).then(function(songList) {
     songList.getSongs().then(function(songs) {
       console.log(songs);
-      const responseList = songs.map(function(song) {
+      let responseList = songs.map(function(song) {
         return { title: song.dataValues.title, url: `/song/${song.id}`}
       });
       console.log("RESPONSELIST");
@@ -25,6 +40,7 @@ exports.classical = function(req, res, next) {
     });
   });
 };
+
 
 exports.song = function(req, res, next) {
   models.Song.findById(Number(req.params.number)).then(function(song) {

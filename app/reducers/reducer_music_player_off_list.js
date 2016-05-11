@@ -1,4 +1,5 @@
 import { SUBMIT_ANSWER } from '../actions/index.js';
+import { RESET_GAME } from '../actions/index.js';
 
 export default function(state = {}, action) {
   // State will look like {musicPlayer1: true, musicPlayer2: true, musicPlayer3: false, musicPlayer4: true};
@@ -13,6 +14,8 @@ export default function(state = {}, action) {
         }
       });
       return musicPlayerOffList;
+    case RESET_GAME:
+      return {};
   }
   return state;
 }

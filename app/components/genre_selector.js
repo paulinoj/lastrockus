@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import GenreSelectorButton from './genre_selector_button';
 import { getNewMusicList } from "../actions/index";
+import { resetGame } from "../actions/index";
+
 import styles from '../genre_selector.css';
 
 class GenreSelector extends Component {
@@ -12,11 +14,15 @@ class GenreSelector extends Component {
     this.onSelection = this.onSelection.bind(this);
   }
 
+  componentWillMount() {
+    this.props.resetGame();
+  }
+
   render() {
     return (
       <div className={styles.genre_selector}>
         <div className="text-center">
-        <GenreSelectorButton value="80s" onClick={this.onSelection} />
+        <GenreSelectorButton value="Eighties" onClick={this.onSelection} />
         <GenreSelectorButton value="Classical" onClick={this.onSelection} />
         <GenreSelectorButton value="Pop" onClick={this.onSelection} />        
         </div>
@@ -30,7 +36,8 @@ class GenreSelector extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getNewMusicList: getNewMusicList }, dispatch);
+  return bindActionCreators({ getNewMusicList: getNewMusicList, 
+                              resetGame: resetGame}, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(GenreSelector);

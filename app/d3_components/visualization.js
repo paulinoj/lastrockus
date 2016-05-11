@@ -35,27 +35,28 @@ export function createVisualization(el, audioID, color) {
      .attr('width', svgWidth / frequencyData.length - barPadding);
 
   function renderChart() {
-     console.log(color);
+    console.log(color);
 
-     // Copy frequency data to frequencyData array.
-     if (analyser) {
-       analyser.getByteFrequencyData(frequencyData);
-     }
+    // Copy frequency data to frequencyData array.
+    if (analyser) {
+      analyser.getByteFrequencyData(frequencyData);
+    }
 
-     // Update d3 chart with new data.
-     svg.selectAll('rect')
-        .data(frequencyData)
-        .attr('y', function(d) {
+    // Update d3 chart with new data.
+    if (svg) {
+      svg.selectAll('rect')
+         .data(frequencyData)
+         .attr('y', function(d) {
            return (svgHeight - d/2);
-        })
-        .attr('height', function(d) {
+          })
+         .attr('height', function(d) {
            return d/2;
-        })
-        .attr('fill', function(d) {
+          })
+         .attr('fill', function(d) {
            return color;
-        })
-        .attr('opacity', 0.3);
- 
+          })
+         .attr('opacity', 0.3);
+    } 
     return timer_ret_val;
   }
 
@@ -65,10 +66,13 @@ export function createVisualization(el, audioID, color) {
 
   return function() {
     timer_ret_val = true;
+    audioCtx.close();
     audioElement = null;
     audioSrc = null;
     audioCtx = null;
     analyser = null;
+    svg=null;
+    frequencyData = null;
   }
 
 };

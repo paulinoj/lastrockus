@@ -14,7 +14,7 @@ export const ACTIVATE_MUSIC_PLAYERS = 'ACTIVATE_MUSIC_PLAYERS';
 export const START_TIMER = 'START_TIMER';
 export const INC_SCORE = 'INC_SCORE';
 export const SIGNAL_GAME_OVER = 'SIGNAL_GAME_OVER';
-
+export const RESET_GAME = 'RESET_GAME';
 
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
@@ -26,22 +26,17 @@ export function submitAnswer(answer) {
   };
 }
 
-// export function getNewMusicList(genre) {
-//   genre = genre.toLowerCase();
-//   console.log('New Selection is: ', genre);
-//   const url = `music/${genre}`
-//   const request = axios.get(url);
-//   return {
-//     type: GET_NEW_MUSIC_LIST,
-//     payload: request
-//   };
-// }
-
+export function resetGame() {
+  return {
+    type: RESET_GAME,
+    payload: null
+  }  
+}
 
 export function getNewMusicList(genre) {
   return function(dispatch) {
     genre = genre.toLowerCase();
-    const url = `music/${genre}`
+    const url = `music/${genre}`;
     axios.get(url)
       .then(response => {
         dispatch({ type: GET_NEW_MUSIC_LIST,
