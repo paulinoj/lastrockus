@@ -66,13 +66,20 @@ export function createVisualization(el, audioID, color) {
 
   return function() {
     timer_ret_val = true;
-    audioCtx.close();
-    audioElement = null;
-    audioSrc = null;
-    audioCtx = null;
-    analyser = null;
-    svg=null;
     frequencyData = null;
+    audioSrc = null;
+    analyser = null;
+
+    // This is the line of code that seems to fix problem with subsequent ajax requests
+    // Be sure you pause audioElement before setting it to null
+    // Got idea from this link:  
+    // http://stackoverflow.com/questions/19294258/forcing-mediaelement-to-release-stream-after-playback
+    audioElement.pause();
+
+    audioElement = null;
+    audioCtx.close();
+    audioCtx = null;
+    svg=null;
   }
 
 };
