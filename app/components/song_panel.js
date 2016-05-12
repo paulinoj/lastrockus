@@ -15,6 +15,7 @@ class SongPanel extends Component {
 
   componentDidMount() {
     this.refs[this.props.audioID].addEventListener("canplaythrough", this.props.incNumberOfMusicPlayersReady);
+    this.refs[this.props.audioID].load();
   }
 
   componentDidUpdate() {
@@ -56,20 +57,16 @@ class SongPanel extends Component {
       return (
         <div className={styles.songPanel}>
           <Visualizer audioID={this.props.audioID} color={this.props.color} />
-          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} key={this.props.audioID} />
+          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         </div>
       );
     }
     else
     {
-      // Force React to create a new audio element by giving different key
-      // Necessary because first audio element is connected to Web Audio API inside visualization.js
-      // and lose reference to it when the Visualizer component dismounts
-      let newRef = this.props.audioID + "A";
       return (
         <div className={styles.songPanel}>
           <SongInfo song={this.props.song} points={this.calcPoints()} />
-          <audio id={newRef} src={this.props.song.url} ref={newRef} key={newRef} controls />
+          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
         </div>
       );      
     }
