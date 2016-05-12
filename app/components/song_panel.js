@@ -19,9 +19,9 @@ class SongPanel extends Component {
   }
 
   componentDidUpdate() {
-     console.log("THIS.PROPS.PLAY", this.props.play);
     if (!this.props.play) {
       this.refs[this.props.audioID].pause();
+      this.refs[this.props.audioID].setAttribute("controls","controls");  
       this.props.incScore(this.calcPoints())
     }
     else
@@ -53,23 +53,13 @@ class SongPanel extends Component {
   }
 
   render() {
-    if (!this.props.playersActivated || this.props.play) {
-      return (
-        <div className={styles.songPanel}>
-          <Visualizer audioID={this.props.audioID} color={this.props.color} />
-          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
-        </div>
-      );
-    }
-    else
-    {
-      return (
-        <div className={styles.songPanel}>
-          <SongInfo song={this.props.song} points={this.calcPoints()} />
-          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} controls />
-        </div>
-      );      
-    }
+    return (
+      <div className={styles.songPanel}>
+        <Visualizer audioID={this.props.audioID} color={this.props.color} show={this.props.play} />
+        <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
+        <SongInfo song={this.props.song} points={this.calcPoints()} show={!this.props.play} />
+      </div>
+    );      
   }
 }
 

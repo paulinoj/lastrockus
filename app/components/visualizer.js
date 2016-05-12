@@ -11,8 +11,19 @@ export default class Visualizer extends Component {
   }
 
   componentDidMount() {
+  }
+
+  componentDidUpdate() {
     let el = ReactDOM.findDOMNode(this);
-    this.d3Dispatcher = createVisualization(el, this.props.audioID, this.props.color);
+    if (this.props.show) {
+      this.d3Dispatcher = createVisualization(el, this.props.audioID, this.props.color);      
+    }
+    else
+    {
+      while (el.firstChild) {
+        el.removeChild(el.firstChild);
+      }
+    }    
   }
 
   componentWillUnmount() {
