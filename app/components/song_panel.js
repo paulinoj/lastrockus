@@ -30,6 +30,11 @@ class SongPanel extends Component {
     }
   }
 
+  componentWillUnmount() {
+    // Need this line of code, otherwise, ajax requests hang when you try to backarrow out of this page
+    this.refs[this.props.audioID].src = null;
+  }
+
   calcPoints() {
     let points = 0;
     let timeElapsed = Math.floor(new Date() - this.props.timerStarted)/1000;

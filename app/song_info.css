@@ -6,3 +6,7 @@
 .songInfo {
   height: 75px;
 }
+
+.hidden {
+  display: none;
+}

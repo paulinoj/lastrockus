@@ -28,12 +28,18 @@ export default class Visualizer extends Component {
 
   componentWillUnmount() {
     console.log("COMPONENT UNMOUNTED");
-    this.d3Dispatcher();
+    if (this.d3Dispatcher) {
+      this.d3Dispatcher();
+    }
   }
 
   render () {
+    var visualizerStyles = styles.visualizer;
+    if (!this.props.show) {
+      visualizerStyles = visualizerStyles + " " + styles.hidden;
+    } 
     return (
-      <div className={styles.visualizer}>
+      <div className={visualizerStyles}>
       </div>
     )
   }

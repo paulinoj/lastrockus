@@ -1,6 +1,10 @@
 .genre_selector {
   /*background-color: #222;*/
-  height: 1200px;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 600px;
 }
 
 
