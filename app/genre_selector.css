@@ -5,6 +5,10 @@
   -webkit-flex-direction: column;
   flex-direction: column;
   height: 600px;
+  -webkit-justify-content: center;
+  justify-content: center;
+/*  -webkit-justify-content: space-between;
+  justify-content: space-between;*/
 }
 
 

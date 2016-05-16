@@ -61,8 +61,8 @@ class SongPanel extends Component {
     return (
       <div className={styles.songPanel}>
         <Visualizer audioID={this.props.audioID} color={this.props.color} show={this.props.play} />
-        <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         <SongInfo song={this.props.song} points={this.calcPoints()} show={!this.props.play} />
+        <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
       </div>
     );      
   }

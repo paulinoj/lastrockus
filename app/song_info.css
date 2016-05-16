@@ -1,9 +1,40 @@
+.songInfo {
+  /*background-color: #222;*/
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  height: 75px;
+  -webkit-justify-content: start;
+  justify-content: start;
+  color: white;
+  align-items: stretch;
+/*  -webkit-justify-content: space-between;
+  justify-content: space-between;*/
+}
+
+.flexitem1 {
+  -webkit-flex: 4 1 120px;
+  flex: 4 1 120px;
+}
+
+.flexitem2 {
+  -webkit-flex: 1 4 20px;
+  flex: 1 4 20px;
+}
+
+.just {
+  text-align: left;
+}
+
 .points {
   font-size: 40px;
+  color: white;
   background-color: #B19BAC;
 }
 
 .songInfo {
+
   height: 75px;
 }
 

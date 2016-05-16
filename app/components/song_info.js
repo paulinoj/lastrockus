@@ -8,15 +8,16 @@ const SongInfo = (props) => {
   } 
   return (
   	<div className={songInfoStyles}>
-	  <div className="row">
-	  	<div className="col-xs-9">
-		  <h1>{props.song.title}</h1>
-		  <div>{props.song.track}</div>
+	  	<div className={styles.flexitem1}>
+	  	  <div className={styles.just}>
+			<h1>{props.song.title}</h1>
+			<div>super cali fragilistic expialidociuos even though </div>
+			<div>{props.song.track}</div>
+		  </div>
 	  	</div>
-	  	<div className="col-xs-3">
+	  	<div className={styles.flexitem2}>
 	  	  <div className={styles.points}>{props.points}</div>
 	  	</div>
-	  </div>
   	</div>
   )
 };
