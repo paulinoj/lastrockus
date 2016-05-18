@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../genre_selector_button.css';
+import styles from '../css/genre_selector_button.css';
 
 const GenreSelectorButton = (props) => {
   let classList = "btn btn-default btn-lg " + styles.genre_selector_button;

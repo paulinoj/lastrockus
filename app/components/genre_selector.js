@@ -5,7 +5,7 @@ import GenreSelectorButton from './genre_selector_button';
 import { getNewMusicList } from "../actions/index";
 import { resetGame } from "../actions/index";
 
-import styles from '../genre_selector.css';
+import styles from '../css/genre_selector.css';
 
 class GenreSelector extends Component {
   constructor(props) {

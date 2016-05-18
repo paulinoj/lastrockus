@@ -1,5 +1,5 @@
 import d3 from 'd3';
-import styles from '../welcome.css';
+import styles from '../css/welcome.css';
 
 
 export function logoDrop(el) {

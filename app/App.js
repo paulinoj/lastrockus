@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import React from 'react';
-import styles from './App.css';
 import Header from './components/header';
 
 export default class App extends React.Component {
@@ -20,7 +19,7 @@ export default class App extends React.Component {
     const answerCheck = _.debounce((answer) => { this.check(answer) }, 300);
 
     return (
-      <div className={styles.app}>
+      <div>
         <Header />
         {this.props.children}
       </div>

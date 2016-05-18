@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import styles from '../song_info.css';
+import styles from '../css/song_info.css';
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 import { incScore } from "../actions/index";
 

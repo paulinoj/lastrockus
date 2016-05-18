@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../start_button.css';
+import styles from '../css/start_button.css';
 
 const StartButton = (props) => {
   console.log("NUMBER OF MUSIC PLAYERS READY", props.numberOfMusicPlayersReady);

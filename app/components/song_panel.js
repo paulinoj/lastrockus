@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import styles from '../song_panel.css';
+import styles from '../css/song_panel.css';
 import Visualizer from './visualizer';
 import SongInfo from './song_info';
 

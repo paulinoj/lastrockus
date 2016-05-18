@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createVisualization } from '../d3_components/visualization';
-import styles from '../visualizer.css';
+import styles from '../css/visualizer.css';
 
 export default class Visualizer extends Component {
 

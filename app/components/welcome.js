@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { logoDrop } from '../d3_components/logo_drop';
-import styles from '../welcome.css';
+import styles from '../css/welcome.css';
 
 export default class Visualizer extends Component {
   constructor(props) {
