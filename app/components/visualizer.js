@@ -13,6 +13,10 @@ export default class Visualizer extends Component {
   componentDidMount() {
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.show !== this.props.show;
+  }
+
   componentDidUpdate() {
     let el = ReactDOM.findDOMNode(this);
     if (this.props.show) {
@@ -44,4 +48,3 @@ export default class Visualizer extends Component {
     )
   }
 }
-

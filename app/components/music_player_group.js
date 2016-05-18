@@ -38,7 +38,6 @@ class MusicPlayerGroup extends Component {
           song={song} 
           key={playerRef} 
           play={playProp} 
-          timerStarted={this.props.timerStarted}
           color={colorList[index]} />
       );
     });
