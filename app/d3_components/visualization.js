@@ -16,6 +16,8 @@ export function createVisualization(el, audioID, color) {
 
   var svgHeight = '75';
   var svgWidth = '940';
+  // var svgWidth = '480';
+
   var barPadding = '1';
 
   function createSvg(parent, height, width) {

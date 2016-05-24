@@ -4,23 +4,33 @@
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
-  height: 75px;
   -webkit-justify-content: start;
   justify-content: start;
   color: white;
-  align-items: stretch;
+  -webkit-flex-wrap: wrap; /* Safari */
+  flex-wrap:         wrap;
+  -webkit-align-items: center; /* Safari */
+  align-items:         center;
+
 /*  -webkit-justify-content: space-between;
   justify-content: space-between;*/
 }
 
 .flexitem1 {
-  -webkit-flex: 4 1 120px;
-  flex: 4 1 120px;
+  -webkit-flex: 1 1 300px;
+  flex: 1 1 300px;
 }
 
 .flexitem2 {
-  -webkit-flex: 1 4 20px;
-  flex: 1 4 20px;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-align-items: center; /* Safari */
+  align-items:         center;
+
+  -webkit-flex: 1 1 300px;
+  flex: 1 1 300px;
+  background-color: green;
+  align-self: stretch;
 }
 
 .just {
@@ -31,11 +41,11 @@
   font-size: 40px;
   color: white;
   background-color: #B19BAC;
+  height: 100%;
 }
 
 .songInfo {
-
-  height: 75px;
+  height: 100%;
 }
 
 .hidden {

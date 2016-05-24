@@ -68,16 +68,17 @@ class SongInfo extends Component {
       <div className={songInfoStyles}>
         <div className={styles.flexitem1}>
           <div className={styles.just}>
-        <h1>{this.props.song.title}</h1>
-        <div>super cali fragilistic expialidociuos even though </div>
-        <div>{this.props.song.track}</div>
+            <h1>{this.props.song.title}</h1>
+            <div>super cali fragilistic expialidociuos even though </div>
+           <div>{this.props.song.url}</div>
+          </div>
         </div>
-        </div>
-        <div>
+
+        <div className={styles.flexitem2}>
           <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         </div>
         <div className={styles.flexitem2}>
-          <div className={styles.points}>{this.calcPoints()}</div>
+          <div className={styles.points}>{this.calcPoints()} points</div>
         </div>
       </div>
     );
