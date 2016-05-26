@@ -11,12 +11,10 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 const router = require('./router');
-const mongoose = require('mongoose');
 
+const models = require('./server/sequelize/models');
+models.sequelize.sync();
 // DB Setup
-
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:auth/auth';
-mongoose.connect(mongoURI);
 
 // DATA FOR TEST PURPOSES ONLY
 const musicList = 
@@ -63,7 +61,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 router(app);
 
 // CREATE TEMPORARY ROUTES FOR ADDING TO DATABASE
-const models = require('./server/sequelize/models');
 
 app.post('/makeSongList', function(req, res) {
   models.SongList.create({

@@ -1,5 +1,5 @@
 const jwt = require('jwt-simple');
-const User = require('../models/user');
+const models = require('../sequelize/models');
 
 var jwtSecret;
 if (process.env.JWTSECRET) {
@@ -34,25 +34,24 @@ exports.signup = function(req, res, next) {
   }
 
   // See if a user with the given email exists
-  User.findOne({ email: email }, function(err, existingUser) {
-    if (err) { return next(err); }
- 
+  models.User.findOne({where: { email: {$iLike: email} 
+  }}).then(function(existingUser) {
     // if a user with email does exist, return an error
     if (existingUser) {
       return res.status(422).send({ error: 'Email is in use' });
     }
 
     // If a user with email does NOT exist, create and save user record
-    const user = new User({
+    models.User.create({
       email: email,
       password: password
-    });
-
-    user.save(function(err) {
-      if (err) { return next(err); }
-
-      // Respond to request indicating the user was created
+    }).then(function(user) {
       res.json({ token: tokenForUser(user) });
+    }).catch(function(err) {
+      if (err) { return next(err); }      
     });
+
+  }).catch(function(err) {
+    if (err) { return next(err); }    
   });
-}
+};
