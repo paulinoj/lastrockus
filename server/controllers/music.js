@@ -32,8 +32,6 @@ exports.classical = function(req, res, next) {
       var responseList = songs.map(function(song) {
         return { title: song.dataValues.title, url: `/song/${song.id}`}
       });
-      console.log("RESPONSELIST");
-      console.log(responseList);
       res.json(responseList);
     });
   });

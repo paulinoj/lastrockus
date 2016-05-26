@@ -37,7 +37,9 @@ export function getNewMusicList(genre) {
   return function(dispatch) {
     genre = genre.toLowerCase();
     const url = `music/${genre}`;
-    axios.get(url)
+    axios(url, {
+      headers: { authorization: localStorage.getItem('token') }
+    })
       .then(response => {
         dispatch({ type: GET_NEW_MUSIC_LIST,
                    payload: response });
