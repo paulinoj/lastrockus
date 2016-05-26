@@ -36,22 +36,41 @@ const musicList =
   ];
 
 const musicList2 = 
-  [{genre: 'eighties',
-    title: 'Saturday Night',
+  [{genre: 'pop',
+    title: 'whatever1',
+    soundcloudTrack: "25278226"},
+   {genre: 'pop',
+    title: 'whatever2',
+    soundcloudTrack: "251024523"},
+   {genre: 'pop',
+    title: 'whatever3',
     soundcloudTrack: "73102421"},
-   {genre: 'eighties',
-    title: 'Saturday Night',
-    soundcloudTrack: "73102421"},
-   {genre: 'eighties',
-    title: 'Saturday Night',
-    soundcloudTrack: "73102421"},
-   {genre: 'eighties',
-    title: 'Saturday Night',
-    soundcloudTrack: "73102421"},
-   {genre: 'eighties',
-    title: 'I Just Wanna Stop',
-    soundcloudTrack: "114113508"}    
+   {genre: 'pop',
+    title: 'whatever4',
+    soundcloudTrack: "77862534"},
+   {genre: 'pop',
+    title: 'whatever5',
+    soundcloudTrack: "39147564"}    
   ];
+
+
+// const musicList2 = 
+//   [{genre: 'eighties',
+//     title: 'Saturday Night',
+//     soundcloudTrack: "73102421"},
+//    {genre: 'eighties',
+//     title: 'Saturday Night',
+//     soundcloudTrack: "73102421"},
+//    {genre: 'eighties',
+//     title: 'Saturday Night',
+//     soundcloudTrack: "73102421"},
+//    {genre: 'eighties',
+//     title: 'Saturday Night',
+//     soundcloudTrack: "73102421"},
+//    {genre: 'eighties',
+//     title: 'I Just Wanna Stop',
+//     soundcloudTrack: "114113508"}    
+//   ];
 
 app.use(morgan('combined'));
 app.use(bodyParser.json({ type: '*/*' }));
