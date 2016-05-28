@@ -9,8 +9,7 @@ const requireAuth = passport.authenticate('jwt', { session: false });
 const requireSignin = passport.authenticate('local', { session: false });
 
 module.exports = function(app) {
-  app.get('/music/classical', requireAuth, Music.classical);
-  app.get('/music/eighties', requireAuth, Music.eighties);
+  app.get('/music/:genre', requireAuth, Music.genre);
   app.get('/song/:number', Music.song);    
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup);

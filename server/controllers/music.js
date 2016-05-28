@@ -10,7 +10,7 @@ else
   soundcloudKey = require('../../soundcloud.config.js')["key"];
 }
 
-exports.eighties = function(req, res, next) {
+exports.genre = function(req, res, next) {
   // JOHN you need to handle errors, i.e.
   // if (err) { return next(err); }
   models.User.findById(req.user.id).then(function(user) {
@@ -19,36 +19,7 @@ exports.eighties = function(req, res, next) {
         return songList.id;
       });
       excludeList.push(0);
-      models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: "eighties" } }).then(function(songLists) {
-        if (songLists[0]) {
-          user.addSongList(songLists[0]);
-          console.log(songLists);
-          songLists[0].getSongs().then(function(songs) {
-            var responseList = songs.map(function(song) {
-              return { title: song.dataValues.title, url: `/song/${song.id}`}
-            });
-            res.json(responseList);
-          });          
-        }
-        else
-        {
-          res.json([]);
-        }
-      });
-    });
-  });
-};
-
-exports.classical = function(req, res, next) {
-  // JOHN you need to handle errors, i.e.
-  // if (err) { return next(err); }
-  models.User.findById(req.user.id).then(function(user) {
-    user.getSongLists().then(function(songLists) {
-      var excludeList = songLists.map(function(songList) {
-        return songList.id;
-      });
-      excludeList.push(0);
-      models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: "classical" } }).then(function(songLists) {
+      models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: req.params.genre } }).then(function(songLists) {
         if (songLists[0]) {
           user.addSongList(songLists[0]);
           console.log(songLists);
