@@ -37,7 +37,7 @@ export function createVisualization(el, audioID, color) {
      .attr('width', svgWidth / frequencyData.length - barPadding);
 
   function renderChart() {
-    console.log(color);
+    // console.log(color);
 
     // Copy frequency data to frequencyData array.
     if (analyser) {

@@ -21,11 +21,11 @@ exports.genre = function(req, res, next) {
       excludeList.push(0);
       models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: req.params.genre } }).then(function(songLists) {
         if (songLists[0]) {
-          user.addSongList(songLists[0]);
+          // user.addSongList(songLists[0]);
           console.log(songLists);
           songLists[0].getSongs().then(function(songs) {
             var responseList = songs.map(function(song) {
-              return { title: song.dataValues.title, url: `/song/${song.id}`}
+              return { genre: req.params.genre, songListId: songLists[0].id, title: song.dataValues.title, url: `/song/${song.id}`}
             });
             res.json(responseList);
           });          

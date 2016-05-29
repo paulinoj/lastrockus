@@ -19,6 +19,20 @@ class MusicPlayerGroup extends Component {
     this.signalGameOver = this.signalGameOver.bind(this);
   }
 
+  componentDidUpdate() {
+    // count number of properties in musicPlayerOffList
+    var musicPlayerOffListCount = 0;
+    var musicPlayerOffList = this.props.musicPlayerOffList;
+    for (var player in musicPlayerOffList) {
+      if (musicPlayerOffList.hasOwnProperty(player)) {
+        musicPlayerOffListCount++;
+      }
+    }
+    if (musicPlayerOffListCount == 5) {
+      this.props.signalGameOver(this.props.musicList[0].songListId, this.props.score);      
+    }
+  }
+
   renderSongPanels() {
     if (!this.props.musicList) {
       return <div>Songs loading ...</div>;
@@ -51,7 +65,7 @@ class MusicPlayerGroup extends Component {
   }
 
   signalGameOver() {
-    this.props.signalGameOver();
+    this.props.signalGameOver(this.props.musicList.id, this.props.score);
   }
 
   render() {

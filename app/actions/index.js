@@ -95,11 +95,22 @@ export function incScore(points) {
   }  
 }
 
-export function signalGameOver(points) {
-  return {
-    type: SIGNAL_GAME_OVER,
-    payload: null
-  }  
+export function signalGameOver(songListId, score) {
+  return function(dispatch) {
+    console.log("SONGLIST ID SCORE", songListId, score);
+    axios.post('save_score', { songListId, score }, { headers: { authorization: localStorage.getItem('token') }})
+      .then(response => {
+        // If request is good ...
+        // - Update state to indicate user is authenticated
+        dispatch({ type: SIGNAL_GAME_OVER,
+                   payload: true });
+      })
+      .catch(() => {
+        // If request is bad ...
+        // - Show an error to the user
+        console.log("COULDN'T SAVE SCORE");
+      });
+  }
 }
 
 export function signinUser({ email, password }) {
