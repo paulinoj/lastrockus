@@ -154,6 +154,8 @@ export function signupUser({ email, password}) {
     axios.post('signup', { email, password })
       .then(response => {
         dispatch({ type: AUTH_USER });
+        dispatch({ type: SET_TOTAL_SONG_LIST_COUNTS, payload: response.data.totalSongListCounts });
+        dispatch({ type: SET_USER_SONG_LIST_COUNTS, payload: response.data.userSongListCounts });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/genre_selector');
       })

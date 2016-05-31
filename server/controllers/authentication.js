@@ -22,7 +22,8 @@ exports.signin = function(req, res, next) {
   // We just need to give them a token
 
   models.User.find({where: {id: req.user.id}}).then(function(user) {
-    const userSongListCounts = {}, totalSongListCounts = {};
+    var userSongListCounts = {}, totalSongListCounts = {};
+
     models.SongList.findAll().then(function(songLists) {
       for (var i = 0; i < songLists.length; i++) {
         if (totalSongListCounts[songLists[i].genre]) {
@@ -59,6 +60,9 @@ exports.signup = function(req, res, next) {
   models.User.findOne({where: { email: {$iLike: email} 
   }}).then(function(existingUser) {
     // if a user with email does exist, return an error
+
+    var userSongListCounts = {}, totalSongListCounts = {};
+
     if (existingUser) {
       return res.status(422).send({ error: 'Email is in use' });
     }
@@ -68,12 +72,27 @@ exports.signup = function(req, res, next) {
       email: email,
       password: password
     }).then(function(user) {
-      res.json({ token: tokenForUser(user) });
+      models.SongList.findAll().then(function(songLists) {
+        for (var i = 0; i < songLists.length; i++) {
+          if (totalSongListCounts[songLists[i].genre]) {
+            totalSongListCounts[songLists[i].genre]++;
+          }
+          else
+          {
+            totalSongListCounts[songLists[i].genre] = 1;
+          }
+        }
+        for (var genre in totalSongListCounts) {
+          userSongListCounts[genre] = 0;
+        }  
+        res.json({ token: tokenForUser(user), userSongListCounts, totalSongListCounts });
+      }).catch(function(err) {
+        if (err) { return next(err); }      
+      });
     }).catch(function(err) {
       if (err) { return next(err); }      
     });
-
   }).catch(function(err) {
-    if (err) { return next(err); }    
+    if (err) { return next(err); }
   });
 };
