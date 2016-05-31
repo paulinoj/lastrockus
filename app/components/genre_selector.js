@@ -18,13 +18,18 @@ class GenreSelector extends Component {
     this.props.resetGame();
   }
 
+  componentDidMount() {
+    console.log("INSIDE COMPONENTDID MOUNT TOTAL,", this.props.totalSongListCounts);
+    console.log("INSIDE COMPONENTDID MOUNT USER,", this.props.userSongListCounts);
+  }
+
   render() {
     return (
       <div className={styles.genre_selector}>
         <div className="text-center">
-        <GenreSelectorButton value="Eighties" onClick={this.onSelection} />
-        <GenreSelectorButton value="Classical" onClick={this.onSelection} />
-        <GenreSelectorButton value="Pop" onClick={this.onSelection} />        
+        <GenreSelectorButton value="Eighties" onClick={this.onSelection} totalSongListCounts={this.props.totalSongListCounts} userSongListCounts={this.props.userSongListCounts} />
+        <GenreSelectorButton value="Classical" onClick={this.onSelection} totalSongListCounts={this.props.totalSongListCounts} userSongListCounts={this.props.userSongListCounts} />
+        <GenreSelectorButton value="Pop" onClick={this.onSelection} totalSongListCounts={this.props.totalSongListCounts} userSongListCounts={this.props.userSongListCounts} />
         </div>
       </div>
     );
@@ -35,10 +40,15 @@ class GenreSelector extends Component {
   }  
 }
 
+function mapStateToProps(state) {
+  return { totalSongListCounts: state.totalSongListCounts,
+           userSongListCounts: state.userSongListCounts };
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getNewMusicList: getNewMusicList, 
                               resetGame: resetGame}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(GenreSelector);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreSelector);
 

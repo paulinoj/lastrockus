@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Link } from 'react-router';
+
 import styles from '../css/music_player_group.css';
 import SongPanel from "./song_panel";
 import StartButton from './start_button';
@@ -10,13 +12,16 @@ import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
 import { startTimer } from "../actions/index";
 import { signalGameOver } from "../actions/index";
+import { decUserSongListCounts } from "../actions/index";
+import { turnOffAllMusicPlayers } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
     super(props);
-    // this.state = {test: 'foo'};
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);
+    this.state = { gameOver: false };
+    this.state = { musicPlayersControl: null };
   }
 
   componentDidUpdate() {
@@ -28,8 +33,15 @@ class MusicPlayerGroup extends Component {
         musicPlayerOffListCount++;
       }
     }
-    if (musicPlayerOffListCount == 5) {
-      this.props.signalGameOver(this.props.musicList[0].songListId, this.props.score);      
+    if (this.state.gameOver) {
+      this.props.signalGameOver(this.props.musicList, this.props.score);
+    }
+    else
+    {
+      if (musicPlayerOffListCount == 5) {
+        clearTimeout(this.state.musicPlayersControl);
+        this.setState({ gameOver: true });
+      }
     }
   }
 
@@ -46,7 +58,7 @@ class MusicPlayerGroup extends Component {
 
     return this.props.musicList.map((song, index) => {
       playerRef = `musicPlayer${index}`;
-      playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef] && !this.props.gameOver;
+      playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef] && !this.state.gameOver;
       return (
         <SongPanel audioID={playerRef} 
           song={song} 
@@ -61,11 +73,11 @@ class MusicPlayerGroup extends Component {
     this.props.activateMusicPlayers();
     this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
-    setTimeout(this.signalGameOver, 120000);    
+    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 60000)});
   }
 
   signalGameOver() {
-    this.props.signalGameOver(this.props.musicList.id, this.props.score);
+    this.props.turnOffAllMusicPlayers(this.props.musicList.length);
   }
 
   render() {
@@ -92,6 +104,9 @@ class MusicPlayerGroup extends Component {
             numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
         </div>
         <div>{this.props.score}</div>
+        <div className="btn btn-default">
+          <Link className="nav-link" to="/genre_selector">Play Again</Link>
+        </div>
       </div>
     );
   }
@@ -104,8 +119,7 @@ function mapStateToProps(state) {
     numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
     playersActivated: state.playersActivated,
     timerStarted: state.timerStarted,
-    score: state.score,
-    gameOver: state.gameOver
+    score: state.score
   };
 }
 
@@ -114,9 +128,11 @@ function mapDispatchToProps(dispatch) {
   // of our reducers
   return bindActionCreators(
     { resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady,
+      decUserSongListCounts: decUserSongListCounts,
       activateMusicPlayers: activateMusicPlayers,
       startTimer: startTimer,
-      signalGameOver: signalGameOver }, dispatch);
+      signalGameOver: signalGameOver,
+      turnOffAllMusicPlayers, turnOffAllMusicPlayers }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MusicPlayerGroup);

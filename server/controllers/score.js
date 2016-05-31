@@ -10,8 +10,8 @@ exports.save = function(req, res, next) {
 
     models.SongList.findById(songListId).then(function(songList) {
       user.addSongList(songList, { score: score });
+      return res.json({ scoreSaved: true });
     });
-    return res.json({ scoreSaved: true });
   });
 
   // return res.json({ scoreSaved: false });

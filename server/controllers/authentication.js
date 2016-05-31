@@ -21,8 +21,30 @@ exports.signin = function(req, res, next) {
   // User has already had their email and password auth'd
   // We just need to give them a token
 
-  // passport assigns user to req.user
-  res.send({ token: tokenForUser(req.user) });
+  models.User.find({where: {id: req.user.id}}).then(function(user) {
+    const userSongListCounts = {}, totalSongListCounts = {};
+    models.SongList.findAll().then(function(songLists) {
+      for (var i = 0; i < songLists.length; i++) {
+        if (totalSongListCounts[songLists[i].genre]) {
+          totalSongListCounts[songLists[i].genre]++;
+        }
+        else
+        {
+          totalSongListCounts[songLists[i].genre] = 1;
+        }
+      }
+      for (var genre in totalSongListCounts) {
+        userSongListCounts[genre] = 0;
+      }
+      user.getSongLists().then(function(songLists) {
+        for (var i = 0; i < songLists.length; i++) {
+          userSongListCounts[songLists[i].genre]++;
+        }
+        // passport assigns user to req.user
+        res.send({ token: tokenForUser(req.user), userSongListCounts, totalSongListCounts });
+      });
+    });
+  });
 };
 
 exports.signup = function(req, res, next) {

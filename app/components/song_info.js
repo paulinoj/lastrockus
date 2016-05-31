@@ -24,7 +24,7 @@ class SongInfo extends Component {
     if (this.props.show) {
       this.refs[this.props.audioID].pause();
       this.refs[this.props.audioID].setAttribute("controls","controls");  
-      this.props.incScore(this.calcPoints())
+      this.props.incScore(this.calcPoints());
     }
     else
     {

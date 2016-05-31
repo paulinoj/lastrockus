@@ -7,7 +7,8 @@ import musicPlayerOffListReducer from './reducer_music_player_off_list';
 import PlayersActivatedReducer from './reducer_players_activated';
 import TimerStartedReducer from './reducer_timer_started';
 import ScoreReducer from './reducer_score';
-import GameOverReducer from './reducer_game_over';
+import TotalSongListCountsReducer from './reducer_total_song_list_counts';
+import UserSongListCountsReducer from './reducer_user_song_list_counts';
 
 const rootReducer = combineReducers({
   form: form,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   playersActivated: PlayersActivatedReducer,
   timerStarted: TimerStartedReducer,
   score: ScoreReducer,
-  gameOver: GameOverReducer
+  totalSongListCounts: TotalSongListCountsReducer,
+  userSongListCounts: UserSongListCountsReducer
 });
 
 export default rootReducer;
