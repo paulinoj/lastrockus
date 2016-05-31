@@ -12,8 +12,10 @@ class SongInfo extends Component {
   }
 
   componentDidMount() {
-    this.refs[this.props.audioID].addEventListener("canplaythrough", this.props.incNumberOfMusicPlayersReady);
-    this.refs[this.props.audioID].load();
+    let musicPlayer = this.refs[this.props.audioID];
+    musicPlayer.addEventListener("canplaythrough", this.props.incNumberOfMusicPlayersReady);
+    musicPlayer.load();
+    musicPlayer.currentTime = 20;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
