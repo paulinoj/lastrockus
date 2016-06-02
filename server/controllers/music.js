@@ -39,10 +39,32 @@ exports.genre = function(req, res, next) {
   });
 };
 
+// var testCounter = 0;
+
 exports.song = function(req, res, next) {
   models.Song.findById(Number(req.params.number)).then(function(song) {
     // Either make function for creating soundcloudURL or make method on song model
+    // if (Number(req.params.number) === 5 && testCounter === 2) {
+    //   song.soundcloudTrack = 25278226;
+    // }
+    // else
+    // {
+    //   if (Number(req.params.number) === 5)
+    //     testCounter++;
+    // }
     const soundcloudURL = `https://api.soundcloud.com/tracks/${song.soundcloudTrack}/stream?client_id=${soundcloudKey}`;
-    request.get(soundcloudURL).pipe(res);
+      request.get(soundcloudURL, {timeout: 10000}, function(err) {
+        // If error was not a connection error, then deactivate this songlist in the database
+        if (err && !err.connect) { 
+          song.getSongList().then(function(songList) {
+            songList.update({active: false});
+          });
+          // console.log("ERROR OCCURRED IN SERVER JOHN, ", err.code, err.connect);
+          // console.log(err);
+          // return next(err);
+        }
+      }).pipe(res);
+  }).catch(function(err) {
+    if (err) { return next(err); }
   });
 };

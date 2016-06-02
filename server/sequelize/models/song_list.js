@@ -1,7 +1,9 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var SongList = sequelize.define('SongList', {
-    genre: DataTypes.STRING
+    genre: DataTypes.STRING,
+    active: { type: DataTypes.BOOLEAN,
+              defaultValue: true }
   }, {
     classMethods: {
       associate: function(models) {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 
 import styles from '../css/song_info.css';
 import { incNumberOfMusicPlayersReady } from "../actions/index";
@@ -9,13 +10,29 @@ import { incScore } from "../actions/index";
 class SongInfo extends Component {
   constructor(props) {
     super(props);
+    this.state = { requestErrorCount: 0 };
+    this.handleRequestError = this.handleRequestError.bind(this);
+  }
+
+  handleRequestError(e) {
+    let audioPlayer = this.refs[this.props.audioID];
+    console.log("AN ERROR OCCURRED, ", e.target.error.code);
+    this.setState({ requestErrorCount: this.state.requestErrorCount + 1 });
+    if (this.state.requestErrorCount == 3) {
+      alert("AN ERROR HAS OCCURRED -- PLEASE TRY AGAIN");
+      browserHistory.push('/genre_selector');
+    }
+    else {
+      audioPlayer.src = this.props.song.url;
+    }
   }
 
   componentDidMount() {
-    let musicPlayer = this.refs[this.props.audioID];
-    musicPlayer.addEventListener("canplaythrough", this.props.incNumberOfMusicPlayersReady);
-    musicPlayer.load();
-    musicPlayer.currentTime = 20;
+    let audioPlayer = this.refs[this.props.audioID];
+    audioPlayer.addEventListener("canplaythrough", this.props.incNumberOfMusicPlayersReady);
+    audioPlayer.addEventListener("error", this.handleRequestError);
+    audioPlayer.load();
+    audioPlayer.currentTime = 20;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -35,8 +52,10 @@ class SongInfo extends Component {
   }
 
   componentWillUnmount() {
+    let audioPlayer = this.refs[this.props.audioID];
+    audioPlayer.removeEventListener("error", this.handleRequestError);
     // Need this line of code, otherwise, ajax requests hang when you try to backarrow out of this page
-    this.refs[this.props.audioID].src = null;
+    audioPlayer.src = null;
   }
 
   calcPoints() {

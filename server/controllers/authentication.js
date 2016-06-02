@@ -21,10 +21,10 @@ exports.signin = function(req, res, next) {
   // User has already had their email and password auth'd
   // We just need to give them a token
 
-  models.User.find({where: {id: req.user.id}}).then(function(user) {
+  models.User.findOne({where: { id: req.user.id }}).then(function(user) {
     var userSongListCounts = {}, totalSongListCounts = {};
 
-    models.SongList.findAll().then(function(songLists) {
+    models.SongList.findAll({where: { active: true }}).then(function(songLists) {
       for (var i = 0; i < songLists.length; i++) {
         if (totalSongListCounts[songLists[i].genre]) {
           totalSongListCounts[songLists[i].genre]++;
@@ -37,7 +37,7 @@ exports.signin = function(req, res, next) {
       for (var genre in totalSongListCounts) {
         userSongListCounts[genre] = 0;
       }
-      user.getSongLists().then(function(songLists) {
+      user.getSongLists({where: { active: true }}).then(function(songLists) {
         for (var i = 0; i < songLists.length; i++) {
           userSongListCounts[songLists[i].genre]++;
         }
@@ -72,7 +72,7 @@ exports.signup = function(req, res, next) {
       email: email,
       password: password
     }).then(function(user) {
-      models.SongList.findAll().then(function(songLists) {
+      models.SongList.findAll({where: { active: true }}).then(function(songLists) {
         for (var i = 0; i < songLists.length; i++) {
           if (totalSongListCounts[songLists[i].genre]) {
             totalSongListCounts[songLists[i].genre]++;

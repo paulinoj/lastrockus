@@ -20,7 +20,7 @@ models.sequelize.sync();
 const musicList = 
   [{genre: 'classical',
     title: 'whatever1',
-    soundcloudTrack: "25278226"},
+    soundcloudTrack: "2527822600000"},
    {genre: 'classical',
     title: 'whatever2',
     soundcloudTrack: "251024523"},

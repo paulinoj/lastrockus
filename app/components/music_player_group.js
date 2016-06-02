@@ -20,8 +20,8 @@ class MusicPlayerGroup extends Component {
     super(props);
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);
-    this.state = { gameOver: false };
-    this.state = { musicPlayersControl: null };
+    this.state = { gameOver: false,
+                   musicPlayersControl: null };
   }
 
   componentDidUpdate() {
