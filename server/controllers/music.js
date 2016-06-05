@@ -19,7 +19,7 @@ exports.genre = function(req, res, next) {
         return songList.id;
       });
       excludeList.push(0);
-      models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: req.params.genre } }).then(function(songLists) {
+      models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: req.params.genre, active: true } }).then(function(songLists) {
         if (songLists[0]) {
           // user.addSongList(songLists[0]);
           console.log(songLists);
@@ -34,6 +34,40 @@ exports.genre = function(req, res, next) {
         {
           res.json([]);
         }
+      });
+    });
+  });
+};
+
+exports.reset_game = function(req, res, next) {
+  // User has already had their email and password auth'd
+  // We just need to give them a token
+
+  models.User.findOne({where: { id: req.user.id }}).then(function(user) {
+    var userSongListCounts = {}, totalSongListCounts = {};
+
+    models.SongList.findAll({where: { active: true }}).then(function(songLists) {
+      for (var i = 0; i < songLists.length; i++) {
+        if (totalSongListCounts[songLists[i].genre]) {
+          totalSongListCounts[songLists[i].genre]++;
+        }
+        else
+        {
+          totalSongListCounts[songLists[i].genre] = 1;
+        }
+      }
+      for (var genre in totalSongListCounts) {
+        userSongListCounts[genre] = 0;
+      }
+      user.getSongLists({where: { active: true }}).then(function(songLists) {
+        for (var i = 0; i < songLists.length; i++) {
+          userSongListCounts[songLists[i].genre]++;
+        }
+  console.log("DO WE GET HERE");
+  console.log(userSongListCounts);
+  console.log(totalSongListCounts);
+
+        res.json({ userSongListCounts, totalSongListCounts });
       });
     });
   });
@@ -54,17 +88,19 @@ exports.song = function(req, res, next) {
     // }
     const soundcloudURL = `https://api.soundcloud.com/tracks/${song.soundcloudTrack}/stream?client_id=${soundcloudKey}`;
       request.get(soundcloudURL, {timeout: 10000}, function(err) {
-        // If error was not a connection error, then deactivate this songlist in the database
-        if (err && !err.connect) { 
-          song.getSongList().then(function(songList) {
-            songList.update({active: false});
-          });
-          // console.log("ERROR OCCURRED IN SERVER JOHN, ", err.code, err.connect);
-          // console.log(err);
-          // return next(err);
-        }
-      }).pipe(res);
+        // If connection error, notify client
+        if (err && err.connect) {
+          res.status(504).send("Timeout error");
+          return next(err);
+        }}).on('response', function(response) {
+          if (Number(response.statusCode) === 500) {
+            song.getSongList().then(function(songList) {
+              songList.update({active: false});
+            });
+          }
+          console.log("Response status code for ", req.params.number, ":  ", response.statusCode);
+        }).pipe(res);
   }).catch(function(err) {
-    if (err) { return next(err); }
-  });
+      if (err) { return next(err); }
+    });
 };

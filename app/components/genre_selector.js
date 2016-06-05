@@ -15,10 +15,11 @@ class GenreSelector extends Component {
   }
 
   componentWillMount() {
-    this.props.resetGame();
   }
 
   componentDidMount() {
+    this.props.resetGame();
+
     console.log("INSIDE COMPONENTDID MOUNT TOTAL,", this.props.totalSongListCounts);
     console.log("INSIDE COMPONENTDID MOUNT USER,", this.props.userSongListCounts);
   }

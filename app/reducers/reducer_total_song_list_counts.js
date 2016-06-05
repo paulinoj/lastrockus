@@ -1,9 +1,9 @@
-import { SET_TOTAL_SONG_LIST_COUNTS } from '../actions/index.js';
+import { RESET_GAME } from '../actions/index.js';
 
 export default function(state = {}, action) {
   switch(action.type) {
-    case SET_TOTAL_SONG_LIST_COUNTS:
-      return action.payload;
+    case RESET_GAME:
+      return action.payload.totalSongListCounts;
   }
   return state;
 }
