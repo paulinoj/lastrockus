@@ -1,9 +1,9 @@
 .songPanel {
-  height: 200px;
+  height: 150px;
   border-style: solid;
   border-radius: 15px;
   margin-top: 20px;
   margin-bottom: 20px;
-  background-color: #222;
+  background-color: #493d54;
   text-align: center;
 }

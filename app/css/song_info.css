@@ -1,19 +1,15 @@
 .songInfo {
-  /*background-color: #222;*/
   display: -webkit-flex; /* Safari */
   display: flex;
   -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-justify-content: start;
-  justify-content: start;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
   color: white;
   -webkit-flex-wrap: wrap; /* Safari */
   flex-wrap:         wrap;
-  -webkit-align-items: center; /* Safari */
-  align-items:         center;
-
-/*  -webkit-justify-content: space-between;
-  justify-content: space-between;*/
+  -webkit-align-items: stretch; /* Safari */
+  align-items:         stretch;
 }
 
 .flexitem1 {
@@ -24,13 +20,26 @@
 .flexitem2 {
   display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-align-items: center; /* Safari */
-  align-items:         center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
 
   -webkit-flex: 1 1 300px;
   flex: 1 1 300px;
-  background-color: green;
-  align-self: stretch;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.flexitem3 {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  
+  -webkit-flex: 1 1 100px;
+  flex: 1 1 100px;
+  background-color: #313131;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .just {
@@ -38,10 +47,8 @@
 }
 
 .points {
-  font-size: 40px;
+  font-size: 25px;
   color: white;
-  background-color: #B19BAC;
-  height: 100%;
 }
 
 .songInfo {

@@ -98,7 +98,7 @@ class SongInfo extends Component {
         <div className={styles.flexitem2}>
           <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         </div>
-        <div className={styles.flexitem2}>
+        <div className={styles.flexitem3}>
           <div className={styles.points}>{this.calcPoints()} points</div>
         </div>
       </div>
