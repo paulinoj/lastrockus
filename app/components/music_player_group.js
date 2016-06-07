@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import styles from '../css/music_player_group.css';
 import SongPanel from "./song_panel";
 import StartButton from './start_button';
+import Scoreboard from './scoreboard';
 import AnswerBar from './answer_bar';
 
 import { activateMusicPlayers } from "../actions/index";
@@ -96,6 +97,7 @@ class MusicPlayerGroup extends Component {
 
     return (
       <div className="container">
+        <Scoreboard />
         <AnswerBar musicList={this.props.musicList} />
         <div className={songPanelVisibility}>
           {this.renderSongPanels()}

@@ -28,7 +28,7 @@ exports.genre = function(req, res, next) {
             });
             models.UserSongList.findAll({ where: { SongListId: songLists[0].id }}).then(function(highScorers) {
               var highScorersList = highScorers.map(function(user) {
-                return {userEmail: user.email, score: user.score}
+                return {email: user.email, score: user.score}
               }); 
               res.json({ songListId: songLists[0].id, songList: songList, highScorers: highScorersList });
             });
