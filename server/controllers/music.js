@@ -21,18 +21,22 @@ exports.genre = function(req, res, next) {
       excludeList.push(0);
       models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: req.params.genre, active: true } }).then(function(songLists) {
         if (songLists[0]) {
-          // user.addSongList(songLists[0]);
           console.log(songLists);
           songLists[0].getSongs().then(function(songs) {
-            var responseList = songs.map(function(song) {
+            var songList = songs.map(function(song) {
               return { genre: req.params.genre, songListId: songLists[0].id, title: song.dataValues.title, url: `/song/${song.id}`}
             });
-            res.json(responseList);
+            models.UserSongList.findAll({ where: { SongListId: songLists[0].id }}).then(function(highScorers) {
+              var highScorersList = highScorers.map(function(user) {
+                return {userEmail: user.email, score: user.score}
+              }); 
+              res.json({ songListId: songLists[0].id, songList: songList, highScorers: highScorersList });
+            });
           });          
         }
         else
         {
-          res.json([]);
+          res.json({ songListId: null, songList: [], highScorers: [] });
         }
       });
     });
@@ -63,10 +67,6 @@ exports.reset_game = function(req, res, next) {
         for (var i = 0; i < songLists.length; i++) {
           userSongListCounts[songLists[i].genre]++;
         }
-  console.log("DO WE GET HERE");
-  console.log(userSongListCounts);
-  console.log(totalSongListCounts);
-
         res.json({ userSongListCounts, totalSongListCounts });
       });
     });

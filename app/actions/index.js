@@ -2,6 +2,8 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 
 export const GET_NEW_MUSIC_LIST = 'GET_NEW_MUSIC_LIST';
+export const GET_NEW_MUSIC_LIST_ID = 'GET_NEW_MUSIC_LIST_ID';
+export const GET_NEW_MUSIC_LIST_HIGH_SCORERS = 'GET_NEW_MUSIC_LIST_HIGH_SCORERS';
 export const ACTIVATE_START_BUTTON = 'ACTIVATE_START_BUTTON';
 export const INC_NUMBER_OF_MUSIC_PLAYERS_READY = 'INC_NUMBER_OF_MUSIC_PLAYERS_READY';
 export const RESET_NUMBER_OF_MUSIC_PLAYERS_READY = 'RESET_NUMBER_OF_MUSIC_PLAYERS_READY';
@@ -58,8 +60,16 @@ export function getNewMusicList(genre) {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
+        console.log("newMusicList: ", response.data);
+        dispatch({ type: GET_NEW_MUSIC_LIST_ID,
+                   payload: response.data.songListId });
+
         dispatch({ type: GET_NEW_MUSIC_LIST,
-                   payload: response });
+                   payload: response.data.songList });
+
+        dispatch({ type: GET_NEW_MUSIC_LIST_HIGH_SCORERS,
+                   payload: response.data.highScorers });
+
         browserHistory.push('/game');
       })
       .catch(response => {
@@ -111,10 +121,10 @@ export function incScore(points) {
   }  
 }
 
-export function signalGameOver(songList, score) {
+export function signalGameOver(songListId, score) {
   return function(dispatch) {
-    console.log("SONGLIST ID SCORE", songList, score);
-    axios.post('save_score', { songListId: songList[0].songListId, score }, { headers: { authorization: localStorage.getItem('token') }})
+    console.log("SONGLIST ID SCORE", songListId, score);
+    axios.post('save_score', { songListId: songListId, score }, { headers: { authorization: localStorage.getItem('token') }})
       .then(response => {
         // If request is good ...
         // - Update state to indicate user is authenticated

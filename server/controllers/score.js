@@ -9,7 +9,7 @@ exports.save = function(req, res, next) {
     console.log("DO WE GET TO SAVE SCORE", songListId, score);
 
     models.SongList.findById(songListId).then(function(songList) {
-      user.addSongList(songList, { score: score });
+      user.addSongList(songList, { email: user.email, score: score });
       return res.json({ scoreSaved: true });
     });
   });

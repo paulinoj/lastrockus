@@ -34,7 +34,9 @@ class MusicPlayerGroup extends Component {
       }
     }
     if (this.state.gameOver) {
-      this.props.signalGameOver(this.props.musicList, this.props.score);
+      console.log("HIGH SCORERS");
+      console.log(this.props.musicListHighScorers);
+      this.props.signalGameOver(this.props.musicListId, this.props.score);
     }
     else
     {
@@ -115,6 +117,8 @@ class MusicPlayerGroup extends Component {
 function mapStateToProps(state) {
   return {
     musicList: state.musicList,
+    musicListId: state.musicListId,
+    musicListHighScorers: state.musicListHighScorers,
     musicPlayerOffList: state.musicPlayerOffList,
     numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
     playersActivated: state.playersActivated,
