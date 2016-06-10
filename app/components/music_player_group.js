@@ -107,7 +107,6 @@ class MusicPlayerGroup extends Component {
             numberOfMusicPlayers={this.props.musicList.length} 
             numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
         </div>
-        <div>{this.props.score}</div>
         <div className="btn btn-default">
           <Link className="nav-link" to="/genre_selector">Play Again</Link>
         </div>

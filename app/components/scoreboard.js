@@ -10,9 +10,15 @@ class Scoreboard extends Component {
   renderHighScorers() {
     return this.props.musicListHighScorers.map((player) => {
       return (
-        <div>
-          <div>{player.email}</div>
-          <div>{player.score}</div>
+        <div className={styles.tableWidth} >
+        <table >
+          <col width="175" />
+          <col width="25" />
+          <tr>
+            <td>{player.email}</td>
+            <td className={styles.right}>{player.score}</td>
+          </tr>
+        </table>
         </div>
       )
     });
@@ -21,11 +27,16 @@ class Scoreboard extends Component {
   render() {
     return (
       <div className={styles.scoreboard}>
-        <h1>Scoreboard</h1>
-        <div>Your Score:  {this.props.score}
-        </div>
-        <div>High Scorers:</div>
-        {this.renderHighScorers()}
+          <div className={styles.score}>
+            <div className={styles.center}>Your Score:  {this.props.score}
+            </div>
+          </div>
+          <div className={styles.highScorers}>
+            <div className={styles.centerHeading}>High Scorers:</div>
+            <div className={styles.highScorersList}>
+              {this.renderHighScorers()}
+            </div>
+          </div>
       </div>
     );
   }
