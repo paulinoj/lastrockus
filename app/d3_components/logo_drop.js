@@ -57,7 +57,7 @@ export function logoDrop(el) {
      
     var rect = [50,50, svg_width - 50, svg_height - 50];
      
-    var n =1000,
+    var n =500,
       m = 40,
       padding = 6,
       maxSpeed = 3,
@@ -70,8 +70,12 @@ export function logoDrop(el) {
       nodes.push({radius: 20,
         // color: color(Math.floor(Math.random() * m)),
         color: "white",
-        x: rect[0] + (Math.random() * (rect[2] - rect[0])),
-        y:rect[1] + (Math.random() * (rect[3] - rect[1])),
+        // x: rect[0] + (Math.random() * (rect[2] - rect[0])),
+        // y:rect[1] + (Math.random() * (rect[3] - rect[1])),
+        x: rect[0] + Math.floor(svg_width/2),
+        y: rect[1] + Math.floor(svg_height/2),
+
+
         speedX: (Math.random() - 0.5) * 2 *maxSpeed,
         speedY: (Math.random() - 0.5) * 2 *maxSpeed});
     }
@@ -192,7 +196,7 @@ export function logoDrop(el) {
   let textGroupBottom = svg_height/2 + 10;
 
   let blurbElement = textGroup.append("text")
-    .text("Identify 5 songs. Played at the same time.")
+    .text("ID 5 songs. Played at the same time.")
     .style("font-size", "30px")
     .style('fill', '#FF83E2')
     .style("text-anchor", "start")
@@ -210,7 +214,7 @@ export function logoDrop(el) {
 
   const text_width3 = textWidth(text_element2) + 10;
 
-  blurbElement.text("Identify 5 songs.")
+  blurbElement.text("ID 5 songs.")
 
   const text_width2 = textWidth(text_element2);
   const text_height2 = textHeight(text_element2);

@@ -8,20 +8,24 @@ class Scoreboard extends Component {
   }
 
   renderHighScorers() {
-    return this.props.musicListHighScorers.map((player) => {
-      return (
-        <div className={styles.tableWidth} >
-        <table >
-          <col width="175" />
-          <col width="25" />
-          <tr>
-            <td>{player.email}</td>
-            <td className={styles.right}>{player.score}</td>
-          </tr>
-        </table>
-        </div>
-      )
-    });
+    if (this.props.musicListHighScorers.length !== 0) {
+      return this.props.musicListHighScorers.map((player) => {
+        if (player) {
+          return (
+            <div className={styles.tableWidth} >
+            <table >
+              <col width="175" />
+              <col width="25" />
+              <tr>
+                <td>{player.email}</td>
+                <td className={styles.right}>{player.score}</td>
+              </tr>
+            </table>
+            </div>
+          )
+        }
+      });      
+    }
   }
 
   render() {
