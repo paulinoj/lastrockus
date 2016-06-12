@@ -59,24 +59,10 @@ class SongInfo extends Component {
   }
 
   calcPoints() {
-    let points = 0;
+    let numSongs = 5;
+    let totalTime = 60;
     let timeElapsed = Math.floor(new Date() - this.props.timerStarted)/1000;
-    if (timeElapsed < 30) {
-      points = 20;
-    }
-    else if (timeElapsed < 60) {
-      points = 15;
-    }
-    else if (timeElapsed < 90) {
-      points = 10;
-    }
-    else if (timeElapsed < 120) {
-      points = 5;
-    }
-    else
-    {
-      points = 0;
-    }
+    let points = Math.round((totalTime - timeElapsed)/numSongs);
     return points;
   }
 
