@@ -50,7 +50,7 @@ export function logoDrop(el) {
 
   // MUSICAL NOTES START ****
 
-  setTimeout(musicStart, 15000);
+  setTimeout(musicStart, 19000);
 
   function musicStart() {
     var margin = {top: 0, right: 0, bottom: 0, left: 0};
@@ -179,12 +179,12 @@ export function logoDrop(el) {
   // the message to animate
   const logo = "Rockus";
 
-  let fontsize = Math.min(150, svg_width/1200 * 150);
+  let fontsize = Math.min(106, svg_width/1200 * 150);
 
   let logoElement = textGroup.append("text")
     .text(logo)
+    .attr("class", styles.logo)
     .style("font-size", fontsize)
-    .style("font-style", "italic")
     .style('fill', '#FF83E2')
     .style("text-anchor", "end");
 
@@ -240,10 +240,13 @@ export function logoDrop(el) {
   blurbElement.attr("transform", translation(xCenterPosition(text_width2, "start"), textGroupBottom, 0))
     .transition()
     .delay(1000)
-    .duration(1000)
+    .duration(3000)
     .style("opacity", 1)
     .transition()
-    .duration(1000)
+    .duration(3000)
+    .style("opacity", 1)
+    .transition()
+    .duration(2000)
     .attr("transform", translation(xCenterPosition(text_width3, "start"), textGroupBottom, 0));
 
   let blurbElementEnding = textGroup.append("text")
@@ -256,29 +259,13 @@ export function logoDrop(el) {
 
   blurbElementEnding.attr("transform", translation(xCenterPosition(text_width3, "end"), textGroupBottom, 0))
     .transition()
-    .delay(6000)
-    .duration(1000)
+    .delay(9000)
+    .duration(2000)
     .style("opacity", 1);
-
-  // logoElement.attr("transform", translation(xCenterPosition(text_width, "start"), -125, 180))
-  //   .transition()
-  //   .attr("transform", translation(xCenterPosition(text_width, "start"), logoBottom - text_height/2, 180))
-  //   .delay(11000)
-  //   .duration(500)
-  //   .ease("cubic")
-  //   .transition()
-  //   .duration(1000)
-  //   .ease("bounce")
-  //   .attr("transform", translation(xCenterPosition(text_width, "start"), logoBottom, 0))
-  //   .transition()
-  //   .duration(2000)
-  //   .ease("cubic")
-  //   .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0))
-  //   .each("end", addButtons);
 
   logoElement.attr("transform", translation(xCenterPosition(text_width, "end"), -125, 0))
     .transition()
-    .delay(11000)
+    .delay(16000)
     .duration(1000)
     .ease("bounce")
     .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0))

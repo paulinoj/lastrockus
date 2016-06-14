@@ -35,8 +35,6 @@ class MusicPlayerGroup extends Component {
       }
     }
     if (this.state.gameOver) {
-      console.log("HIGH SCORERS");
-      console.log(this.props.musicListHighScorers);
       this.props.signalGameOver(this.props.musicListId, this.props.score);
     }
     else
@@ -45,6 +43,36 @@ class MusicPlayerGroup extends Component {
         clearTimeout(this.state.musicPlayersControl);
         this.setState({ gameOver: true });
       }
+    }
+  }
+
+  renderAnswerBar() {
+    if (this.props.playersActivated && !this.state.gameOver) {
+      return (
+        <AnswerBar musicList={this.props.musicList} />
+      );
+    }
+  }
+
+  renderStartButton() {
+    if (!this.props.playersActivated) {
+      return (
+        <div className={styles.start_button}>
+          <StartButton activatePlayers={this.activatePlayers}
+           numberOfMusicPlayers={this.props.musicList.length}
+           numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
+        </div>
+      );
+    }
+  }
+
+  renderPlayAgainButton() {
+    if (this.state.gameOver) {
+      return (
+        <div className="btn btn-default">
+          <Link className="nav-link" to="/genre_selector">Play Again</Link>
+        </div>
+      );
     }
   }
 
@@ -63,10 +91,10 @@ class MusicPlayerGroup extends Component {
       playerRef = `musicPlayer${index}`;
       playProp = this.props.playersActivated && !this.props.musicPlayerOffList[playerRef] && !this.state.gameOver;
       return (
-        <SongPanel audioID={playerRef} 
-          song={song} 
-          key={playerRef} 
-          play={playProp} 
+        <SongPanel audioID={playerRef}
+          song={song}
+          key={playerRef}
+          play={playProp}
           color={colorList[index]} />
       );
     });
@@ -85,31 +113,19 @@ class MusicPlayerGroup extends Component {
 
   render() {
     let songPanelVisibility = styles.show;
-    let startButtonVisibility = styles.show;      
-
-    if (this.props.playersActivated) {
-      startButtonVisibility = styles.hide;      
-    }
-    else
-    {
+    if (!this.props.playersActivated) {
       songPanelVisibility = styles.hide;      
     }
 
     return (
       <div className="container">
-        <Scoreboard />
-        <AnswerBar musicList={this.props.musicList} />
+        <Scoreboard gameOver={this.state.gameOver} />
+        {this.renderAnswerBar()}
         <div className={songPanelVisibility}>
           {this.renderSongPanels()}
         </div>
-        <div className={startButtonVisibility}>
-          <StartButton activatePlayers={this.activatePlayers}
-            numberOfMusicPlayers={this.props.musicList.length} 
-            numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
-        </div>
-        <div className="btn btn-default">
-          <Link className="nav-link" to="/genre_selector">Play Again</Link>
-        </div>
+        {this.renderStartButton()}
+        {this.renderPlayAgainButton()}
       </div>
     );
   }

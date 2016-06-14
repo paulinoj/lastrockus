@@ -9,7 +9,7 @@ class Scoreboard extends Component {
 
   renderHighScorers() {
     if (this.props.musicListHighScorers.length !== 0) {
-      return this.props.musicListHighScorers.map((player) => {
+      let list = this.props.musicListHighScorers.map((player) => {
         if (player) {
           return (
             <div className={styles.tableWidth} >
@@ -24,7 +24,17 @@ class Scoreboard extends Component {
             </div>
           )
         }
-      });      
+      });
+      if (this.props.gameOver) {
+        return (
+          <div className={styles.highScorers}>
+            <div className={styles.centerHeading}>High Scorers:</div>
+            <div className={styles.highScorersList}>
+              {list}
+            </div>
+          </div>
+        );
+      }
     }
   }
 
@@ -35,12 +45,7 @@ class Scoreboard extends Component {
             <div className={styles.center}>Your Score:  {this.props.score}
             </div>
           </div>
-          <div className={styles.highScorers}>
-            <div className={styles.centerHeading}>High Scorers:</div>
-            <div className={styles.highScorersList}>
-              {this.renderHighScorers()}
-            </div>
-          </div>
+          {this.renderHighScorers()}
       </div>
     );
   }

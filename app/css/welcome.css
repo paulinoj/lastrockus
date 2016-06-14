@@ -11,10 +11,14 @@
 }
 
 .welcome {
-	position: relative;
+  position: relative;
 }
 
 .button_group {
-    position:absolute;
-    width:100%;
+  position:absolute;
+  width:100%;
+}
+
+.logo {
+  font-family: 'Monoton';
 }

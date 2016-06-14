@@ -5,7 +5,7 @@ const StartButton = (props) => {
   console.log("NUMBER OF MUSIC PLAYERS READY", props.numberOfMusicPlayersReady);
   return (
   	<div className={styles.startButton}>
-	  <button disabled={props.numberOfMusicPlayers == 0 || props.numberOfMusicPlayersReady < props.numberOfMusicPlayers} 
+	  <button className="btn btn-lg btn-default" disabled={props.numberOfMusicPlayers == 0 || props.numberOfMusicPlayersReady < props.numberOfMusicPlayers} 
 	  onClick={props.activatePlayers}>start</button>
     </div>
   )

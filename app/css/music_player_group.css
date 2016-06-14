@@ -12,3 +12,16 @@
 
 .show {
 }
+
+.start_button {
+  /*background-color: #222;*/
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  height: 50vh;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center; /* Safari */
+  align-items:         center;
+}
