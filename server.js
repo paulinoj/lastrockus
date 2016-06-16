@@ -20,73 +20,113 @@ models.sequelize.sync();
 const musicList = 
   [{genre: 'classical',
     title: 'whatever1',
-    soundcloudTrack: "2527822600000"},
+    soundcloudTrack: "2527822600000",
+    volume: 0.2,
+    permalink_url: "a"},
    {genre: 'classical',
     title: 'whatever2',
-    soundcloudTrack: "251024523"},
+    soundcloudTrack: "251024523",
+    volume: 0.3,
+    permalink_url: "b"},
    {genre: 'classical',
     title: 'whatever3',
-    soundcloudTrack: "73102421"},
+    soundcloudTrack: "73102421",
+    volume: 0.4,
+    permalink_url: "c"},
    {genre: 'classical',
     title: 'whatever4',
-    soundcloudTrack: "77862534"},
+    soundcloudTrack: "77862534",
+    volume: 0.5,
+    permalink_url: "d"},
    {genre: 'classical',
     title: 'whatever5',
-    soundcloudTrack: "39147564"}    
+    soundcloudTrack: "39147564",
+    volume: 0.6,
+    permalink_url: "e"}
   ];
 
 const musicList2 = 
   [{genre: 'classical',
     title: 'whatever6',
-    soundcloudTrack: "25278226"},
+    soundcloudTrack: "25278226",
+    volume: 0.2,
+    permalink_url: "f"},
    {genre: 'classical',
     title: 'whatever7',
-    soundcloudTrack: "251024523"},
+    soundcloudTrack: "251024523",
+    volume: 0.3,
+    permalink_url: "g"},
    {genre: 'classical',
     title: 'whatever8',
-    soundcloudTrack: "73102421"},
+    soundcloudTrack: "73102421",
+    volume: 0.4,
+    permalink_url: "j"},
    {genre: 'classical',
     title: 'whatever9',
-    soundcloudTrack: "77862534"},
+    soundcloudTrack: "77862534",
+    volume: 0.5,
+    permalink_url: "i"},
    {genre: 'classical',
     title: 'whatever10',
-    soundcloudTrack: "39147564"}    
+    soundcloudTrack: "39147564",
+    volume: 0.6,
+    permalink_url: "j"}
   ];
 
 const musicList3 = 
   [{genre: 'eighties',
     title: 'whatever11',
-    soundcloudTrack: "25278226"},
+    soundcloudTrack: "25278226",
+    volume: 0.2,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever12',
-    soundcloudTrack: "251024523"},
+    soundcloudTrack: "251024523",
+    volume: 0.3,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever13',
-    soundcloudTrack: "73102421"},
+    soundcloudTrack: "73102421",
+    volume: 0.4,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever14',
-    soundcloudTrack: "77862534"},
+    soundcloudTrack: "77862534",
+    volume: 0.5,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever15',
-    soundcloudTrack: "39147564"}    
+    soundcloudTrack: "39147564",
+    volume: 0.6,
+    permalink_url: ""}
   ];
 
 const musicList4 = 
   [{genre: 'eighties',
     title: 'whatever16',
-    soundcloudTrack: "25278226"},
+    soundcloudTrack: "25278226",
+    volume: 0.2,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever17',
-    soundcloudTrack: "251024523"},
+    soundcloudTrack: "251024523",
+    volume: 0.3,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever18',
-    soundcloudTrack: "73102421"},
+    soundcloudTrack: "73102421",
+    volume: 0.4,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever19',
-    soundcloudTrack: "77862534"},
+    soundcloudTrack: "77862534",
+    volume: 0.5,
+    permalink_url: ""},
    {genre: 'eighties',
     title: 'whatever20',
-    soundcloudTrack: "39147564"}    
+    soundcloudTrack: "39147564",
+    volume: 0.6,
+    permalink_url: ""}
   ];
 
 // const musicList2 = 
@@ -129,7 +169,9 @@ app.post('/makeSongList', function(req, res) {
         models.Song.create({
           genre: musicList[counter].genre,
           title: musicList[counter].title,
-          soundcloudTrack: musicList[counter].soundcloudTrack
+          soundcloudTrack: musicList[counter].soundcloudTrack,
+          permalink_url: musicList[counter].permalink_url,
+          volume: musicList[counter].volume
         }).then(function(song) {
           songList.addSong(song);
           if (counter === 0) {
@@ -159,7 +201,9 @@ app.post('/makeSongList2', function(req, res) {
         models.Song.create({
           genre: musicList2[counter].genre,
           title: musicList2[counter].title,
-          soundcloudTrack: musicList2[counter].soundcloudTrack
+          soundcloudTrack: musicList2[counter].soundcloudTrack,
+          permalink_url: musicList2[counter].permalink_url,
+          volume: musicList2[counter].volume
         }).then(function(song) {
           songList.addSong(song);
           if (counter === 0) {
@@ -190,7 +234,9 @@ app.post('/makeSongList3', function(req, res) {
         models.Song.create({
           genre: musicList3[counter].genre,
           title: musicList3[counter].title,
-          soundcloudTrack: musicList2[counter].soundcloudTrack
+          soundcloudTrack: musicList3[counter].soundcloudTrack,
+          permalink_url: musicList3[counter].permalink_url,
+          volume: musicList3[counter].volume
         }).then(function(song) {
           songList.addSong(song);
           if (counter === 0) {
@@ -221,7 +267,9 @@ app.post('/makeSongList4', function(req, res) {
         models.Song.create({
           genre: musicList4[counter].genre,
           title: musicList4[counter].title,
-          soundcloudTrack: musicList2[counter].soundcloudTrack
+          soundcloudTrack: musicList4[counter].soundcloudTrack,
+          permalink_url: musicList4[counter].permalink_url,
+          volume: musicList4[counter].volume
         }).then(function(song) {
           songList.addSong(song);
           if (counter === 0) {

@@ -24,7 +24,12 @@ exports.genre = function(req, res, next) {
           console.log(songLists);
           songLists[0].getSongs().then(function(songs) {
             var songList = songs.map(function(song) {
-              return { genre: req.params.genre, songListId: songLists[0].id, title: song.dataValues.title, url: `/song/${song.id}`}
+              return { genre: req.params.genre,
+                       songListId: songLists[0].id,
+                       title: song.title,
+                       url: `/song/${song.id}`,
+                       volume: song.volume,
+                       permalink_url: song.permalink_url}
             });
             models.UserSongList.findAll({ where: { SongListId: songLists[0].id }}).then(function(highScorers) {
               var highScorersList = highScorers.map(function(user) {

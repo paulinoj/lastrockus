@@ -33,6 +33,7 @@ class SongInfo extends Component {
     audioPlayer.addEventListener("error", this.handleRequestError);
     audioPlayer.load();
     audioPlayer.currentTime = 20;
+    audioPlayer.volume = this.props.song.volume;
   }
 
   shouldComponentUpdate(nextProps, nextState) {
