@@ -1,26 +1,23 @@
 import d3 from 'd3';
 import styles from '../css/welcome.css';
 
-
 export function logoDrop(el) {
 
-  var svg_width = parseInt(d3.select("body").style("width"));
-  let svg_height = 1200;
+  let svgWidth = parseInt(d3.select("body").style("width"));
+  let svgHeight = 1200;
 
   // initialize the svg canvas
   var svg = d3.select(el).insert("svg",":first-child")
-    .attr("width", svg_width)
-    .attr("height", svg_height);
+    .attr("width", svgWidth)
+    .attr("height", svgHeight);
 
   svg.append("rect")
     .attr("width", "100%")
-    .attr("height", svg_height)
+    .attr("height", svgHeight)
     .attr("fill", "#222");
 
   function addButtons() {
-
-    let buttonGroupTop = (svg_height/2 + 170) + "px";
-
+    let buttonGroupTop = (svgHeight/2 + 170) + "px";
     let login_button_classes = `btn btn-info btn-lg ${styles.login_button}`;
     let signup_button_classes = `btn btn-info btn-lg ${styles.signup_button}`;
     let button_div = d3.select(el)
@@ -43,7 +40,6 @@ export function logoDrop(el) {
       .text("Sign Up")
       .style("opacity", 0)
       .attr("href", "/signup");
-
       login_button.transition().delay(3000).duration(3000).style("opacity", 1);
       signup_button.transition().delay(3000).duration(3000).style("opacity", 1);
   }
@@ -55,7 +51,7 @@ export function logoDrop(el) {
   function musicStart() {
     var margin = {top: 0, right: 0, bottom: 0, left: 0};
      
-    var rect = [50,50, svg_width - 50, svg_height - 50];
+    var rect = [50,50, svgWidth - 50, svgHeight - 50];
      
     var n =500,
       m = 40,
@@ -72,9 +68,8 @@ export function logoDrop(el) {
         color: "white",
         // x: rect[0] + (Math.random() * (rect[2] - rect[0])),
         // y:rect[1] + (Math.random() * (rect[3] - rect[1])),
-        x: rect[0] + Math.floor(svg_width/2),
-        y: rect[1] + Math.floor(svg_height/2),
-
+        x: rect[0] + Math.floor(svgWidth/2),
+        y: rect[1] + Math.floor(svgHeight/2),
 
         speedX: (Math.random() - 0.5) * 2 *maxSpeed,
         speedY: (Math.random() - 0.5) * 2 *maxSpeed});
@@ -82,7 +77,7 @@ export function logoDrop(el) {
       
     var force = d3.layout.force()
       .nodes(nodes)
-      .size([svg_width, svg_height])
+      .size([svgWidth, svgHeight])
       .gravity(0)
       .charge(0)
       .on("tick", tick);
@@ -92,8 +87,8 @@ export function logoDrop(el) {
     // setTimeout(force.start, 10000);
      
     var notesGroup = svg
-    // .attr("width", svg_width + margin.left + margin.right)
-    // .attr("height", svg_height + margin.top + margin.bottom)
+    // .attr("width", svgWidth + margin.left + margin.right)
+    // .attr("height", svgHeight + margin.top + margin.bottom)
       .insert("g",":nth-child(2)");
     // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
      
@@ -136,7 +131,6 @@ export function logoDrop(el) {
      
         d.x = d.x + (d.speedX * alpha);
         d.y = d.y + (-1 * d.speedY * alpha);
-     
       };
     }
      
@@ -173,115 +167,130 @@ export function logoDrop(el) {
   };
   // *** MUSICAL NOTES END
 
-
-  var textGroup = svg.append("g");
-
-  // the message to animate
-  const logo = "Rockus";
-
-  let fontsize = Math.min(106, svg_width/1200 * 150);
-
-  let logoElement = textGroup.append("text")
-    .text(logo)
-    .attr("class", styles.logo)
-    .style("font-size", fontsize)
-    .style('fill', '#FF83E2')
-    .style("text-anchor", "end");
-
-  const text_element = textGroup.select("text");
-  const text_width = textWidth(text_element);
-  const text_height = textHeight(text_element);
-
-  let logoBottom = svg_height/2 - 50;
-  let textGroupBottom = svg_height/2 + 10;
-
-  let blurbElement = textGroup.append("text")
-    .text("ID 5 songs. Played at the same time.")
-    .style("font-size", "30px")
-    .style('fill', '#FF83E2')
-    .style("text-anchor", "start")
-    .style("opacity", 0);
-
-  let text_element2 = textGroup.select("text:nth-child(2)");
-
   function textWidth(textElement) {
-    return textElement.node().getBBox().width;
+    return +textElement.node().getBBox().width;
   }
 
   function textHeight(textElement) {
-    return textElement.node().getBBox().height;
+    return +textElement.node().getBBox().height;
   }
-
-  const text_width3 = textWidth(text_element2) + 10;
-
-  blurbElement.text("ID 5 songs.")
-
-  const text_width2 = textWidth(text_element2);
-  const text_height2 = textHeight(text_element2);
 
   function translation(x, y, rotation) {
     return `translate(${x}, ${y}) rotate(${rotation})`
   }
 
   function xCenterPosition(textWidth, anchor) {
+    svgWidth = parseInt(d3.select("body").style("width"));
+    svg.attr("width", svgWidth);
+
     if (anchor === "start") {
-      return svg_width/2 - textWidth/2;
+      return svgWidth/2 - textWidth/2;
     }
     else if (anchor === "end") {
-      return svg_width/2 + textWidth/2;
+      return svgWidth/2 + textWidth/2;
     }
     else
     {
-      return svg_width/2;
+      return svgWidth/2;
     }
   }
 
-  // blurbElement.transition().delay(2000).attr("transform", translation4);      
-  blurbElement.attr("transform", translation(xCenterPosition(text_width2, "start"), textGroupBottom, 0))
+  let textGroup = svg.append("g");
+
+  // the message to animate
+  const logo = "Rockus";
+
+  let fontsize = Math.min(106, svgWidth/1200 * 150);
+
+  let logoElement = textGroup.append("text")
+    .text(logo)
+    .attr("class", styles.logo)
+    .style("font-size", fontsize)
+    .style('fill', '#FF83E2')
+    .style("text-anchor", "middle");
+
+  let blurbHeadElement = textGroup.append("text")
+    .text("ID 5 songs. Played at the same time.")
+    .style("font-size", "30px")
+    .style('fill', '#FF83E2')
+    .style("text-anchor", "start")
+    .style("opacity", 0);
+
+  const fullBlurbWidth = textWidth(blurbHeadElement) + 10;
+
+  blurbHeadElement.text("ID 5 songs.")
+
+  let blurbEndElement = textGroup.append("text")
+    .text("Played at the same time.")
+    .style("font-size", "30px")
+    .style('fill', '#FF83E2')
+    .style("text-anchor", "end")
+    .style("font-style", "italic")
+    .style("opacity", 0);
+
+  let logoStart = -125;
+  let logoBottom = svgHeight/2 - 50;
+  let blurbBottom = svgHeight/2 + 10;
+  let logoWidth = textWidth(logoElement);
+  const blurbHeadWidth = textWidth(blurbHeadElement);
+
+  blurbHeadElement.attr("transform", translation(xCenterPosition(blurbHeadWidth, "start"), blurbBottom, 0))
     .transition()
     .delay(1000)
     .duration(3000)
     .style("opacity", 1)
     .transition()
     .duration(3000)
-    .style("opacity", 1)
     .transition()
     .duration(2000)
-    .attr("transform", translation(xCenterPosition(text_width3, "start"), textGroupBottom, 0));
+    .attrTween("transform", function() {
+      return function(t) {
+        return translation(xCenterPosition(blurbHeadWidth, "start") +
+          ((xCenterPosition(fullBlurbWidth, "start") - xCenterPosition(blurbHeadWidth, "start")) * t),
+          blurbBottom, 0);
+      };
+    });
 
-  let blurbElementEnding = textGroup.append("text")
-    .text("Played at the same time.")
-    .style("font-size", "30px")
-    .style('fill', '#FF83E2')      
-    .style("text-anchor", "end")
-    .style("font-style", "italic")
-    .style("opacity", 0);
-
-  blurbElementEnding.attr("transform", translation(xCenterPosition(text_width3, "end"), textGroupBottom, 0))
+  blurbEndElement.attr("transform", translation(xCenterPosition(fullBlurbWidth, "end"), blurbBottom, 0))
     .transition()
     .delay(9000)
     .duration(2000)
     .style("opacity", 1);
 
-  logoElement.attr("transform", translation(xCenterPosition(text_width, "end"), -125, 0))
+  logoElement.attr("transform", translation(xCenterPosition(logoWidth, "middle"), logoStart, 0))
     .transition()
     .delay(16000)
     .duration(1000)
     .ease("bounce")
-    .attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0))
+    .attrTween("transform", function() {
+      return function(t) {
+        return translation(xCenterPosition(logoWidth, "middle"), logoStart + (logoBottom - logoStart) * t, 0);
+      };
+    })
     .each("end", addButtons);
+
+  d3.select(window).on('resize', resize);
 
   function resize() {
     /* Find the new window dimensions */
-    // let svg = d3.select("svg");
-    svg_width = parseInt(d3.select("body").style("width"));
-    svg.attr("width", svg_width);
-    logoElement.attr("transform", translation(xCenterPosition(text_width, "end"), logoBottom, 0));
-    blurbElement.attr("transform", translation(xCenterPosition(text_width3, "start"), textGroupBottom, 0));
-    blurbElementEnding.attr("transform", translation(xCenterPosition(text_width3, "end"), textGroupBottom, 0));
+    let lastSvgWidth = svgWidth;
+    svgWidth = parseInt(d3.select("body").style("width"));
+    svg.attr("width", svgWidth);
+    let positionAdjustment = (svgWidth - lastSvgWidth)/2;
 
+    // Get current X position of each text element and add the adjustment factor
+    let logoElementX = d3.transform(logoElement.attr("transform")).translate[0] + positionAdjustment;
+    let blurbHeadElementX = d3.transform(blurbHeadElement.attr("transform")).translate[0] + positionAdjustment;
+    let blurbEndElementX = d3.transform(blurbEndElement.attr("transform")).translate[0] + positionAdjustment;
+
+    // Get current Y position of each text element
+    let logoElementY = d3.transform(logoElement.attr("transform")).translate[1];
+    let blurbHeadElementY = d3.transform(blurbHeadElement.attr("transform")).translate[1];
+    let blurbEndElementY = d3.transform(blurbEndElement.attr("transform")).translate[1];
+
+    // Translate text elements using newly calculated X and Y positions
+    logoElement.attr("transform", translation(logoElementX, logoElementY, 0));
+    blurbHeadElement.attr("transform", translation(blurbHeadElementX, blurbHeadElementY, 0));
+    blurbEndElement.attr("transform", translation(blurbEndElementX, blurbEndElementY, 0));
   }
-     
-  d3.select(window).on('resize', resize);
-
 };
