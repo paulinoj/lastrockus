@@ -29,7 +29,8 @@ exports.genre = function(req, res, next) {
                        title: song.title,
                        url: `/song/${song.id}`,
                        volume: song.volume,
-                       permalink_url: song.permalink_url}
+                       permalink_url: song.permalink_url,
+                       soundcloudUser: song.soundcloudUser}
             });
             models.UserSongList.findAll({ where: { SongListId: songLists[0].id }}).then(function(highScorers) {
               var highScorersList = highScorers.map(function(user) {

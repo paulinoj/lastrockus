@@ -76,12 +76,11 @@ class SongInfo extends Component {
       <div className={songInfoStyles}>
         <div className={styles.flexitem1}>
           <div className={styles.just}>
-            <h1>{this.props.song.title}</h1>
-            <div>super cali fragilistic expialidociuos even though </div>
-           <div>{this.props.song.url}</div>
+            <h1 className={styles.title}>{this.props.song.title}</h1>
+            <div>Soundcloud User: {this.props.song.soundcloudUser}</div>
+           <div>Soundcloud Link: {this.props.song.permalink_url}</div>
           </div>
         </div>
-
         <div className={styles.flexitem2}>
           <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         </div>

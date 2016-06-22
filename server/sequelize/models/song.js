@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     genre: DataTypes.STRING,
     title: DataTypes.STRING,
     soundcloudTrack: DataTypes.STRING,
+    soundcloudUser: DataTypes.STRING,    
     SongListId: DataTypes.INTEGER,
     permalink_url: DataTypes.STRING,
     volume: DataTypes.DECIMAL
