@@ -76,9 +76,11 @@ class SongInfo extends Component {
       <div className={songInfoStyles}>
         <div className={styles.flexitem1}>
           <div className={styles.just}>
-            <h1 className={styles.title}>{this.props.song.title}</h1>
-            <div>Soundcloud User: {this.props.song.soundcloudUser}</div>
-           <div>Soundcloud Link: {this.props.song.permalink_url}</div>
+            <a href={this.props.song.permalink_url}>
+              <h1 className={styles.title}>{this.props.song.title}</h1>
+              <div>{this.props.song.artist}</div>
+              <div>Soundcloud Content Creator: {this.props.song.soundcloudUser}</div>
+            </a>
           </div>
         </div>
         <div className={styles.flexitem2}>

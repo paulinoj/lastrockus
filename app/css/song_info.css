@@ -13,8 +13,8 @@
 }
 
 .flexitem1 {
-  -webkit-flex: 1 1 300px;
-  flex: 1 1 300px;
+  -webkit-flex: 1 1 500px;
+  flex: 1 1 500px;
 }
 
 .flexitem2 {
@@ -23,8 +23,8 @@
   -webkit-flex-direction: column;
   flex-direction: column;
 
-  -webkit-flex: 1 1 300px;
-  flex: 1 1 300px;
+  -webkit-flex: 1 1 100px;
+  flex: 1 1 100px;
   -webkit-justify-content: center;
   justify-content: center;
 }

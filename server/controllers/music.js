@@ -27,6 +27,7 @@ exports.genre = function(req, res, next) {
               return { genre: req.params.genre,
                        songListId: songLists[0].id,
                        title: song.title,
+                       artist: song.artist,
                        url: `/song/${song.id}`,
                        volume: song.volume,
                        permalink_url: song.permalink_url,
