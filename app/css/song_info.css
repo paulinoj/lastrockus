@@ -15,6 +15,7 @@
 .flexitem1 {
   -webkit-flex: 1 1 500px;
   flex: 1 1 500px;
+  margin-left: 15px;
 }
 
 .flexitem2 {
@@ -22,11 +23,11 @@
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-
-  -webkit-flex: 1 1 100px;
-  flex: 1 1 100px;
+  -webkit-flex: 1 1 300px;
+  flex: 1 1 300px;
   -webkit-justify-content: center;
   justify-content: center;
+  margin-left: 15px;
 }
 
 .flexitem3 {
@@ -60,5 +61,5 @@
 }
 
 .title {
-  font-size: 18px;
+  font-size: 22px;
 }
