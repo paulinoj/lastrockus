@@ -74,17 +74,20 @@ class SongInfo extends Component {
   } 
     return (
       <div className={songInfoStyles}>
-        <div className={styles.flexitem1}>
-          <div className={styles.just}>
-            <a href={this.props.song.permalink_url} target="_blank">
-              <h1 className={styles.title}>{this.props.song.title} - {this.props.song.artist}</h1>
-              <div>Soundcloud Content Creator: {this.props.song.soundcloudUser}</div>
-            </a>
+        <div className={styles.songInfo2}>
+          <div className={styles.flexitem1}>
+            <div className={styles.just}>
+              <a href={this.props.song.permalink_url} target="_blank">
+                <h1 className={styles.title}>{this.props.song.title} - {this.props.song.artist}</h1>
+                <div>Soundcloud Content Creator: {this.props.song.soundcloudUser}</div>
+              </a>
+            </div>
+          </div>
+          <div className={styles.flexitem2}>
+            <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
           </div>
         </div>
-        <div className={styles.flexitem2}>
-          <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
-        </div>
+
         <div className={styles.flexitem3}>
           <div className={styles.points}>{this.calcPoints()} points</div>
         </div>

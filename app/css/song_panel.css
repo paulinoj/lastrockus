@@ -8,14 +8,14 @@
   text-align: center;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 990px) {
   .songPanel {
   	height: 150px;
   }
 }
 
-@media screen and (max-width: 450px) {
+/*@media screen and (max-width: 450px) {
   .songPanel {
   	height: 200px;
   }
-}
+}*/
