@@ -24,8 +24,8 @@
   flex-wrap:         wrap;
   -webkit-align-items: stretch; /* Safari */
   align-items:         stretch;
-  -webkit-flex: 5 5 400px;
-  flex: 5 5 400px;
+  -webkit-flex: 5 5 300px;
+  flex: 5 5 300px;
 }
 
 .flexitem1 {
@@ -40,6 +40,7 @@
   flex-direction: column;
   -webkit-justify-content: center;
   justify-content: center;
+  min-width: 300px;
 }
 
 .flexitem3 {

@@ -12,6 +12,7 @@ class SongInfo extends Component {
     super(props);
     this.state = { requestErrorCount: 0 };
     this.handleRequestError = this.handleRequestError.bind(this);
+    this.prepAudioElement = this.prepAudioElement.bind(this);
   }
 
   handleRequestError(e) {
@@ -27,13 +28,25 @@ class SongInfo extends Component {
     }
   }
 
+  prepAudioElement(e) {
+    e.target.removeEventListener("canplaythrough", this.prepAudioElement);    
+
+    // Need to play then immediately pause audio element in order to set currentTime
+    // successfully in Safari
+    e.target.play();
+    e.target.pause();
+
+    e.target.currentTime = 20;
+    e.target.volume = this.props.song.volume;
+    this.props.incNumberOfMusicPlayersReady();
+  }
+
   componentDidMount() {
     let audioPlayer = this.refs[this.props.audioID];
-    audioPlayer.addEventListener("canplaythrough", this.props.incNumberOfMusicPlayersReady);
+    audioPlayer.addEventListener("canplaythrough", this.prepAudioElement);
     audioPlayer.addEventListener("error", this.handleRequestError);
-    audioPlayer.load();
-    audioPlayer.currentTime = 20;
-    audioPlayer.volume = this.props.song.volume;
+    // DO WE NEED THIS LOAD METHOD?
+    // audioPlayer.load();
   }
 
   shouldComponentUpdate(nextProps, nextState) {

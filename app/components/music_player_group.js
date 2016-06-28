@@ -104,7 +104,7 @@ class MusicPlayerGroup extends Component {
     this.props.activateMusicPlayers();
     this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
-    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 500)});
+    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 30000)});
   }
 
   signalGameOver() {
