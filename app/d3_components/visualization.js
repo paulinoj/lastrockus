@@ -1,87 +1,162 @@
 import d3 from 'd3';
+import detect from '../detect.min.js'
 
-export function createVisualization(el, audioID, color) {
+var user = detect.parse(navigator.userAgent);
+var svgHeight = '75';
+var svgWidth = '940';
 
-  var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  var audioElement = document.getElementById(audioID);
-  var audioSrc = audioCtx.createMediaElementSource(audioElement);
-  var analyser = audioCtx.createAnalyser();
-  let timer_ret_val = false;
+function createSvg(parent, height, width) {
+  return d3.select(parent).append('svg').attr('height', height).attr('width', width);
+}
 
-  // Bind our analyser to the media element source.
-  audioSrc.connect(analyser);
-  audioSrc.connect(audioCtx.destination);
+if (user.browser.family === "Safari") {
+  var createVisualization = function(el, audioID, color) {
+    let timer_ret_val = false;
 
-  var frequencyData = new Uint8Array(200);
+    var canvas = d3.select(el).append("canvas")
+      .attr("width", svgWidth)
+      .attr("height", svgHeight);
 
-  var svgHeight = '75';
-  var svgWidth = '940';
-  // var svgWidth = '480';
+    var ctx = canvas.node().getContext('2d'),
+        height = svgHeight,
+        width = svgWidth;
 
-  var barPadding = '1';
+    canvas.height = height;
+    canvas.width = width;
 
-  function createSvg(parent, height, width) {
-    return d3.select(parent).append('svg').attr('height', height).attr('width', width);
-  }
+    var particle = {
+      amp: (height / 2) * Math.random(),
+      cycle: Math.random(),
+      hue: Math.floor(361 * Math.random()),
+      r: 2,
+      x: 0,
+      y: height / 2,
+      v: 2.5 * Math.random() + 0.5
+    };
 
-  var svg = createSvg(el, svgHeight, svgWidth);
-
-  // Create our initial D3 chart.
-  svg.selectAll('rect')
-     .data(frequencyData)
-     .enter()
-     .append('rect')
-     .attr('x', function (d, i) {
-        return i * (svgWidth / frequencyData.length);
-     })
-     .attr('width', svgWidth / frequencyData.length - barPadding);
-
-  function renderChart() {
-    // console.log(color);
-
-    // Copy frequency data to frequencyData array.
-    if (analyser) {
-      analyser.getByteFrequencyData(frequencyData);
+    function draw() {
+      ctx.beginPath();
+      ctx.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2, true);
+      ctx.fillStyle = 'hsl(' + particle.hue + ', 60%, 70%)';
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = 'hsl(' + particle.hue + ', 80%, 80%)';
+      ctx.fill();
+      ctx.shadowBlur = 0;
     }
 
-    // Update d3 chart with new data.
-    if (svg) {
-      svg.selectAll('rect')
-         .data(frequencyData)
-         .attr('y', function(d) {
-           return (svgHeight - d/2);
-          })
-         .attr('height', function(d) {
-           return d/2;
-          })
-         .attr('fill', function(d) {
-           return color;
-          })
-         .attr('opacity', 0.3);
-    } 
-    return timer_ret_val;
+    function loop() {
+      ctx.fillStyle = 'rgba(25, 45, 65, 0.4)';
+      ctx.fillRect(0, 0, width, height);
+
+      particle.cycle += 0.02;
+      particle.y = Math.sin(particle.cycle * Math.PI) * particle.amp + height / 2;
+
+      if (particle.x + particle.r > width) {
+        particle.x = 0 - particle.r;
+      } else {
+        particle.x += particle.v;
+      }
+
+      draw();
+
+      return timer_ret_val;
+    }
+
+    d3.timer(loop);
+
+    return function() {
+      timer_ret_val = true;
+    }
   }
 
-  // Run the loop
-  // renderChart();
-  d3.timer(renderChart);
+} else {
+  var createVisualization = function(el, audioID, color) {
+  console.log(
+    user.browser.family,
+    user.browser.version,
+    user.os.name
+  );
+    var svg = createSvg(el, svgHeight, svgWidth);
 
-  return function() {
-    timer_ret_val = true;
-    frequencyData = null;
-    audioSrc = null;
-    analyser = null;
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var audioElement = document.getElementById(audioID);
+    var audioSrc = audioCtx.createMediaElementSource(audioElement);
+    var analyser = audioCtx.createAnalyser();
+    let timer_ret_val = false;
 
-    // This is the line of code that seems to fix problem with subsequent ajax requests
-    // Be sure you pause audioElement before setting it to null
-    // Got idea from this link:  
-    // http://stackoverflow.com/questions/19294258/forcing-mediaelement-to-release-stream-after-playback
-    audioElement.pause();
+    // Bind our analyser to the media element source.
+    audioSrc.connect(analyser);
+    audioSrc.connect(audioCtx.destination);
 
-    audioElement = null;
-    audioCtx.close();
-    audioCtx = null;
-    svg=null;
-  }
+    var frequencyData = new Uint8Array(200);
 
-};
+    var barPadding = '1';
+
+
+
+    // Create our initial D3 chart.
+    svg.selectAll('rect')
+       .data(frequencyData)
+       .enter()
+       .append('rect')
+       .attr('x', function (d, i) {
+          return i * (svgWidth / frequencyData.length);
+       })
+       .attr('width', svgWidth / frequencyData.length - barPadding);
+
+    function renderChart() {
+      // console.log(color);
+
+      // Copy frequency data to frequencyData array.
+      if (analyser) {
+        analyser.getByteFrequencyData(frequencyData);
+      }
+
+      // Update d3 chart with new data.
+      if (svg) {
+        svg.selectAll('rect')
+           .data(frequencyData)
+           .attr('y', function(d) {
+             return (svgHeight - d/2);
+            })
+           .attr('height', function(d) {
+             return d/2;
+            })
+           .attr('fill', function(d) {
+             return color;
+            })
+           .attr('opacity', 0.3);
+      } 
+      return timer_ret_val;
+    }
+
+    // Run the loop
+    // renderChart();
+    d3.timer(renderChart);
+
+    return function() {
+      timer_ret_val = true;
+      frequencyData = null;
+      audioSrc = null;
+      analyser = null;
+
+      // This is the line of code that seems to fix problem with subsequent ajax requests
+      // Be sure you pause audioElement before setting it to null
+      // Got idea from this link:  
+      // http://stackoverflow.com/questions/19294258/forcing-mediaelement-to-release-stream-after-playback
+      audioElement.pause();
+
+      audioElement = null;
+      audioCtx.close();
+      audioCtx = null;
+      svg=null;
+    }
+
+  };
+
+
+}
+
+export { createVisualization };
+
+
