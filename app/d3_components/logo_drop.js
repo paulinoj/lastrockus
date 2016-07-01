@@ -1,5 +1,6 @@
 import d3 from 'd3';
 import styles from '../css/welcome.css';
+import soundcloudLogo from '../soundcloud_logo.png';
 
 export function logoDrop(el) {
 
@@ -17,13 +18,20 @@ export function logoDrop(el) {
     .attr("fill", "#222");
 
   function addButtons() {
-    let buttonGroupTop = (svgHeight/2 + 170) + "px";
+    let buttonGroupTop = (svgHeight/2 + 130) + "px";
     let login_button_classes = `btn btn-info btn-lg ${styles.login_button}`;
     let signup_button_classes = `btn btn-info btn-lg ${styles.signup_button}`;
     let button_div = d3.select(el)
       .append("div")
       .attr("class", styles.button_group)
       .style("top", buttonGroupTop);
+    let soundcloudImg = button_div
+      .append("div")
+      .attr("class", "text-center")
+      .append("img")
+      .attr("src", soundcloudLogo)
+      .attr("width", 150)
+      .style("opacity", 0);
     let login_button = button_div
       .append("div")
       .attr("class", "text-center")
@@ -40,6 +48,7 @@ export function logoDrop(el) {
       .text("Sign Up")
       .style("opacity", 0)
       .attr("href", "/signup");
+      soundcloudImg.transition().delay(3000).duration(3000).style("opacity", 1);
       login_button.transition().delay(3000).duration(3000).style("opacity", 1);
       signup_button.transition().delay(3000).duration(3000).style("opacity", 1);
   }
