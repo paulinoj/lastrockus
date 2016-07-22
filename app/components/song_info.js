@@ -46,7 +46,7 @@ class SongInfo extends Component {
     audioPlayer.addEventListener("canplaythrough", this.prepAudioElement);
     audioPlayer.addEventListener("error", this.handleRequestError);
     // DO WE NEED THIS LOAD METHOD?
-    // audioPlayer.load();
+    audioPlayer.load();
   }
 
   shouldComponentUpdate(nextProps, nextState) {

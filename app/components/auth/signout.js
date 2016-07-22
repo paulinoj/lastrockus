@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
+import styles from '../../css/signout.css';
+
 
 class Signout extends Component {
   componentWillMount() {
@@ -9,7 +11,7 @@ class Signout extends Component {
 
   render() {
     return (
-      <div>Thank you for playing Rockus.</div>
+      <div className={styles.signout}>Thank you for playing Rockus.</div>
     )
   }
 }
