@@ -25,3 +25,9 @@
   -webkit-align-items: center; /* Safari */
   align-items:         center;
 }
+
+.loader_message {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 12px;
+}

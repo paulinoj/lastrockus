@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 import styles from '../css/music_player_group.css';
 import SongPanel from "./song_panel";
 import StartButton from './start_button';
+import Loader from './loader';
 import Scoreboard from './scoreboard';
 import AnswerBar from './answer_bar';
 
@@ -56,13 +57,26 @@ class MusicPlayerGroup extends Component {
 
   renderStartButton() {
     if (!this.props.playersActivated) {
-      return (
-        <div className={styles.start_button}>
-          <StartButton activatePlayers={this.activatePlayers}
-           numberOfMusicPlayers={this.props.musicList.length}
-           numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
-        </div>
-      );
+      if (this.props.musicList.length !== this.props.numberOfMusicPlayersReady) {
+        return (
+          <div className={styles.start_button}>
+            <div className={styles.loader_message}>
+              Music Loading
+            </div>
+            <Loader />
+          </div>
+        );
+      }
+      else
+      {
+        return (
+          <div className={styles.start_button}>
+            <StartButton activatePlayers={this.activatePlayers}
+             numberOfMusicPlayers={this.props.musicList.length}
+             numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
+          </div>
+        );
+      }
     }
   }
 
