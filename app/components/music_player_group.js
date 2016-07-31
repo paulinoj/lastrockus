@@ -57,7 +57,7 @@ class MusicPlayerGroup extends Component {
 
   renderStartButton() {
     if (!this.props.playersActivated) {
-      if (this.props.musicList.length !== this.props.numberOfMusicPlayersReady) {
+      if (this.props.musicList.length > this.props.numberOfMusicPlayersReady) {
         return (
           <div className={styles.start_button}>
             <div className={styles.loader_message}>
@@ -109,7 +109,8 @@ class MusicPlayerGroup extends Component {
           song={song}
           key={playerRef}
           play={playProp}
-          color={colorList[index]} />
+          color={colorList[index]}
+          gameOver={this.state.gameOver} />
       );
     });
   }
