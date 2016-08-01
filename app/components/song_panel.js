@@ -42,7 +42,7 @@ class SongPanel extends Component {
   }
 
   componentDidMount() {
-    this.setState({player: this.refs[this.props.audioID]}, 
+    this.setState({player: this.refs[this.props.audioID]},
       function() {
         this.state.player.addEventListener("canplay", this.prepAudioElement);
         this.state.player.addEventListener("error", this.handleRequestError);

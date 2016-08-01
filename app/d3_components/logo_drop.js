@@ -5,8 +5,9 @@ import soundcloudLogo from '../soundcloud_logo.png';
 export function logoDrop(el) {
 
   let svgWidth, svgHeight, buttonGroupTop;
-  let logoFontSize = 106;
-  let blurbFontSize = 30;
+  let logoFontSize = "106px";
+  let blurbFontSize = "30px";
+  let logoColor = "#9d9d9d"
   let textColor = "#FF83E2";
 
   let button_div = d3.select(el)
@@ -27,7 +28,7 @@ export function logoDrop(el) {
     .text(logo)
     .attr("class", styles.logo)
     .style("font-size", logoFontSize)
-    .style('fill', textColor)
+    .style('fill', logoColor)
     .style("text-anchor", "middle");
 
   // Temporarily set text of blurbHeadElement to entire blurb in order
@@ -138,9 +139,9 @@ export function logoDrop(el) {
     var margin = {top: 0, right: 0, bottom: 0, left: 0};
      
     // var rect = [50,50, svgWidth - 50, svgHeight - 50];
-    var rect = [50,50, 1900, 1900];
+    var rect = [50,50, 2560, 1440];
 
-    var n =500,
+    var n =200,
       m = 40,
       padding = 6,
       maxSpeed = 3,
@@ -151,8 +152,8 @@ export function logoDrop(el) {
      
     for (var i in d3.range(n)) {
       nodes.push({radius: 20,
-        color: color(Math.floor(Math.random() * m)),
-        // color: "white",
+        // color: color(Math.floor(Math.random() * m)),
+        color: "white",
         // x: rect[0] + (Math.random() * (rect[2] - rect[0])),
         // y:rect[1] + (Math.random() * (rect[3] - rect[1])),
         x: rect[0] + Math.floor(svgWidth/2),
@@ -164,10 +165,9 @@ export function logoDrop(el) {
       
     var force = d3.layout.force()
       .nodes(nodes)
-      // .size([svgWidth, svgHeight])
-      .size([1200, 1200])
+      .size([2560, 1440])
       .gravity(0)
-      .charge(0)
+      .charge(3)
       .on("tick", tick)
       .start();
      
@@ -176,19 +176,19 @@ export function logoDrop(el) {
      
     var notes = ["\u2669", "\u266A", "\u266B", "\u266C", "\u266D", "\u266E"];
 
-    var fontSizes = [30, 40, 50];
+    var fontSizes = [50, 60, 70];
 
     var circle = notesGroup.selectAll("text")
       .data(nodes)
       .enter().append("text")
       .text(function() { var i = Math.floor(Math.random() * notes.length); return notes[i]})
-      .style("font-size",function() { var i = Math.floor(Math.random() * fontSizes.length); return fontSizes[i]})
+      .style("font-size",function() { var i = Math.floor(Math.random() * fontSizes.length); return fontSizes[i] + "px"})
       .attr("r", function(d) { return d.radius; })
       .attr("x", function(d) { return d.x; })
       .attr("y", function(d) { return d.y; })
       .style("fill", function(d) { return d.color; })
-      .style("opacity", 0.7)
-      .call(force.drag);
+      .style("opacity", 0.4);
+      // .call(force.drag);
      
     var flag = false;
 
