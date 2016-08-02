@@ -9,7 +9,6 @@
   flex-wrap:         wrap;
   -webkit-align-items: stretch; /* Safari */
   align-items:         stretch;
-  margin-bottom: 40px;
   height: 180px;
 }
 
@@ -62,7 +61,6 @@
   flex-direction: column;
   -webkit-flex-wrap: wrap; /* Safari */
   flex-wrap:         wrap;
-
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
   background-color: #e9e6e0;

@@ -9,6 +9,8 @@ import StartButton from './start_button';
 import Loader from './loader';
 import Scoreboard from './scoreboard';
 import AnswerBar from './answer_bar';
+import CountdownClock from './countdown_clock';
+
 
 import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
@@ -90,6 +92,20 @@ class MusicPlayerGroup extends Component {
     }
   }
 
+  renderScreenTop() {
+    if (!this.state.gameOver) {
+      return (
+        <CountdownClock />
+      )
+    }
+    else
+    {
+      return (
+        <Scoreboard gameOver={this.state.gameOver} />
+      )
+    }
+  }
+
   renderSongPanels() {
     if (!this.props.musicList) {
       return <div>Songs loading ...</div>;
@@ -119,7 +135,7 @@ class MusicPlayerGroup extends Component {
     this.props.activateMusicPlayers();
     this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
-    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 30000)});
+    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 120000)});
   }
 
   signalGameOver() {
@@ -136,7 +152,7 @@ class MusicPlayerGroup extends Component {
       <div className="container">
         <div className={show}>
           <div className={styles.screen_top}>
-            <Scoreboard gameOver={this.state.gameOver} />
+            {this.renderScreenTop()}
           </div>
           <div className={styles.screen_middle}>
             {this.renderAnswerBar()}
