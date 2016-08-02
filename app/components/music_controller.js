@@ -36,6 +36,7 @@ class MusicController extends Component {
         var playhead = this.state.playhead;
         var timeline = this.state.timeline;
         var duration = music.duration;
+
         this.setState({ duration: duration });
 
         // timeline width adjusted for playhead

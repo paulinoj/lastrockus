@@ -48,6 +48,11 @@ class MusicPlayerGroup extends Component {
   }
 
   renderAnswerBar() {
+    if (this.state.gameOver) {
+      return (
+        <div>GAME OVER</div>
+      )
+    }
     if (this.props.playersActivated && !this.state.gameOver) {
       return (
         <AnswerBar musicList={this.props.musicList} />
@@ -119,7 +124,7 @@ class MusicPlayerGroup extends Component {
     this.props.activateMusicPlayers();
     this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
-    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 30000)});
+    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 500)});
   }
 
   signalGameOver() {

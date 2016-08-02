@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { submitAnswer } from "../actions/index";
+import styles from '../css/answer_bar.css';
 
 class AnswerBar extends Component {
   constructor(props) {
@@ -22,16 +23,18 @@ class AnswerBar extends Component {
   }
 
   render () {
+    var inputBoxStyles = "form-control " + styles.input_box;
+    var buttonStyles = "btn btn-secondary " + styles.button;
     return (
-      <div className="answer-bar">
+      <div className={styles.answer_bar}>
         <form onSubmit={this.onFormSubmit} className="input-group">
           <input
             placeholder="Guess a song"
-            className="form-control" 
+            className={inputBoxStyles} 
             value={this.state.answer}
             onChange={this.onInputChange} />
           <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
+            <button type="submit" className={buttonStyles}>Submit</button>
           </span>
         </form>
       </div>
