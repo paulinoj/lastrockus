@@ -1,25 +1,13 @@
-.app {
-  height: 200px;
-}
-
-.background {
-  /*background-color: #222;*/
-}
-
 .hide {
   display: none;
 }
 
-.show {
-}
-
 .start_button {
-  /*background-color: #222;*/
   display: -webkit-flex; /* Safari */
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  height: 50vh;
+  height: 80vh;
   -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center; /* Safari */
@@ -30,4 +18,18 @@
   color: white;
   font-size: 24px;
   margin-bottom: 12px;
+}
+
+.screen_top {
+  height: 180px;
+}
+
+.screen_middle {
+  height: 100px;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
 }

@@ -48,11 +48,6 @@ class MusicPlayerGroup extends Component {
   }
 
   renderAnswerBar() {
-    if (this.state.gameOver) {
-      return (
-        <div>GAME OVER</div>
-      )
-    }
     if (this.props.playersActivated && !this.state.gameOver) {
       return (
         <AnswerBar musicList={this.props.musicList} />
@@ -88,7 +83,7 @@ class MusicPlayerGroup extends Component {
   renderPlayAgainButton() {
     if (this.state.gameOver) {
       return (
-        <div className="btn btn-default">
+        <div className="btn btn-default btn-lg">
           <Link className="nav-link" to="/genre_selector">Play Again</Link>
         </div>
       );
@@ -124,7 +119,7 @@ class MusicPlayerGroup extends Component {
     this.props.activateMusicPlayers();
     this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
-    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 500)});
+    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 30000)});
   }
 
   signalGameOver() {
@@ -132,20 +127,26 @@ class MusicPlayerGroup extends Component {
   }
 
   render() {
-    let songPanelVisibility = styles.show;
+    let show = styles.show;
     if (!this.props.playersActivated) {
-      songPanelVisibility = styles.hide;      
+      show = styles.hide;      
     }
 
     return (
       <div className="container">
-        <Scoreboard gameOver={this.state.gameOver} />
-        {this.renderAnswerBar()}
-        <div className={songPanelVisibility}>
-          {this.renderSongPanels()}
+        <div className={show}>
+          <div className={styles.screen_top}>
+            <Scoreboard gameOver={this.state.gameOver} />
+          </div>
+          <div className={styles.screen_middle}>
+            {this.renderAnswerBar()}
+            {this.renderPlayAgainButton()}
+          </div>
+          <div className={styles.screen_bottom}>
+            {this.renderSongPanels()}
+          </div>
         </div>
         {this.renderStartButton()}
-        {this.renderPlayAgainButton()}
       </div>
     );
   }
