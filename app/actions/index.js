@@ -13,7 +13,6 @@ export const UNAUTH_USER = 'UNAUTH_USER';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const FETCH_MESSAGE = 'FETCH_MESSAGE';
 export const ACTIVATE_MUSIC_PLAYERS = 'ACTIVATE_MUSIC_PLAYERS';
-export const START_TIMER = 'START_TIMER';
 export const INC_SCORE = 'INC_SCORE';
 export const RESET_GAME = 'RESET_GAME';
 export const TURN_OFF_ALL_MUSIC_PLAYERS = 'TURN_OFF_ALL_MUSIC_PLAYERS';
@@ -104,13 +103,6 @@ export function activateMusicPlayers() {
   return {
     type: ACTIVATE_MUSIC_PLAYERS,
     payload: true
-  }  
-}
-
-export function startTimer() {
-  return {
-    type: START_TIMER,
-    payload: null
   }  
 }
 

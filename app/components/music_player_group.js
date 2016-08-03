@@ -13,20 +13,21 @@ import TimeDisplay from './time_display';
 
 import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
-import { startTimer } from "../actions/index";
 import { signalGameOver } from "../actions/index";
 import { decUserSongListCounts } from "../actions/index";
 import { turnOffAllMusicPlayers } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
+    var timeLimit = 120000;
     super(props);
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);
     this.setTime = this.setTime.bind(this);
     this.state = { gameOver: false,
                    timerControlSwitch: null,
-                   currentTime: 120000 };
+                   timeLimit: timeLimit,
+                   timeRemaining: timeLimit };
   }
 
   componentDidUpdate() {
@@ -100,7 +101,7 @@ class MusicPlayerGroup extends Component {
   renderScreenTop() {
     if (!this.state.gameOver) {
       return (
-        <TimeDisplay currentTime={this.state.currentTime} />
+        <TimeDisplay timeRemaining={this.state.timeRemaining} />
       )
     }
     else
@@ -131,6 +132,8 @@ class MusicPlayerGroup extends Component {
           key={playerRef}
           play={playProp}
           color={colorList[index]}
+          timeLimit={this.state.timeLimit}
+          timeRemaining={this.state.timeRemaining}
           gameOver={this.state.gameOver} />
       );
     });
@@ -138,16 +141,14 @@ class MusicPlayerGroup extends Component {
 
   activatePlayers() {
     this.props.activateMusicPlayers();
-    this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
     this.setState({timerControlSwitch: setInterval(this.setTime, 1000)});
   }
 
   setTime() {
-    var currentTime = this.state.currentTime - 1000;
-    console.log("HOW OFTEN IS SETTIME CALLEd");
-    this.setState({currentTime: currentTime}, function() {
-      if (this.state.currentTime === 0) {
+    var timeRemaining = this.state.timeRemaining - 1000;
+    this.setState({timeRemaining: timeRemaining}, function() {
+      if (this.state.timeRemaining === 0) {
         this.signalGameOver();
       }
     }.bind(this))
@@ -191,7 +192,6 @@ function mapStateToProps(state) {
     musicPlayerOffList: state.musicPlayerOffList,
     numberOfMusicPlayersReady: state.numberOfMusicPlayersReady,
     playersActivated: state.playersActivated,
-    timerStarted: state.timerStarted,
     score: state.score
   };
 }
@@ -203,7 +203,6 @@ function mapDispatchToProps(dispatch) {
     { resetNumberOfMusicPlayersReady: resetNumberOfMusicPlayersReady,
       decUserSongListCounts: decUserSongListCounts,
       activateMusicPlayers: activateMusicPlayers,
-      startTimer: startTimer,
       signalGameOver: signalGameOver,
       turnOffAllMusicPlayers, turnOffAllMusicPlayers }, dispatch);
 }

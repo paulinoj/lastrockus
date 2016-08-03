@@ -81,10 +81,10 @@ class SongPanel extends Component {
   }
 
   calcPoints() {
-    let numSongs = 5;
-    let totalTime = 30;
-    let timeElapsed = Math.floor(new Date() - this.props.timerStarted)/1000;
-    let points = Math.round((totalTime - timeElapsed)/numSongs);
+    var maxPointsPerSong = 20;
+    var timeLimit = this.props.timeLimit/1000;
+    var timeRemaining = this.props.timeRemaining/1000;    
+    let points = Math.ceil(timeRemaining/timeLimit * maxPointsPerSong);
     return points;
   }
 

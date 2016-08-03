@@ -8,7 +8,6 @@ import MusicListHighScorersReducer from './reducer_music_list_high_scorers';
 import NumberOfMusicPlayersReadyReducer from './reducer_number_of_music_players_ready';
 import musicPlayerOffListReducer from './reducer_music_player_off_list';
 import PlayersActivatedReducer from './reducer_players_activated';
-import TimerStartedReducer from './reducer_timer_started';
 import ScoreReducer from './reducer_score';
 import TotalSongListCountsReducer from './reducer_total_song_list_counts';
 import UserSongListCountsReducer from './reducer_user_song_list_counts';
@@ -22,7 +21,6 @@ const rootReducer = combineReducers({
   numberOfMusicPlayersReady: NumberOfMusicPlayersReadyReducer,
   musicPlayerOffList: musicPlayerOffListReducer,
   playersActivated: PlayersActivatedReducer,
-  timerStarted: TimerStartedReducer,
   score: ScoreReducer,
   totalSongListCounts: TotalSongListCountsReducer,
   userSongListCounts: UserSongListCountsReducer

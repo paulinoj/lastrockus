@@ -8,9 +8,9 @@ class TimeDisplay extends Component {
   }
 
   render() {
-    var currentTime = +this.props.currentTime;
-    var minutes = Math.floor((currentTime/1000) / 60);
-    var seconds = (currentTime/1000) % 60;
+    var timeRemaining = +this.props.timeRemaining;
+    var minutes = Math.floor((timeRemaining/1000) / 60);
+    var seconds = (timeRemaining/1000) % 60;
     var displayTime=('0'  + minutes).slice(-2)+':'+('0' + seconds).slice(-2);
 
     return (
