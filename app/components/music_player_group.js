@@ -9,8 +9,7 @@ import StartButton from './start_button';
 import Loader from './loader';
 import Scoreboard from './scoreboard';
 import AnswerBar from './answer_bar';
-import CountdownClock from './countdown_clock';
-
+import TimeDisplay from './time_display';
 
 import { activateMusicPlayers } from "../actions/index";
 import { resetNumberOfMusicPlayersReady } from "../actions/index";
@@ -24,8 +23,10 @@ class MusicPlayerGroup extends Component {
     super(props);
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);
+    this.setTime = this.setTime.bind(this);
     this.state = { gameOver: false,
-                   musicPlayersControl: null };
+                   timerControlSwitch: null,
+                   currentTime: 120000 };
   }
 
   componentDidUpdate() {
@@ -43,10 +44,14 @@ class MusicPlayerGroup extends Component {
     else
     {
       if (musicPlayerOffListCount == 5) {
-        clearTimeout(this.state.musicPlayersControl);
+        clearTimeout(this.state.timerControlSwitch);
         this.setState({ gameOver: true });
       }
     }
+  }
+
+  componentWillUnmount() {
+    this.setState({timerControlSwitch: null});
   }
 
   renderAnswerBar() {
@@ -95,7 +100,7 @@ class MusicPlayerGroup extends Component {
   renderScreenTop() {
     if (!this.state.gameOver) {
       return (
-        <CountdownClock />
+        <TimeDisplay currentTime={this.state.currentTime} />
       )
     }
     else
@@ -135,7 +140,17 @@ class MusicPlayerGroup extends Component {
     this.props.activateMusicPlayers();
     this.props.startTimer();
     this.props.resetNumberOfMusicPlayersReady();
-    this.setState({musicPlayersControl: setTimeout(this.signalGameOver, 120000)});
+    this.setState({timerControlSwitch: setInterval(this.setTime, 1000)});
+  }
+
+  setTime() {
+    var currentTime = this.state.currentTime - 1000;
+    console.log("HOW OFTEN IS SETTIME CALLEd");
+    this.setState({currentTime: currentTime}, function() {
+      if (this.state.currentTime === 0) {
+        this.signalGameOver();
+      }
+    }.bind(this))
   }
 
   signalGameOver() {
