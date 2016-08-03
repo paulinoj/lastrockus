@@ -28,12 +28,12 @@
   flex: 5 5 300px;
 }
 
-.flexitem1 {
+.first_panel {
   min-width: 300px;
   /*JOHN ADD MAX-WIDTH HERE?*/
 }
 
-.flexitem2 {
+.middle_panel {
   display: -webkit-flex; /* Safari */
   display: flex;
   -webkit-flex-direction: column;
@@ -43,20 +43,18 @@
   min-width: 300px;
 }
 
-.flexitem3 {
+.last_panel {
   display: -webkit-flex; /* Safari */
   display: flex;
   -webkit-flex-direction: column;
-  flex-direction: column;s
+  flex-direction: column;
   -webkit-flex: 1 1 175px;
   flex: 1 1 175px;
-  background-color: #313131;
   -webkit-justify-content: center;
   justify-content: center;
-}
-
-.just {
-  text-align: left;
+  -webkit-align-items: center; /* Safari */
+  align-items:         center;
+  background-color: #313131;
 }
 
 .points {
@@ -66,12 +64,9 @@
 
 .songInfo {
   height: 100%;
+  text-align: left;
 }
 
 .hidden {
   display: none;
-}
-
-.title {
-  font-size: 22px;
 }

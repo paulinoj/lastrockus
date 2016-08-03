@@ -4,7 +4,12 @@
   border-radius: 15px;
   margin-bottom: 20px;
   background-color: #493d54;
+  font-size: 14px;
   text-align: center;
+}
+
+h1 {
+  font-size: 22px;
 }
 
 @media screen and (max-width: 990px) {
@@ -13,8 +18,18 @@
   }
 }
 
-/*@media screen and (max-width: 450px) {
+@media screen and (max-width: 590px) {
   .songPanel {
   	height: 200px;
   }
-}*/
+}
+
+@media screen and (max-width: 400px) {
+  .songPanel {
+    font-size: 12px;
+  }
+
+  h1 {
+    font-size: 18px;
+  }
+}
