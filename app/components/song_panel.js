@@ -6,7 +6,9 @@ import Visualizer from './visualizer';
 import SongInfo from './song_info';
 import { incNumberOfMusicPlayersReady } from "../actions/index";
 import { incScore } from "../actions/index";
+import detect from '../detect.min.js'
 
+var user = detect.parse(navigator.userAgent);
 
 class SongPanel extends Component {
   constructor(props) {
@@ -98,9 +100,18 @@ class SongPanel extends Component {
   }
 
   render() {
+    var url;
+    if (user.browser.family === "Safari") {
+      url = this.props.song.url2;
+    }
+    else
+    {
+      url = this.props.song.url;
+    }
+
     return (
       <div className={styles.songPanel}>
-        <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
+        <audio id={this.props.audioID} src={url} ref={this.props.audioID} />
         <Visualizer audioID={this.props.audioID} color={this.props.color} show={this.props.play} />
         {this.renderSongInfo()}
       </div>

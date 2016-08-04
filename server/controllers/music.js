@@ -29,6 +29,7 @@ exports.genre = function(req, res, next) {
                        title: song.title,
                        artist: song.artist,
                        url: `/song/${song.id}`,
+                       url2: `https://api.soundcloud.com/tracks/${song.soundcloudTrack}/stream?client_id=${soundcloudKey}`,
                        volume: song.volume,
                        permalink_url: song.permalink_url,
                        soundcloudUser: song.soundcloudUser}
