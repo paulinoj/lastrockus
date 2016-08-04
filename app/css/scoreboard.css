@@ -21,10 +21,6 @@
   height: 30px;
 }
 
-.right {  
-  text-align: right;
-}
-
 .score {
   display: -webkit-flex; /* Safari */
   display: flex;
@@ -80,6 +76,7 @@
 
 .column2 {
   width: 25px;
+  text-align: right;
 }
 
 @media screen and (max-width: 1000px) {

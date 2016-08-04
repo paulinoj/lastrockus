@@ -26,11 +26,9 @@ class Scoreboard extends Component {
             <div className={styles.tableWidth} key={player.email}>
               <table >
                 <tbody>
-                  <col className={styles.column1} />
-                  <col className={styles.column2} />
                   <tr>
-                    <td>{player.email}</td>
-                    <td className={styles.right}>{player.score}</td>
+                    <td className={styles.column1}>{player.email}</td>
+                    <td className={styles.column2}>{player.score}</td>
                   </tr>
                 </tbody>
               </table>
