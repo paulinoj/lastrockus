@@ -12,7 +12,7 @@ const requireSignin = passport.authenticate('local', { session: false });
 module.exports = function(app) {
   app.get('/music/:genre', requireAuth, Music.genre);
   app.get('/reset_game', requireAuth, Music.reset_game);
-  app.get('/song/:number', Music.song);    
+  app.get('/song/:number', Music.song);
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup);
   app.post('/save_score', requireAuth, Score.save);

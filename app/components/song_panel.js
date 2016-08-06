@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 import styles from '../css/song_panel.css';
 import Visualizer from './visualizer';
 import SongInfo from './song_info';
@@ -100,18 +101,9 @@ class SongPanel extends Component {
   }
 
   render() {
-    var url;
-    if (user.browser.family === "Safari") {
-      url = this.props.song.url2;
-    }
-    else
-    {
-      url = this.props.song.url;
-    }
-
     return (
       <div className={styles.songPanel}>
-        <audio id={this.props.audioID} src={url} ref={this.props.audioID} />
+        <audio id={this.props.audioID} src={this.props.song.url} ref={this.props.audioID} />
         <Visualizer audioID={this.props.audioID} color={this.props.color} show={this.props.play} />
         {this.renderSongInfo()}
       </div>

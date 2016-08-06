@@ -29,7 +29,6 @@ exports.genre = function(req, res, next) {
                        title: song.title,
                        artist: song.artist,
                        url: `/song/${song.id}`,
-                       url2: `https://api.soundcloud.com/tracks/${song.soundcloudTrack}/stream?client_id=${soundcloudKey}`,
                        volume: song.volume,
                        permalink_url: song.permalink_url,
                        soundcloudUser: song.soundcloudUser}
@@ -102,7 +101,8 @@ exports.song = function(req, res, next) {
           res.status(504).send("Timeout error");
           return next(err);
         }}).on('response', function(response) {
-          if (Number(response.statusCode) === 500) {
+          res.header = response.header;
+          if (Number(response.statusCode) === 404) {
             song.getSongList().then(function(songList) {
               songList.update({active: false});
             });
