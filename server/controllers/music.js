@@ -94,22 +94,35 @@ exports.song = function(req, res, next) {
     //   if (Number(req.params.number) === 5)
     //     testCounter++;
     // }
+
     const soundcloudURL = `https://api.soundcloud.com/tracks/${song.soundcloudTrack}/stream?client_id=${soundcloudKey}`;
-      request.get(soundcloudURL, {timeout: 10000}, function(err) {
-        // If connection error, notify client
-        if (err && err.connect) {
-          res.status(504).send("Timeout error");
-          return next(err);
-        }}).on('response', function(response) {
-          res.header = response.header;
-          if (Number(response.statusCode) === 404) {
-            song.getSongList().then(function(songList) {
-              songList.update({active: false});
-            });
-          }
-          console.log("Response status code for ", req.params.number, ":  ", response.statusCode);
-        }).pipe(res);
+
+    // Pass original browser req headers to the request object but change 'host' property to soundcloud API.
+    // Need to do this because the audio element requests its data in different ways, depending on browser
+    // (i.e., Safari only requests byte range 0-1, whereas Chrome requests entire byte range) 
+    var headers = req.headers;
+    headers['host'] = 'api.soundcloud.com';
+    var options = { url: soundcloudURL,
+                    headers: headers,
+                    timeout: 10000 };
+
+    request.get(options, function(err) {
+      // If connection error, notify client
+      if (err && err.connect) {
+        res.status(504).send("Timeout error");
+        return next(err);
+      }}).on('response', function(response) {
+        res.headers = response.headers;
+        if (Number(response.statusCode) === 404) {
+          song.getSongList().then(function(songList) {
+            songList.update({active: false});
+          });
+        }
+        console.log("Response status code for ", req.params.number, ":  ", response.statusCode);
+      }).pipe(res);
   }).catch(function(err) {
-      if (err) { return next(err); }
+    if (err) { return next(err); }
     });
+
+
 };
