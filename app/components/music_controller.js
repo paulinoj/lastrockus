@@ -15,7 +15,7 @@ class MusicController extends Component {
                    clickStarted: false };
     this.mouseDown = this.mouseDown.bind(this);
     this.mouseUp = this.mouseUp.bind(this);
-    this.mouseOut = this.mouseOut.bind(this);
+    this.mouseLeave = this.mouseLeave.bind(this);
     this.moveplayhead = this.moveplayhead.bind(this);
     this.timelineClick = this.timelineClick.bind(this);                   
     this.timeUpdate = this.timeUpdate.bind(this);                   
@@ -70,12 +70,13 @@ class MusicController extends Component {
 
         // Makes playhead draggable 
         playhead.addEventListener('mousedown', this.mouseDown, false);
-        playhead.addEventListener('mouseup', this.mouseUp, false);
-        playhead.addEventListener('mouseout', this.mouseOut, false);
 
         // Boolean value so that mouse is moved on mouseUp only when the playhead is released 
         this.setState({ clickStarted: false });
-        // mouseDown EventListener
+
+        timeline.addEventListener('mousemove', this.moveplayhead, false);
+        timeline.addEventListener('mouseup', this.mouseUp, false);
+        timeline.addEventListener('mouseleave', this.mouseLeave, false);    
 
       }.bind(this));
   }
@@ -95,9 +96,7 @@ class MusicController extends Component {
 
   mouseDown() {
     var music = this.props.player; // id for audio element
-    var playhead = this.state.playhead;
     this.setState({ clickStarted: true });
-    playhead.addEventListener('mousemove', this.moveplayhead, false);
     music.removeEventListener('timeupdate', this.timeUpdate, false);
   }
 
@@ -105,44 +104,40 @@ class MusicController extends Component {
   // getting input from all mouse clicks
   mouseUp(e) {
     var music = this.props.player; // id for audio element
-    var playhead = this.state.playhead;
     var duration = this.state.duration;
-
     if (this.state.clickStarted) {
       this.setState({ clickStarted: false });
-      playhead.removeEventListener('mousemove', this.moveplayhead, false);
       music.currentTime = duration * this.clickPercent(e);
       music.addEventListener('timeupdate', this.timeUpdate, false);        
     }
   }
 
-  mouseOut(e) {
+  mouseLeave(e) {
     var music = this.props.player; // id for audio element
-    var playhead = this.state.playhead;
-
+    var duration = this.state.duration;
     if (this.state.clickStarted) {
       this.setState({ clickStarted: false });
-      playhead.removeEventListener('mousemove', this.moveplayhead, false);
+      music.currentTime = duration * this.clickPercent(e);
       music.addEventListener('timeupdate', this.timeUpdate, false);        
     }
   }
 
-  // mousemove EventListener
-  // Moves playhead as user drags
   moveplayhead(e) {
     var playhead = this.state.playhead;
     var timeline = this.state.timeline;
     var timelineWidth = this.state.timelineWidth;
     var newMargLeft = e.pageX - timeline.offsetLeft - 10;
 
-    if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
-      playhead.style.marginLeft = newMargLeft + "px";
-    }
-    if (newMargLeft < 0) {
-      playhead.style.marginLeft = "0px";
-    }
-    if (newMargLeft > timelineWidth) {
-      playhead.style.marginLeft = timelineWidth + "px";
+    if (this.state.clickStarted) {
+      if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
+        playhead.style.marginLeft = newMargLeft + "px";
+      }
+      if (newMargLeft < 0) {
+        playhead.style.marginLeft = "0px";
+      }
+      if (newMargLeft > timelineWidth) {
+        playhead.style.marginLeft = timelineWidth + "px";
+      }
     }
   }
 
@@ -167,14 +162,13 @@ class MusicController extends Component {
     var pButton = this.state.pButton;
     var playhead = this.state.playhead;
     var timeline = this.state.timeline;
-
     pButton.onclick = null;
     music.removeEventListener("timeupdate", this.timeUpdate, false);
     timeline.removeEventListener("click", this.timelineClick, false);
-    playhead.removeEventListener('mousemove', this.moveplayhead, false);
     playhead.removeEventListener('mousedown', this.mouseDown, false);
-    playhead.removeEventListener('mouseup', this.mouseUp, false);
-    playhead.removeEventListener('mouseout', this.mouseOut, false);
+    timeline.removeEventListener('mousemove', this.moveplayhead, false);
+    timeline.removeEventListener('mouseup', this.mouseUp, false);
+    timeline.removeEventListener('mouseleave', this.mouseLeave, false);    
   }
 
   render() {
