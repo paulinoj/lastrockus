@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 
 import styles from '../css/music_player_group.css';
 import SongPanel from "./song_panel";
@@ -19,7 +20,7 @@ import { turnOffAllMusicPlayers } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
-    var timeLimit = 1000;
+    var timeLimit = 120000;
     super(props);
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);
@@ -28,6 +29,12 @@ class MusicPlayerGroup extends Component {
                    timerControlSwitch: null,
                    timeLimit: timeLimit,
                    timeRemaining: timeLimit };
+  }
+
+  componentWillMount() {
+    if (this.props.musicList.length === 0) {
+      browserHistory.push("/genre_selector");
+    }
   }
 
   componentDidUpdate() {
