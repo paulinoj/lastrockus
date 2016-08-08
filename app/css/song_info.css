@@ -22,25 +22,19 @@
   color: white;
   -webkit-flex-wrap: wrap; /* Safari */
   flex-wrap:         wrap;
-  -webkit-align-items: stretch; /* Safari */
-  align-items:         stretch;
-  -webkit-flex: 5 5 300px;
-  flex: 5 5 300px;
+  -webkit-align-items: center; /* Safari */
+  align-items:         center;
+  -webkit-flex: 10 1 400px;
+  flex: 10 1 400px;
 }
 
 .first_panel {
-  min-width: 300px;
-  /*JOHN ADD MAX-WIDTH HERE?*/
+  width: 440px;
+  padding-left: 20px;
 }
 
 .middle_panel {
-  display: -webkit-flex; /* Safari */
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-justify-content: center;
-  justify-content: center;
-  min-width: 300px;
+  width: 440px;
 }
 
 .last_panel {
@@ -48,8 +42,8 @@
   display: flex;
   -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-flex: 1 1 175px;
-  flex: 1 1 175px;
+  -webkit-flex: 1 0 200px;
+  flex: 1 0 200px;
   -webkit-justify-content: center;
   justify-content: center;
   -webkit-align-items: center; /* Safari */
@@ -69,4 +63,27 @@
 
 .hidden {
   display: none;
+}
+
+.title {
+  font-size: 22px;
+}
+
+.creator {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 1199px) {
+  .first_panel {
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .creator {
+    font-size: 12px;
+  }
 }

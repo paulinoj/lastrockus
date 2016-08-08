@@ -18,3 +18,10 @@
 .hidden {
   display: none;
 }
+
+
+@media screen and (max-width: 1199px) {
+  .visualizer {
+    margin-top: 30px;
+  }
+}
