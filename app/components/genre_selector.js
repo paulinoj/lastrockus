@@ -28,6 +28,7 @@ class GenreSelector extends Component {
     return (
       <div className={styles.genre_selector}>
         <div className="text-center">
+        <div className={styles.heading}>Select a genre:</div>
         <GenreSelectorButton value="Seventies" onClick={this.onSelection} totalSongListCounts={this.props.totalSongListCounts} userSongListCounts={this.props.userSongListCounts} />
         <GenreSelectorButton value="Eighties" onClick={this.onSelection} totalSongListCounts={this.props.totalSongListCounts} userSongListCounts={this.props.userSongListCounts} />
         <GenreSelectorButton value="Classical" onClick={this.onSelection} totalSongListCounts={this.props.totalSongListCounts} userSongListCounts={this.props.userSongListCounts} />
