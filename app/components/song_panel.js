@@ -70,8 +70,9 @@ class SongPanel extends Component {
       score = this.calcPoints();
       this.props.incScore(score);
       this.setState({ score: score });
+      this.state.player.pause();
     }
-    else
+    else if (this.props.play)
     {
       this.state.player.play();
     }

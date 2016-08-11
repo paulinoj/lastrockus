@@ -113,7 +113,7 @@ exports.song = function(req, res, next) {
         return next(err);
       }}).on('response', function(response) {
         res.headers = response.headers;
-        if (Number(response.statusCode) === 404) {
+        if (Number(response.statusCode) === 401 || Number(response.statusCode) === 404) {
           song.getSongList().then(function(songList) {
             songList.update({active: false});
           });

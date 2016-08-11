@@ -6,10 +6,28 @@
   margin-bottom: 0;
 }
 
+.navbar-nav>li>a {
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+}
+
+.navbar-nav {
+  margin: 0 !important;
+}
+
 a.nav-link {
   color: black;
 }
 
 .body-class {
   background-color: #222;
+}
+
+.navbar-nav>li {
+    float: left !important;
+}
+
+.navbar-brand {
+  font-size: 35px !important;
+  font-family: 'Monoton';
 }
