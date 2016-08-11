@@ -33,3 +33,9 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
+
+.warning {
+  font-size: 24px;
+  color: red;
+  margin-bottom: 36px;
+}

@@ -86,6 +86,7 @@ class MusicPlayerGroup extends Component {
       {
         return (
           <div className={styles.start_button}>
+            <div className={styles.warning}>CAUTION:  Set the volume on your computer to low before beginning</div>
             <StartButton activatePlayers={this.activatePlayers}
              numberOfMusicPlayers={this.props.musicList.length}
              numberOfMusicPlayersReady={this.props.numberOfMusicPlayersReady} />
