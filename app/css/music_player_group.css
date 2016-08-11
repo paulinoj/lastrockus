@@ -2,6 +2,16 @@
   display: none;
 }
 
+.center_vertical {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-justify-content: center;
+  justify-content: center;
+  height: 90vh;
+}
+
 .start_button {
   display: -webkit-flex; /* Safari */
   display: flex;
