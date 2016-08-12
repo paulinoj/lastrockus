@@ -58,8 +58,8 @@ class MusicPlayerGroup extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.setState({timerControlSwitch: null});
+  componentWillUnmount() {        
+    clearTimeout(this.state.timerControlSwitch);
   }
 
   renderAnswerBar() {
