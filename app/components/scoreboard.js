@@ -19,8 +19,26 @@ class Scoreboard extends Component {
   }
 
   renderHighScorers() {
-    if (this.props.musicListHighScorers.length !== 0) {
-      let list = this.props.musicListHighScorers.map((player) => {
+    var musicListHighScorers = this.props.musicListHighScorers;
+    var score = this.props.score;
+    var currentPlayerStats = {email: "CURRENT PLAYER", score: score};
+
+    if (musicListHighScorers.length === 0) {
+      musicListHighScorers.push(currentPlayerStats);
+    }
+    else
+    {
+      for (var i = 0; i < musicListHighScorers.length; i++) {
+        if (score >= musicListHighScorers[i]) {
+          musicListHighScorers.splice(i, 0, {email: "CURRENT PLAYER", score: score});
+          musicListHighScorers.length = Math.max(10, musicListHighScorers.length);
+          break;
+        }
+      }
+    }
+
+    if (musicListHighScorers.length !== 0) {
+      let list = musicListHighScorers.map((player) => {
         if (player) {
           return (
             <div className={styles.tableWidth} key={player.email}>
@@ -36,6 +54,7 @@ class Scoreboard extends Component {
           )
         }
       });
+
       if (this.props.gameOver) {
         return (
           <div className={styles.highScorers}>
