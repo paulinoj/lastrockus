@@ -1,3 +1,6 @@
+
+
+
 .audioplayer {
   width: 380px;
   height: 60px;
@@ -52,4 +55,33 @@
   border-radius: 50%;
   margin-top: 1px;
   background: rgba(0, 0, 0,1);
+}
+
+@media screen and (max-height: 1120px) {
+  .audioplayer {
+    width: 380px;
+    height: 30px;
+  }
+  .pButton {
+    height: 30px;
+    width: 30px;
+  }
+  .play {
+    height: 30px;
+    width: 30px;
+  }
+  .pause {
+    height: 30px;
+    width: 30px;
+  }
+  .timeline {
+    width: 300px;
+    height: 10px;
+    margin-top: 10px;
+
+  }
+  .playhead {
+    width: 9px;
+    height: 9px;
+  }
 }

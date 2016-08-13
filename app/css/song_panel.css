@@ -13,3 +13,16 @@
   	height: 150px;
   }
 }
+
+@media screen and (max-height: 1120px) {
+  .songPanel {
+    height: 75px;
+  }
+}
+
+@media screen and (max-height: 1120px) and (max-width: 1199px) {
+  .songPanel {
+    height: 110px;
+  }
+}
+

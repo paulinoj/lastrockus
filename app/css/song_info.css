@@ -34,7 +34,7 @@
 }
 
 .middle_panel {
-  width: 440px;
+  width: 380px;
 }
 
 .last_panel {
@@ -75,15 +75,24 @@
 
 @media screen and (max-width: 1199px) {
   .first_panel {
+    padding-left: 48px;
   }
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 675px),
+       screen and (max-height: 1120px)  {
+  .first_panel {
+    padding-left: 40px;
+  }
   .title {
     font-size: 18px;
   }
 
   .creator {
     font-size: 12px;
+  }
+
+  .points {
+    font-size: 18px;
   }
 }

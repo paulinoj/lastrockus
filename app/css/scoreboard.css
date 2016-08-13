@@ -57,8 +57,6 @@
   flex-direction: column;
   -webkit-flex-wrap: wrap; /* Safari */
   flex-wrap:         wrap;
-  -webkit-justify-content: flex-start;
-  justify-content: flex-start;
   background-color: #e9e6e0;
   -webkit-align-content: center; /* Safari */
   align-content:         center;
@@ -80,5 +78,20 @@
 }
 
 @media screen and (max-width: 1000px) {
-    .highScorers { display:none }
+  .highScorers { display:none }
+}
+
+@media screen and (max-height: 1120px) {
+  .scoreboard {
+    height: 150px;
+  }
+  .highScorers {
+    font-size: 13px;
+  }
+  .highScorersList {
+    height: 100px;
+  }
+  .score {
+    font-size: 30px;
+  }
 }

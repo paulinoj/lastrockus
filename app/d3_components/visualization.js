@@ -24,8 +24,9 @@ if (user.browser.family === "Safari") {
     canvas.height = height;
     canvas.width = width;
 
+    var heightFactor = Math.random();
     var particle = {
-      amp: (height / 2) * Math.random(),
+      amp: (height / 2) * heightFactor,
       cycle: Math.random(),
       hue: Math.floor(361 * Math.random()),
       r: 2,
@@ -45,7 +46,29 @@ if (user.browser.family === "Safari") {
     }
 
     function loop() {
+      var svgHeight = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight;
+      var lastHeight = height;
+
+      if (svgHeight <= 1024) {
+        height = '55';
+      }
+      else
+      {
+        height = '75';
+      }
+
+      canvas.height = height;
+
+      particle.amp = (height / 2) * heightFactor;
+
+      if (lastHeight !== height) {
+        ctx.clearRect(0, 0, width, lastHeight);
+      }
+
       ctx.fillStyle = 'rgba(25, 45, 65, 0.4)';
+
       ctx.fillRect(0, 0, width, height);
 
       particle.cycle += 0.02;
