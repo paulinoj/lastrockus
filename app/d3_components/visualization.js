@@ -51,7 +51,7 @@ if (user.browser.family === "Safari") {
       || document.body.clientHeight;
       var lastHeight = height;
 
-      if (svgHeight <= 1024) {
+      if (svgHeight <= 1120) {
         height = '55';
       }
       else
