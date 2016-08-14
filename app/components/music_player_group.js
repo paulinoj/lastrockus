@@ -20,7 +20,7 @@ import { turnOffAllMusicPlayers } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
-    var timeLimit = 120000;
+    var timeLimit = 1000;
     super(props);
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);
@@ -99,9 +99,7 @@ class MusicPlayerGroup extends Component {
   renderPlayAgainButton() {
     if (this.state.gameOver) {
       return (
-        <div className="btn btn-default btn-lg">
-          <Link className="nav-link" to="/genre_selector">Play Again</Link>
-        </div>
+        <Link className="nav-link btn btn-default btn-lg" to="/genre_selector">Play Again</Link>
       );
     }
   }
