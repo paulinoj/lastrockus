@@ -65,7 +65,7 @@ if (user.browser.family === "Safari" || 1) {
 
       canvas.height = height;
 
-      particle.amp = (height / 2) * heightFactor;
+      particle.amp = (height / 2) * heightFactor - 10;
 
       if (lastHeight !== height) {
         ctx.clearRect(0, 0, width, lastHeight);
@@ -76,7 +76,7 @@ if (user.browser.family === "Safari" || 1) {
       ctx.fillRect(0, 0, width, height);
 
       particle.cycle += 0.02;
-      particle.y = Math.sin(particle.cycle * Math.PI) * particle.amp + height / 2 - 1;
+      particle.y = Math.sin(particle.cycle * Math.PI) * particle.amp + height / 2;
 
       if (particle.x + particle.r > width) {
         particle.x = 0 - particle.r;
