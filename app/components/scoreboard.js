@@ -12,7 +12,7 @@ class Scoreboard extends Component {
       return (
         <div className={styles.score}>
           <div className={styles.center}>Game Over</div>
-          <div className={styles.center}>Your Score:  {this.props.score}</div>
+          <div className={styles.center}>{this.props.userId}'s Score:  {this.props.score}</div>
         </div>
       )
     }
