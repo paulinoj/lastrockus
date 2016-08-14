@@ -137,7 +137,8 @@ export function signinUser({ email, password }) {
       .then(response => {
         // If request is good ...
         // - Update state to indicate user is authenticated
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER,
+                   payload: email });
 
         // - Save the JWT token in LocalStorage
         localStorage.setItem('token', response.data.token);
@@ -157,7 +158,8 @@ export function signupUser({ email, password}) {
   return function(dispatch) {
     axios.post('signup', { email, password })
       .then(response => {
-        dispatch({ type: AUTH_USER });
+        dispatch({ type: AUTH_USER,
+                   payload: email });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/genre_selector');
       })

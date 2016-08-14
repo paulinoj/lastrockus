@@ -21,17 +21,16 @@ class Scoreboard extends Component {
   renderHighScorers() {
     var musicListHighScorers = this.props.musicListHighScorers;
     var score = this.props.score;
-    var currentPlayerStats = {email: "CURRENT PLAYER", score: score};
-
+    var currentPlayerStats = {email: this.props.userId, score: score};
     if (musicListHighScorers.length === 0) {
       musicListHighScorers.push(currentPlayerStats);
     }
     else
     {
       for (var i = 0; i < musicListHighScorers.length; i++) {
-        if (score >= musicListHighScorers[i]) {
-          musicListHighScorers.splice(i, 0, {email: "CURRENT PLAYER", score: score});
-          musicListHighScorers.length = Math.max(10, musicListHighScorers.length);
+        if (score >= musicListHighScorers[i].score) {
+          musicListHighScorers.splice(i, 0, currentPlayerStats);
+          musicListHighScorers.length = Math.min(10, musicListHighScorers.length);
           break;
         }
       }
@@ -80,7 +79,8 @@ class Scoreboard extends Component {
 
 function mapStateToProps(state) {
   return { score : state.score,
-           musicListHighScorers: state.musicListHighScorers };
+           musicListHighScorers: state.musicListHighScorers,
+           userId: state.auth.userId }
 }
 
 export default connect(mapStateToProps)(Scoreboard);
