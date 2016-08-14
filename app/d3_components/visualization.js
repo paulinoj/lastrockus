@@ -9,7 +9,11 @@ function createSvg(parent, height, width) {
   return d3.select(parent).append('svg').attr('height', height).attr('width', width);
 }
 
-if (user.browser.family === "Safari") {
+// Two alternative visualizations depending on browser, but currently
+// set to use the first visualization for all browsers because second
+// visualization is slow on computers without a lot of RAM
+
+if (user.browser.family === "Safari" || 1) {
   var createVisualization = function(el, audioID, color) {
     let timer_ret_val = false;
 
@@ -72,7 +76,7 @@ if (user.browser.family === "Safari") {
       ctx.fillRect(0, 0, width, height);
 
       particle.cycle += 0.02;
-      particle.y = Math.sin(particle.cycle * Math.PI) * particle.amp + height / 2;
+      particle.y = Math.sin(particle.cycle * Math.PI) * particle.amp + height / 2 - 1;
 
       if (particle.x + particle.r > width) {
         particle.x = 0 - particle.r;
