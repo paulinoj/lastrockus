@@ -27,9 +27,11 @@ exports.genre = function(req, res, next) {
               return { genre: req.params.genre,
                        songListId: songLists[0].id,
                        title: song.title,
+                       alt_title: song.alt_title,
                        artist: song.artist,
                        url: `/song/${song.id}`,
                        volume: song.volume,
+                       start_time: song.start_time,
                        permalink_url: song.permalink_url,
                        soundcloudUser: song.soundcloudUser}
             });

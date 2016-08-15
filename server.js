@@ -235,6 +235,7 @@ const musicList6 =
     artist: 'Nikolai Rimsky-Korsakov',
     soundcloudTrack: "116056283",
     volume: 1.0,
+    start_time: 1,
     permalink_url: "https://soundcloud.com/robin-scheidegger/nikolai-rimsky-korsakov-flight",
     soundcloudUser: "Robin"},
    {genre: 'classical',
@@ -287,10 +288,12 @@ app.post('/makeSongList1', function(req, res) {
         models.Song.create({
           genre: musicList1[counter].genre,
           title: musicList1[counter].title,
-          artist: musicList1[counter].artist,          
+          alt_title: musicList1[counter].alt_title,          
+          artist: musicList1[counter].artist,                    
           soundcloudTrack: musicList1[counter].soundcloudTrack,
           permalink_url: musicList1[counter].permalink_url,
           volume: musicList1[counter].volume,
+          start_time: musicList1[counter].start_time,
           soundcloudUser: musicList1[counter].soundcloudUser
         }).then(function(song) {
           songList.addSong(song);
@@ -321,10 +324,12 @@ app.post('/makeSongList2', function(req, res) {
         models.Song.create({
           genre: musicList2[counter].genre,
           title: musicList2[counter].title,
+          alt_title: musicList2[counter].alt_title,
           artist: musicList2[counter].artist,          
           soundcloudTrack: musicList2[counter].soundcloudTrack,
           permalink_url: musicList2[counter].permalink_url,
           volume: musicList2[counter].volume,
+          start_time: musicList2[counter].start_time,
           soundcloudUser: musicList2[counter].soundcloudUser
         }).then(function(song) {
           songList.addSong(song);
@@ -355,10 +360,12 @@ app.post('/makeSongList3', function(req, res) {
         models.Song.create({
           genre: musicList3[counter].genre,
           title: musicList3[counter].title,
+          alt_title: musicList3[counter].alt_title,
           artist: musicList3[counter].artist,          
           soundcloudTrack: musicList3[counter].soundcloudTrack,
           permalink_url: musicList3[counter].permalink_url,
           volume: musicList3[counter].volume,
+          start_time: musicList3[counter].start_time,
           soundcloudUser: musicList3[counter].soundcloudUser
         }).then(function(song) {
           songList.addSong(song);
@@ -389,10 +396,12 @@ app.post('/makeSongList4', function(req, res) {
         models.Song.create({
           genre: musicList4[counter].genre,
           title: musicList4[counter].title,
+          alt_title: musicList4[counter].alt_title,
           artist: musicList4[counter].artist,          
           soundcloudTrack: musicList4[counter].soundcloudTrack,
           permalink_url: musicList4[counter].permalink_url,
           volume: musicList4[counter].volume,
+          start_time: musicList4[counter].start_time,
           soundcloudUser: musicList4[counter].soundcloudUser
         }).then(function(song) {
           songList.addSong(song);
@@ -423,10 +432,12 @@ app.post('/makeSongList5', function(req, res) {
         models.Song.create({
           genre: musicList5[counter].genre,
           title: musicList5[counter].title,
+          alt_title: musicList5[counter].alt_title,
           artist: musicList5[counter].artist,          
           soundcloudTrack: musicList5[counter].soundcloudTrack,
           permalink_url: musicList5[counter].permalink_url,
           volume: musicList5[counter].volume,
+          start_time: musicList5[counter].start_time,
           soundcloudUser: musicList5[counter].soundcloudUser
         }).then(function(song) {
           songList.addSong(song);
@@ -457,10 +468,12 @@ app.post('/makeSongList6', function(req, res) {
         models.Song.create({
           genre: musicList6[counter].genre,
           title: musicList6[counter].title,
+          alt_title: musicList6[counter].alt_title,
           artist: musicList6[counter].artist,          
           soundcloudTrack: musicList6[counter].soundcloudTrack,
           permalink_url: musicList6[counter].permalink_url,
           volume: musicList6[counter].volume,
+          start_time: musicList6[counter].start_time,
           soundcloudUser: musicList6[counter].soundcloudUser
         }).then(function(song) {
           songList.addSong(song);

@@ -38,7 +38,9 @@ class SongPanel extends Component {
     // successfully in Safari
     e.target.play();
     e.target.pause();
-    e.target.currentTime = 30;
+    e.target.currentTime = this.props.song.start_time || 20;
+    console.log("PROPS, ", this.props.song.start_time);
+    console.log("START TIME: ", e.target.currentTime);
     // e.target.addEventListener("durationchange", function() {console.log("DURATION CHANGE")});
     e.target.volume = this.props.song.volume;
     this.props.incNumberOfMusicPlayersReady();
