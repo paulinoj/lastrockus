@@ -61,7 +61,7 @@ const musicList2 =
     title: "More Than A Feeling",
     artist: 'Boston',
     soundcloudTrack: "210867179",
-    volume: 0.6,
+    volume: 0.7,
     permalink_url: "https://soundcloud.com/gembong-martin/boston-more-than-a-feeling",
     soundcloudUser: "Gembong Martin"},
    {genre: 'seventies',
@@ -75,7 +75,7 @@ const musicList2 =
     title: "Dancing Queen",
     artist: 'Abba',
     soundcloudTrack: "187768173",
-    volume: 0.5,
+    volume: 0.6,
     permalink_url: "https://soundcloud.com/abba-99/dancing-queen",
     soundcloudUser: "ABBA 99"},
    {genre: 'seventies',
@@ -89,7 +89,7 @@ const musicList2 =
     title: "Ring My Bell",
     artist: 'Anita Ward',
     soundcloudTrack: "84882471",
-    volume: 0.45,
+    volume: 0.50,
     permalink_url: "https://soundcloud.com/radiowebdaion-1/anita-ward-ring-my-bell",
     soundcloudUser: "Radiowebdaion"},
   ];
@@ -99,7 +99,7 @@ const musicList3 =
     title: 'Material Girl',
     artist: 'Madonna',
     soundcloudTrack: "144171420",
-    volume: 0.6,
+    volume: 0.75,
     permalink_url: "https://soundcloud.com/mfordummies/13-material-girl",
     soundcloudUser: "MforDummies"},
    {genre: 'eighties',
@@ -120,7 +120,7 @@ const musicList3 =
     title: "Everybody Wants To Rule The World",
     artist: 'Tears For Fears',
     soundcloudTrack: "15464864",
-    volume: 0.5,
+    volume: 0.4,
     permalink_url: "https://soundcloud.com/aramisschultz/tears-for-fears-everybody",
     soundcloudUser: "aramis-schultz"},
    {genre: 'eighties',
@@ -144,7 +144,7 @@ const musicList4 =
     title: "Holiday",
     artist: 'Madonna',
     soundcloudTrack: "162076780",
-    volume: 0.6,
+    volume: 0.70,
     permalink_url: "https://soundcloud.com/paris-13/madonna-holiday-2014-edit",
     soundcloudUser: "loveblonde2013"},     
    {genre: 'eighties',
@@ -155,12 +155,12 @@ const musicList4 =
     permalink_url: "https://soundcloud.com/rub-n-carri-n/the-power-of-love-huey-lewis",
     soundcloudUser: "Rubén Carrión"},
    {genre: 'eighties',
-    title: "Maniac",
-    artist: 'Michael Sembello',
-    soundcloudTrack: "48574581",
+    title: "Karma Chameleon",
+    artist: 'Culture Club',
+    soundcloudTrack: "158260264",
     volume: 1.0,
-    permalink_url: "https://soundcloud.com/naoufeldastan/maniac-michael-sembello",
-    soundcloudUser: "NaoufelDastan"},
+    permalink_url: "https://soundcloud.com/luis-pascual-11/culture-club-karma-chameleon",
+    soundcloudUser: "Luis 10"},
    {genre: 'eighties',
     title: "Come On Eileen",
     artist: "Dexys Midnight Runners",
@@ -169,7 +169,6 @@ const musicList4 =
     permalink_url: "https://soundcloud.com/theliongoasroar/dexys-midnight-runners-come-on",
     soundcloudUser: "theliongoesroar"}
   ];
-
 
 const musicList5 = 
    [{genre: 'pop',
@@ -481,11 +480,6 @@ app.post('/makeSongList6', function(req, res) {
 
 
 // **** END OF TEMPORARY ROUTES FOR ADDING TO DATABASE
-
-app.get('/data', function response(req, res) {
-  res.json({"message": "Data successfully requested"});
-});
-
 
 if (isDeveloping) {
   const webpack = require('webpack');
