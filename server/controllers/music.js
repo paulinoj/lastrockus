@@ -39,7 +39,7 @@ exports.genre = function(req, res, next) {
               var highScorersList = highScorers.map(function(user) {
                 return {email: user.email, score: user.score}
               });
-              res.json({ songListId: songLists[0].id, songList: songList, highScorers: highScorersList });
+              res.json({ songListId: songLists[0].id, songList: songList, highScorers: highScorersList, userName: req.user.email });
             });
           });          
         }
@@ -53,12 +53,8 @@ exports.genre = function(req, res, next) {
 };
 
 exports.reset_game = function(req, res, next) {
-  // User has already had their email and password auth'd
-  // We just need to give them a token
-
   models.User.findOne({where: { id: req.user.id }}).then(function(user) {
     var userSongListCounts = {}, totalSongListCounts = {};
-
     models.SongList.findAll({where: { active: true }}).then(function(songLists) {
       for (var i = 0; i < songLists.length; i++) {
         if (totalSongListCounts[songLists[i].genre]) {

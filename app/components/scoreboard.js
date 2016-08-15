@@ -12,7 +12,7 @@ class Scoreboard extends Component {
       return (
         <div className={styles.score}>
           <div className={styles.center}>Game Over</div>
-          <div className={styles.center}>{this.props.userId}'s Score:  {this.props.score}</div>
+          <div className={styles.center}>{this.props.userName}'s Score:  {this.props.score}</div>
         </div>
       )
     }
@@ -21,7 +21,7 @@ class Scoreboard extends Component {
   renderHighScorers() {
     var musicListHighScorers = this.props.musicListHighScorers;
     var score = this.props.score;
-    var currentPlayerStats = {email: this.props.userId, score: score};
+    var currentPlayerStats = {email: this.props.userName, score: score};
     if (musicListHighScorers.length === 0) {
       musicListHighScorers.push(currentPlayerStats);
     }
@@ -80,7 +80,7 @@ class Scoreboard extends Component {
 function mapStateToProps(state) {
   return { score : state.score,
            musicListHighScorers: state.musicListHighScorers,
-           userId: state.auth.userId }
+           userName: state.userName }
 }
 
 export default connect(mapStateToProps)(Scoreboard);

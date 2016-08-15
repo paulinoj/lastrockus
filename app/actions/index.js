@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 export const GET_NEW_MUSIC_LIST = 'GET_NEW_MUSIC_LIST';
 export const GET_NEW_MUSIC_LIST_ID = 'GET_NEW_MUSIC_LIST_ID';
 export const GET_NEW_MUSIC_LIST_HIGH_SCORERS = 'GET_NEW_MUSIC_LIST_HIGH_SCORERS';
+export const GET_USER_NAME = 'GET_USER_NAME';
 export const ACTIVATE_START_BUTTON = 'ACTIVATE_START_BUTTON';
 export const INC_NUMBER_OF_MUSIC_PLAYERS_READY = 'INC_NUMBER_OF_MUSIC_PLAYERS_READY';
 export const RESET_NUMBER_OF_MUSIC_PLAYERS_READY = 'RESET_NUMBER_OF_MUSIC_PLAYERS_READY';
@@ -40,8 +41,6 @@ export function resetGame() {
       .then(response => {
         // If request is good ...
         dispatch({ type: RESET_GAME, payload: response.data });
-        console.log("USERSONGLISTCOUNTS:", response.data.userSongListCounts);
-        console.log("TOTALSONGLISTCOUNTS: ", response.data.totalSongListCounts);
       })
       .catch((e) => {
         // If request is bad ...
@@ -68,6 +67,9 @@ export function getNewMusicList(genre) {
 
         dispatch({ type: GET_NEW_MUSIC_LIST_HIGH_SCORERS,
                    payload: response.data.highScorers });
+
+        dispatch({ type: GET_USER_NAME,
+                   payload: response.data.userName });
 
         browserHistory.push('/game');
       })
@@ -137,8 +139,7 @@ export function signinUser({ email, password }) {
       .then(response => {
         // If request is good ...
         // - Update state to indicate user is authenticated
-        dispatch({ type: AUTH_USER,
-                   payload: email });
+        dispatch({ type: AUTH_USER });
 
         // - Save the JWT token in LocalStorage
         localStorage.setItem('token', response.data.token);
@@ -158,8 +159,7 @@ export function signupUser({ email, password}) {
   return function(dispatch) {
     axios.post('signup', { email, password })
       .then(response => {
-        dispatch({ type: AUTH_USER,
-                   payload: email });
+        dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
         browserHistory.push('/genre_selector');
       })

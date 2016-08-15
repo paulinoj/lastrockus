@@ -14,7 +14,8 @@ function tokenForUser(user) {
   const timestamp = new Date().getTime();
 
   // "iat" stands for "issued at time"
-  return jwt.encode({ sub: user.id, iat: timestamp }, jwtSecret);
+  return jwt.encode({ sub: user.id, iat: timestamp, email: user.email }, jwtSecret);
+
 }
 
 exports.signin = function(req, res, next) {
