@@ -3,24 +3,17 @@
 }
 
 .center_vertical {
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-justify-content: center;
   justify-content: center;
   height: 90vh;
 }
 
 .start_button {
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
   height: 80vh;
-  -webkit-justify-content: center;
   justify-content: center;
-  -webkit-align-items: center; /* Safari */
   align-items:         center;
 }
 
@@ -35,11 +28,8 @@
 
 .screen_middle {
   height: 100px;
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-justify-content: center;
   justify-content: center;
 }
 

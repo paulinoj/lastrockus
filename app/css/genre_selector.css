@@ -1,11 +1,7 @@
 .genre_selector {
-  /*background-color: #222;*/
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
   height: 90vh;
-  -webkit-justify-content: center;
   justify-content: center;
 }
 
@@ -14,5 +10,3 @@
   color: #00e3ff;
   margin-bottom: 24px;
 }
-
-

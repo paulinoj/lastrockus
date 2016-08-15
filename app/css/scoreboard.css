@@ -1,14 +1,9 @@
 .scoreboard {
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-justify-content: space-between;
   justify-content: space-between;
-  -webkit-flex-wrap: wrap; /* Safari */
-  flex-wrap:         wrap;
-  -webkit-align-items: stretch; /* Safari */
-  align-items:         stretch;
+  flex-wrap: wrap;
+  align-items: stretch;
   height: 180px;
 }
 
@@ -22,13 +17,9 @@
 }
 
 .score {
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-flex: 1 1 100px;
   flex: 1 1 100px;
-  -webkit-justify-content: center;
   justify-content: center;
   background-color: #d4d382;
   font-size: 35px;
@@ -36,30 +27,21 @@
 
 .highScorers {
   font-size: 18px;
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-flex: 1 1 100px;
   flex: 1 1 100px;
-  -webkit-justify-content: center;
   justify-content: center;
   background-color: #52d0da;
-  -webkit-align-items: stretch; /* Safari */
-  align-items:         stretch;
+  align-items: stretch;
 }
 
 .highScorersList {
   height: 130px;
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
-  -webkit-flex-wrap: wrap; /* Safari */
-  flex-wrap:         wrap;
+  flex-wrap: wrap;
   background-color: #e9e6e0;
-  -webkit-align-content: center; /* Safari */
-  align-content:         center;
+  align-content: center;
 }
 
 .tableWidth {

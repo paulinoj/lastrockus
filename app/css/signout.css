@@ -1,13 +1,9 @@
 .signout {
   color: grey;
-  display: -webkit-flex; /* Safari */
   display: flex;
-  -webkit-flex-direction: row;
   flex-direction: row;
-  -webkit-justify-content: center;
   justify-content: center;
-  -webkit-align-items: center; /* Safari */
-  align-items:         center;
+  align-items: center;
   height: 90vh;
   font-size: 25px;
 }
