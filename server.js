@@ -30,7 +30,7 @@ const musicList1 =
     title: "Don't Fear The Reaper",
     artist: 'Blue Oyster Cult',
     soundcloudTrack: "243343427",
-    volume: 0.9,
+    volume: 0.85,
     permalink_url: "https://soundcloud.com/stringwagon/dont-fear-the-reaper-blue-oyster-cult",
     soundcloudUser: "Manuel Martinez"},
    {genre: 'seventies',
@@ -51,7 +51,7 @@ const musicList1 =
     title: "I Will Survive",
     artist: 'Gloria Gaynor',
     soundcloudTrack: "35951800",
-    volume: 0.85,
+    volume: 0.80,
     permalink_url: "https://soundcloud.com/banoo-002/gloria-gaynor-i-will-survive",
     soundcloudUser: "Mano Beshno 002"}
   ];
@@ -165,7 +165,7 @@ const musicList4 =
     title: "Come On Eileen",
     artist: "Dexys Midnight Runners",
     soundcloudTrack: "62542293",
-    volume: 0.8,
+    volume: 0.75,
     permalink_url: "https://soundcloud.com/theliongoasroar/dexys-midnight-runners-come-on",
     soundcloudUser: "theliongoesroar"}
   ];
@@ -228,7 +228,7 @@ const musicList6 =
     title: "Turkish March",
     artist: 'Wolfgang Amadeus Mozart',
     soundcloudTrack: "128141776",
-    volume: 0.85,
+    volume: 0.75,
     permalink_url: "https://soundcloud.com/nadaossama/turkish-march-mozart",
     soundcloudUser: "Nada Ossama"},
    {genre: 'classical',

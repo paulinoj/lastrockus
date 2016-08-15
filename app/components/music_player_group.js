@@ -20,7 +20,7 @@ import { turnOffAllMusicPlayers } from "../actions/index";
 
 class MusicPlayerGroup extends Component {
   constructor(props) {
-    var timeLimit = 15000;
+    var timeLimit = 120000;
     super(props);
     this.activatePlayers = this.activatePlayers.bind(this);
     this.signalGameOver = this.signalGameOver.bind(this);

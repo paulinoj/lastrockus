@@ -31,3 +31,8 @@ a.nav-link {
   font-size: 35px !important;
   font-family: 'Monoton';
 }
+
+button[disabled=disabled], button:disabled {
+  opacity: 1.00 !important;
+  background-color: grey !important;
+}
