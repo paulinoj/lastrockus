@@ -11,17 +11,33 @@ export default function(state = {}, action) {
   let playerRef = "";
   let fuzzyDict = FuzzySet();
   let titleList = [];
-  let matchArr, matchValue, matchName, guess,
-      guessIndex, origSentenceLength, sentenceLength;
+  let altTitleList = [];
+  let matchArr, matchValue, matchName, guess, songTitle, altSongTitle,
+      guessIndex, altGuessIndex, origSentenceLength, sentenceLength;
+
+  function normalizeString(string) {
+    string = string.toLowerCase().trim();
+    string = string.replace(/^(The|An|A)\s+/i, "");
+    string = string.replace(/\s{2,}/g, " ");
+    return string;
+  } 
 
   switch(action.type) {
     case SUBMIT_ANSWER:
-      guess = action.payload.answer.toLowerCase().trim();
-      guess = guess.replace(/^(The|An|A)\s+/i, "");
-      guess = guess.replace(/\s{2,}/g, " ");
+      guess = normalizeString(action.payload.answer);
       action.payload.musicList.forEach((song, index) => {
-        titleList.push(song.title.toLowerCase());
-        fuzzyDict.add(song.title.toLowerCase());
+        songTitle = normalizeString(song.title);
+        titleList.push(songTitle);
+        fuzzyDict.add(songTitle);
+        if (song.alt_title) {
+          altSongTitle = normalizeString(song.alt_title);
+          altTitleList.push(altSongTitle);
+          fuzzyDict.add(altSongTitle);          
+        }
+        else
+        {
+          altTitleList.push(null);
+        }
       });
       origSentenceLength = guess.split(" ").length;
       sentenceLength = origSentenceLength;
@@ -31,11 +47,19 @@ export default function(state = {}, action) {
           matchValue = matchArr[0][0];
           matchName = matchArr[0][1];
         }
-        guessIndex = titleList.indexOf(matchName);
-        if ((guessIndex !== -1) && (matchValue > 0.8)) {
-          playerRef = `musicPlayer${guessIndex}`;
-          musicPlayerOffList[playerRef] = true;
-          return musicPlayerOffList;
+        if (matchValue > 0.8) {
+          guessIndex = titleList.indexOf(matchName);
+          if (guessIndex !== -1) {
+            playerRef = `musicPlayer${guessIndex}`;
+            musicPlayerOffList[playerRef] = true;
+            return musicPlayerOffList;
+          }
+          altGuessIndex = altTitleList.indexOf(matchName);
+          if (altGuessIndex !== -1) {
+            playerRef = `musicPlayer${altGuessIndex}`;
+            musicPlayerOffList[playerRef] = true;
+            return musicPlayerOffList;
+          }
         }
         sentenceLength--;
         guess = guess.split(" ");
