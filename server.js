@@ -101,7 +101,7 @@ const musicList3 =
     artist: 'Madonna',
     soundcloudTrack: "144171420",
     volume: 0.75,
-    start_time: 50,
+    start_time: 20,
     permalink_url: "https://soundcloud.com/mfordummies/13-material-girl",
     soundcloudUser: "MforDummies"},
    {genre: 'eighties',

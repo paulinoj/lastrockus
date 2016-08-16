@@ -6,8 +6,6 @@ exports.save = function(req, res, next) {
   const songListId = Number(req.body.songListId);
   const score = Number(req.body.score);
   models.User.findById(req.user.id).then(function(user) {
-    console.log("DO WE GET TO SAVE SCORE", songListId, score);
-
     models.SongList.findById(songListId).then(function(songList) {
       user.addSongList(songList, { email: user.email, score: score });
       return res.json({ scoreSaved: true });

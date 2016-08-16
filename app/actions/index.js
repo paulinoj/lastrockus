@@ -21,7 +21,6 @@ export const TURN_OFF_ALL_MUSIC_PLAYERS = 'TURN_OFF_ALL_MUSIC_PLAYERS';
 export function submitAnswer(answer) {
   // if user guesses a song correctly make corresponding music player stop playing
   // and calculate points
-  console.log('An answer has been submitted:', answer);
   return {
     type: SUBMIT_ANSWER,
     payload: answer
@@ -58,7 +57,6 @@ export function getNewMusicList(genre) {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
-        console.log("newMusicList: ", response.data);
         dispatch({ type: GET_NEW_MUSIC_LIST_ID,
                    payload: response.data.songListId });
 
@@ -117,7 +115,6 @@ export function incScore(points) {
 
 export function signalGameOver(songListId, score) {
   return function(dispatch) {
-    console.log("SONGLIST ID SCORE", songListId, score);
     axios.post('save_score', { songListId: songListId, score }, { headers: { authorization: localStorage.getItem('token') }})
       .then(response => {
         // If request is good ...

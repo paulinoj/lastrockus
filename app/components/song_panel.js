@@ -20,7 +20,6 @@ class SongPanel extends Component {
   }
 
   handleRequestError(e) {
-    console.log("AN ERROR OCCURRED, ", e.target.error.code);
     this.setState({ requestErrorCount: this.state.requestErrorCount + 1 });
     if (this.state.requestErrorCount == 3) {
       alert("AN ERROR HAS OCCURRED -- PLEASE TRY AGAIN");
@@ -39,9 +38,6 @@ class SongPanel extends Component {
     e.target.play();
     e.target.pause();
     e.target.currentTime = this.props.song.start_time || 20;
-    console.log("PROPS, ", this.props.song.start_time);
-    console.log("START TIME: ", e.target.currentTime);
-    // e.target.addEventListener("durationchange", function() {console.log("DURATION CHANGE")});
     e.target.volume = this.props.song.volume;
     this.props.incNumberOfMusicPlayersReady();
   }
@@ -65,14 +61,14 @@ class SongPanel extends Component {
     if (this.props.gameOver) {
       this.state.player.pause();
       this.state.player.currentTime = 0;
-      // this.state.player.setAttribute("controls","controls");
     }
-
     else if (!this.props.play && this.state.score == 0) {
       score = this.calcPoints();
       this.props.incScore(score);
       this.setState({ score: score });
-      this.state.player.pause();
+      // Uncomment the following line if you want music player to stop playing
+      // as soon as someone guesses the song it is playing
+      // this.state.player.pause();
     }
     else if (this.props.play)
     {

@@ -4,8 +4,6 @@ import styles from '../css/genre_selector_button.css';
 const GenreSelectorButton = (props) => {
   let classList = "btn btn-default btn-lg " + styles.genre_selector_button;
   const genre = props.value.toLowerCase();
-  console.log(props.totalSongListCounts[genre]);
-  console.log(props.userSongListCounts[genre]);
 
   return (
   	<div>

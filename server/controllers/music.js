@@ -21,7 +21,6 @@ exports.genre = function(req, res, next) {
       excludeList.push(0);
       models.SongList.findAll({ where: { id: { $notIn: excludeList }, genre: req.params.genre, active: true } }).then(function(songLists) {
         if (songLists[0]) {
-          console.log(songLists);
           songLists[0].getSongs().then(function(songs) {
             var songList = songs.map(function(song) {
               return { genre: req.params.genre,
