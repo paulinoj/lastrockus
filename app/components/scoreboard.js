@@ -22,20 +22,18 @@ class Scoreboard extends Component {
     var musicListHighScorers = this.props.musicListHighScorers;
     var score = this.props.score;
     var currentPlayerStats = {email: this.props.userName, score: score};
-    if (musicListHighScorers.length === 0) {
-      musicListHighScorers.push(currentPlayerStats);
-    }
-    else
-    {
-      for (var i = 0; i < musicListHighScorers.length; i++) {
-        if (score >= musicListHighScorers[i].score) {
-          musicListHighScorers.splice(i, 0, currentPlayerStats);
-          musicListHighScorers.length = Math.min(10, musicListHighScorers.length);
-          break;
-        }
+    var statsAdded = false;
+    for (var i = 0; i < musicListHighScorers.length; i++) {
+      if (score >= musicListHighScorers[i].score) {
+        musicListHighScorers.splice(i, 0, currentPlayerStats);
+        statsAdded = true;
+        musicListHighScorers.length = Math.min(10, musicListHighScorers.length);
+        break;
       }
     }
-
+    if (musicListHighScorers.length < 10 && !statsAdded) {
+      musicListHighScorers.push(currentPlayerStats);
+    }
     if (musicListHighScorers.length !== 0) {
       let list = musicListHighScorers.map((player) => {
         if (player) {
