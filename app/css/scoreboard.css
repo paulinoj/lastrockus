@@ -5,6 +5,7 @@
   flex-wrap: wrap;
   align-items: stretch;
   height: 180px;
+  margin-top: 10px;
 }
 
 .center {
@@ -65,13 +66,13 @@
 
 @media screen and (max-height: 1120px) {
   .scoreboard {
-    height: 150px;
+    height: 130px;
   }
   .highScorers {
     font-size: 13px;
   }
   .highScorersList {
-    height: 100px;
+    height: 90px;
   }
   .score {
     font-size: 30px;

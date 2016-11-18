@@ -23,11 +23,8 @@
   margin-bottom: 12px;
 }
 
-.screen_top {
-}
-
 .screen_middle {
-  height: 100px;
+  height: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;

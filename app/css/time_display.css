@@ -4,7 +4,8 @@
   flex-wrap: wrap;
   justify-content: center;
   font-size: 40px;
-  height: 180px;
+  height: 150px;
+  margin-top: 10px;
 }
 
 .center {
@@ -19,8 +20,8 @@
   border-radius: 30px;
 }
 
-@media screen and (max-height: 1024px) {
+@media screen and (max-height: 1120px) {
   .countdownClock {
-    height: 150px;
+    height: 130px;
   }
 }

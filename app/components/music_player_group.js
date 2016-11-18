@@ -170,21 +170,19 @@ class MusicPlayerGroup extends Component {
 
     return (
       <div className="container">
-        <div className={styles.center_vertical}>
-          <div className={show}>
-            <div className={styles.screen_top}>
-              {this.renderScreenTop()}
-            </div>
-            <div className={styles.screen_middle}>
-              {this.renderAnswerBar()}
-              {this.renderPlayAgainButton()}
-            </div>
-            <div className={styles.screen_bottom}>
-              {this.renderSongPanels()}
-            </div>
+        <div className={show}>
+          <div className={styles.screen_top}>
+            {this.renderScreenTop()}
           </div>
-          {this.renderStartButton()}
+          <div className={styles.screen_middle}>
+            {this.renderAnswerBar()}
+            {this.renderPlayAgainButton()}
+          </div>
+          <div className={styles.screen_bottom}>
+            {this.renderSongPanels()}
+          </div>
         </div>
+        {this.renderStartButton()}
       </div>
     );
   }
