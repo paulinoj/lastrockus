@@ -1,6 +1,6 @@
 import d3 from 'd3';
 import styles from '../css/welcome.css';
-import soundcloudLogo from '../soundcloud_logo.png';
+import soundcloudLogo from '../images/soundcloud_logo.png';
 
 export function logoDrop(el) {
 

@@ -16,18 +16,18 @@
 }
 
 .play {
-  background: url('http://www.alexkatz.me/codepen/images/play.png') ;
+  background: url('../images/play.png') ;
   height:60px; 
   width: 60px;
   border: none;
-  background-size: 50% 50%;
+  background-size: 60% 60%;
   background-repeat: no-repeat;
   background-position: center;
   float:left;
   outline:none;}
 
 .pause {
-  background: url('http://www.alexkatz.me/codepen/images/pause.png') ;
+  background: url('../images/pause.png') ;
   height:60px; 
   width: 60px;
   border: none;
